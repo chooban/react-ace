@@ -14,8 +14,6 @@ const PATHS = {
 const common = {
     entry: {
       app: PATHS.app
-    , vendor: [
-      ]
     }
   , resolve: {
       extensions: ['', '.js', '.jsx']
@@ -43,9 +41,6 @@ const common = {
       }
     ]
   }
-  , plugins: [
-      // new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
-    ]
 }
 
 if (TARGET === 'start' || !TARGET) {
