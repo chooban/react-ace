@@ -11,7 +11,7 @@ export default class IssueSelect extends React.Component {
     return(
       <div>
         <span>Pick an issue: </span>
-        <select>
+        <select onChange={this.handleSelected.bind(this, this.props)}>
           {issues}
         </select>
       </div>
@@ -22,4 +22,11 @@ export default class IssueSelect extends React.Component {
     return <option key={issueNumber}>{issueNumber}</option>
   }
 
+  handleSelected(props, e) {
+    if (props.onSelectIssue) {
+      props.onSelectIssue(e.currentTarget.selectedOptions[0].value)
+    } else {
+      console.log("No handler")
+    }
+  }
 }

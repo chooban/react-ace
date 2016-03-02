@@ -20,6 +20,10 @@ export default class IssuePickerContainer extends React.Component {
   }
 
   render() {
-    return <IssueSelect issues={this.state.issues} />
+    return <IssueSelect onSelectIssue={this.handleSelectIssue} issues={this.state.issues} />
+  }
+
+  handleSelectIssue(selectedIssue) {
+    console.log(selectedIssue)
   }
 }
