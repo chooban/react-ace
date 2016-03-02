@@ -44,7 +44,8 @@ const common = {
 }
 
 if (TARGET === 'start' || !TARGET) {
-  module.exports = merge(common, devConfig(PATHS.build))
+  // module.exports = merge(common, devConfig(PATHS.build))
+  module.exports = merge(common, {})
 }
 
 if (TARGET === 'build') {

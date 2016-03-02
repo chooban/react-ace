@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "set PORT=8091 && webpack-dev-server"
+    "start": "set PORT=8091 && webpack-dev-server --watch-poll --inline --hot"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +25,7 @@
     "webpack-merge": "^0.7.3"
   },
   "dependencies": {
+    "ramda": "^0.19.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7"
   }

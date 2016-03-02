@@ -8,12 +8,13 @@ export default class IssueSelect extends React.Component {
   render() {
     return(
       <select>
-        {this.props.issues.map(renderIssue)}
+        {this.props.issues.forEach(this.renderIssue)}
       </select>
     )
   }
 
-  renderIssue = (issueNumber) => {
+  renderIssue(issueNumber) {
     return <option>{issueNumber}</option>
   }
+
 }
