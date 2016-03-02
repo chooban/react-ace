@@ -1,4 +1,5 @@
 import React from 'react'
+import Ramda from 'ramda'
 
 export default class IssueSelect extends React.Component {
   constructor(props) {
@@ -6,15 +7,19 @@ export default class IssueSelect extends React.Component {
   }
 
   render() {
+    var issues = Ramda.map(this.renderIssue, this.props.issues)
     return(
-      <select>
-        {this.props.issues.forEach(this.renderIssue)}
-      </select>
+      <div>
+        <span>Pick an issue: </span>
+        <select>
+          {issues}
+        </select>
+      </div>
     )
   }
 
   renderIssue(issueNumber) {
-    return <option>{issueNumber}</option>
+    return <option key={issueNumber}>{issueNumber}</option>
   }
 
 }
