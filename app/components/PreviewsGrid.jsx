@@ -6,6 +6,10 @@ export default class PreviewsGrid extends React.Component {
   }
 
   render() {
-    return(<div>The grid will go here</div>)
+    const msg = (this.props.selectedIssue)
+                  ? "Selected issue is " + this.props.selectedIssue
+                  : "No issue currently selected"
+
+    return(<div>{msg}</div>)
   }
 }

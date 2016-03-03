@@ -1,29 +1,22 @@
 import React from 'react'
 import IssueSelect from './IssueSelect.jsx'
+import R from 'ramda'
 
 export default class IssuePickerContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      issues: []
+      issues: props.availableIssues
     }
   }
 
-  componentDidMount() {
-    this.setState({
-      issues: [
-        100
-      , 101
-      , 102
-      ]
-    })
-  }
-
   render() {
-    return <IssueSelect onSelectIssue={this.handleSelectIssue} issues={this.state.issues} />
+    console.log("Rendering the container :", this.state.issues)
+    const issues = R.map(R.prop('issue'), this.state.issues)
+    return <IssueSelect onSelectIssue={this.handleSelectIssue.bind(this, this.props)} issues={issues} />
   }
 
-  handleSelectIssue(selectedIssue) {
-    console.log(selectedIssue)
+  handleSelectIssue(props, selectedIssue) {
+    if (props.doneSelectIssue) props.doneSelectIssue(selectedIssue)
   }
 }
