@@ -1,9 +1,9 @@
 import AppDispatcher from '../dispatcher/AppDispatcher'
+import {GET_DATA, GOT_DATA} from '../consts'
 
 export function getData() {
-  console.log("PreviewsActions getData")
   AppDispatcher.handleViewAction({
-    type: 'GET_DATA'
+    type: GET_DATA
   })
 
   gotData([
@@ -15,7 +15,7 @@ export function getData() {
 
 export function gotData(data) {
   AppDispatcher.handleServerAction({
-      type: 'GOT_DATA'
+      type: GOT_DATA
     , all: data
   })
 }

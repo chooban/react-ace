@@ -1,9 +1,9 @@
 import {EventEmitter} from 'events'
 import assign from 'object-assign'
 import AppDispatcher from '../dispatcher/AppDispatcher'
+import {CHANGE_EVENT, GOT_DATA} from '../consts'
 
 let data = null
-const CHANGE_EVENT = 'CHANGE_EVENT'
 
 let PreviewsStore = assign({}, EventEmitter.prototype, {
     emitChange() {
@@ -23,7 +23,7 @@ let PreviewsStore = assign({}, EventEmitter.prototype, {
 PreviewsStore.dispatchToken = AppDispatcher.register(payload => {
   let action = payload.action
   switch (action.type) {
-    case 'GOT_DATA':
+    case GOT_DATA:
       data = action.all
       PreviewsStore.emitChange()
       break;
