@@ -26,23 +26,6 @@ export default class App extends React.Component {
     )
   }
 
-  componentDidMount() {
-    /*
-    d3.json('http://nginx-previews-861f5682-1.chooban.cont.tutum.io/previews', function(error, listOfIssues) {
-      this.setState({
-        availableIssues: listOfIssues
-      })
-    }.bind(this))
-    */
-    console.log("App mounted")
-    this.setState({
-      availableIssues: [{"issue": 324}]
-    }, function() {
-      console.log("Rerendered")
-      console.log(JSON.stringify(this.state))
-    })
-  }
-
   handleIssueSelected(selectedIssue) {
     this.setState({
       selectedIssue: selectedIssue

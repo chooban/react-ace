@@ -6,7 +6,7 @@
   "scripts": {
     "test": "babel-tape-runner test/**/*.test.js",
     "build": "webpack",
-    "start": "set PORT=8091 && webpack-dev-server --watch-poll --inline --hot"
+    "start": "set PORT=8091 && webpack-dev-server"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +30,8 @@
   },
   "dependencies": {
     "d3": "^3.5.16",
+    "flux": "^2.1.1",
+    "object-assign": "^4.0.1",
     "ramda": "^0.19.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7"

@@ -1,22 +1,37 @@
 import React from 'react'
 import IssueSelect from './IssueSelect.jsx'
+import PreviewsStore from '../stores/PreviewsStore'
+import {getData} from '../actions/PreviewsActions'
 import R from 'ramda'
 
-export default class IssuePickerContainer extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      issues: props.availableIssues
+export default React.createClass({
+    displayName: 'IssueSelect'
+  , propTypes: {
+      all: React.PropTypes.array
     }
+  , getInitialState() {
+      return {
+        all: []
+      }
   }
-
-  render() {
-    console.log("Rendering the container :", this.state.issues)
-    const issues = R.map(R.prop('issue'), this.state.issues)
-    return <IssueSelect onSelectIssue={this.handleSelectIssue.bind(this, this.props)} issues={issues} />
+  , componentWillMount() {
+      PreviewsStore.addChangeListener(this.onStoreChange)
+      getData()
   }
-
-  handleSelectIssue(props, selectedIssue) {
-    if (props.doneSelectIssue) props.doneSelectIssue(selectedIssue)
+  , onStoreChange() {
+      this.setState({
+        all: PreviewsStore.getIssues()
+      })
   }
-}
+  , onSelectIssue(issue) {
+      console.log("Selected", issue)
+  }
+  , render() {
+      const issues = R.map(R.prop('issue'), this.state.all)
+      return(
+        <div>
+          <IssueSelect issues={issues} onSelectIssue={this.onSelectIssue}/>
+        </div>
+      )
+  }
+})
