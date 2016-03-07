@@ -6,15 +6,23 @@ export default React.createClass({
   , propTypes : {
       selectedIssue: React.PropTypes.number
     }
+  , getInitialState() {
+      return {
+          chosenIssue: null
+      }
+  }
   , componentWillMount() {
       ChosenIssueStore.addChangeListener(this.onChosenIssue)
   }
   , onChosenIssue(issue) {
-      console.log("PreviewsGrid: ", ChosenIssueStore.getChosenIssue())
+      this.setState({
+        chosenIssue: ChosenIssueStore.getChosenIssue()
+      })
+      console.log("Set state")
   }
   , render() {
-    const msg = (this.props.selectedIssue)
-                  ? "Selected issue is " + this.props.selectedIssue
+    const msg = (this.state.chosenIssue)
+                  ? "Selected issue is " + this.state.chosenIssue
                   : "No issue currently selected"
 
     return(<div>{msg}</div>)
