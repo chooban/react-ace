@@ -1,4 +1,6 @@
 export const CHANGE_EVENT = 'CHANGE_EVENT'
-export const GOT_DATA = 'GOT_DATA'
-export const GET_DATA = 'GET_DATA'
+export const GOT_ISSUES = 'GOT_ISSUES'
+export const GET_ISSUES = 'GET_ISSUES'
+export const GET_ISSUE = 'GET_ISSUE'
+export const GOT_ISSUE = 'GOT_ISSUE'
 export const CHOSE_ISSUE = 'CHOSE_ISSUE'

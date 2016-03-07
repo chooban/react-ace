@@ -1,9 +1,10 @@
 import {EventEmitter} from 'events'
 import assign from 'object-assign'
 import AppDispatcher from '../dispatcher/AppDispatcher'
-import {CHANGE_EVENT, GOT_DATA} from '../consts'
+import {CHANGE_EVENT, GOT_ISSUES, GOT_ISSUE} from '../consts'
 
-let data = null
+let issuesList = null
+  , issuesStore = {}
 
 let PreviewsStore = assign({}, EventEmitter.prototype, {
     emitChange() {
@@ -16,18 +17,27 @@ let PreviewsStore = assign({}, EventEmitter.prototype, {
       this.removeListener(CHANGE_EVENT, done)
   }
   , getIssues() {
-      return data
+      return issuesList
+  }
+  , getIssue(issueNumber) {
+      return issuesStore[issueNumber] || null
   }
 })
 
 PreviewsStore.dispatchToken = AppDispatcher.register(payload => {
   let action = payload.action
   switch (action.type) {
-    case GOT_DATA:
-      data = action.all
+    case GOT_ISSUES:
+      issuesList = action.all
       PreviewsStore.emitChange()
       break;
+    case GOT_ISSUE:
+      issuesStore[action.issue] = action.issueData
+      PreviewsStore.emitChange()
+      break
   }
+
+  return true
 })
 
 export default PreviewsStore
