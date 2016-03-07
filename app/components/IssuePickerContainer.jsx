@@ -2,6 +2,7 @@ import React from 'react'
 import IssueSelect from './IssueSelect.jsx'
 import PreviewsStore from '../stores/PreviewsStore'
 import {getData} from '../actions/PreviewsActions'
+import {choseIssue} from '../actions/ChosenIssueActions'
 import R from 'ramda'
 
 export default React.createClass({
@@ -24,7 +25,7 @@ export default React.createClass({
       })
   }
   , onSelectIssue(issue) {
-      console.log("Selected", issue)
+      choseIssue(issue)
   }
   , render() {
       const issues = R.map(R.prop('issue'), this.state.all)
