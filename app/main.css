@@ -1,9 +1,5 @@
-#app {
-  width: 500px;
-}
-
-#app div {
-  border: thin solid black;
+.react-datagrid {
+  width: 950px;
 }
 
 .controlBar {

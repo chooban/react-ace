@@ -5,25 +5,15 @@ import PreviewsGridContainer from './PreviewsGridContainer.jsx'
 
 export default React.createClass({
     displayName: "AceItApp"
-  , getInitialState() {
-      return {
-        selectedIssue: null
-      }
-    }
   , render() {
       return(
         <div className="previewsApp">
           <div className="controlBar">
-            <IssuePickerContainer doneSelectIssue={this.handleIssueSelected} />
+            <IssuePickerContainer />
             <OrderDetails />
           </div>
-          <PreviewsGridContainer selectedIssue={this.state.selectedIssue}/>
+          <PreviewsGridContainer />
         </div>
       )
-    }
-  , handleIssueSelected(selectedIssue) {
-      this.setState({
-        selectedIssue: selectedIssue
-      })
     }
 })

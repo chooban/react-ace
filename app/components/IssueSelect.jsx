@@ -7,6 +7,10 @@ export default React.createClass({
         issues: React.PropTypes.array
       , onSelectIssue: React.PropTypes.func
     }
+  , componentDidMount() {
+      // First render only, I hope
+      this.props.onSelectIssue(this.props.issues[0])
+    }
   , render() {
       var issues = Ramda.map(this.renderIssue, this.props.issues)
       return(

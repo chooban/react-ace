@@ -15,17 +15,17 @@ export function getIssues() {
 }
 
 export function getIssue(issueNumber) {
-  var resultHandler = gotIssueData.bind(this, issueNumber)
-  console.log("Pre action")
   AppDispatcher.handleAction({
     type: GET_ISSUE
   })
-  console.log("Post action")
 
-  d3.csv('data/ecmail324.csv', function(err, data) {
-    console.log("Got data")
-    if(err) console.error(err)
-    else resultHandler(data)
+  d3.text('data/ecmail324.csv', function(err, data) {
+    if (err) { console.error(err)
+    }
+    else {
+      var parsedData = d3.csv.parseRows(data)
+      gotIssueData(issueNumber, parsedData)
+    }
   })
 }
 
@@ -37,7 +37,6 @@ function gotIssues(data) {
 }
 
 function gotIssueData(issueNumber, issueData) {
-  console.log(arguments)
   AppDispatcher.handleAction({
     type: GOT_ISSUE
   , issue: issueNumber

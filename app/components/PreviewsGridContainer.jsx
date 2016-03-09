@@ -19,6 +19,9 @@ export default React.createClass({
   , componentWillMount() {
       ChosenIssueStore.addChangeListener(this.setChosenIssue)
   }
+  , componentWillUnmount() {
+      ChosenIssueStore.removeChangeListener(this.setChosenIssue)
+  }
   , setChosenIssue() {
       this.setState({
         chosenIssue: ChosenIssueStore.getChosenIssue()
@@ -29,12 +32,10 @@ export default React.createClass({
                     ? "Selected issue is " + this.state.chosenIssue
                     : "No issue currently selected"
 
-      console.log(msg)
-
       return(
         <div className="previewsGridContainer">
           <p>{msg}</p>
-          <PreviewsGrid issueNumber={this.state.chosenIssue}/>
+          <PreviewsGrid issueNumber={+this.state.chosenIssue}/>
         </div>
       )
   }

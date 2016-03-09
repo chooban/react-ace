@@ -21,13 +21,15 @@ export default React.createClass({
       PreviewsStore.addChangeListener(this.onStoreChange)
       getIssues()
   }
+  , componentWillUnmount() {
+      PreviewsStore.removeChangeListener(this.onStoreChange)
+  }
   , onStoreChange() {
       this.setState({
         all: PreviewsStore.getIssues()
       })
   }
   , onSelectIssue(issue) {
-      console.log("An issue has been selected: ", issue)
       choseIssue(issue)
   }
   , render() {
