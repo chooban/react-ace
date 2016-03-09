@@ -38,12 +38,15 @@ export default React.createClass({
       })
   }
   , onSelect(page) {
-    var pagination = this.state.pagination || {};
-    pagination.page = page;
+      const state = this.state;
+      const pagination = state.pagination || {};
+      const pages = Math.ceil(state.gridData.length / pagination.perPage);
 
-    this.setState({
+      pagination.page = Math.min(Math.max(page, 1), pages);
+
+      this.setState({
         pagination: pagination
-    });
+      });
   }
   , render() {
       const columns = [
@@ -69,7 +72,7 @@ export default React.createClass({
         }
       ]
       let pagination = this.state.pagination
-      const currentPage = this.state.pagination.page
+      const currentPage = pagination.page
       const paginated = paginate(this.state.gridData, pagination)
       const pages = Math.ceil(this.state.gridData.length / Math.max(
         isNaN(pagination.perPage) ? 1 : pagination.perPage, 1)
@@ -77,40 +80,21 @@ export default React.createClass({
 
       return(
         <div>
-          <Paginator.Context className="pagify-pagination"
+          <Table
+            data={paginated.data}
+            columns={columns}
+          />
+        <Paginator.Context className="pagify-pagination"
             segments={segmentize({
               page: pagination.page,
               pages: pages,
               beginPages: 1,
               endPages: 1,
               sidePages: 2
-            })} onSelect={this.onSelect} ellipsis={'…'}>
+            })} onSelect={this.onSelect}>
             <Paginator.Button page={currentPage - 1}>Previous</Paginator.Button>
-            <Paginator.Segment field="beginPages" />
-              <Paginator.Ellipsis
-                className="ellipsis"
-                previousField="beginPages"
-                nextField="previousPages">
-                ***
-            </Paginator.Ellipsis>
-
-            <Paginator.Segment field="previousPages" />
-            <Paginator.Segment field="centerPage" className="selected" />
-            <Paginator.Segment field="nextPages" />
-
-            <Paginator.Ellipsis
-              className="ellipsis"
-              previousField="nextPages"
-              nextField="endPages">
-              ***
-            </Paginator.Ellipsis>
-            <Paginator.Segment field="endPages" />
             <Paginator.Button page={currentPage + 1}>Next</Paginator.Button>
           </Paginator.Context>
-          <Table
-            data={paginated.data}
-            columns={columns}
-          />
         </div>
       )
   }
@@ -119,7 +103,7 @@ export default React.createClass({
 function paginate(data, o) {
   data = data || [];
 
-  // adapt to zero indexed logic
+  console.log(o)
   const page = o.page - 1 || 0;
   const perPage = o.perPage;
 
