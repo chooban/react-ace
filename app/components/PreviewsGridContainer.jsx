@@ -29,7 +29,7 @@ export default React.createClass({
   }
   , render() {
       const msg = (this.state.chosenIssue)
-                    ? "Selected issue is " + this.state.chosenIssue
+                    ? "" 
                     : "No issue currently selected"
 
       return(

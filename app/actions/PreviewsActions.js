@@ -19,14 +19,19 @@ export function getIssue(issueNumber) {
     type: GET_ISSUE
   })
 
-  d3.text('data/ecmail324.csv', function(err, data) {
-    if (err) { console.error(err)
+  d3.text(url(issueNumber), function(err, data) {
+    if (err) {
+      console.error(err)
     }
     else {
       var parsedData = d3.csv.parseRows(data)
       gotIssueData(issueNumber, parsedData)
     }
   })
+
+  function url(issueNumber) {
+    return 'data/ecmail' + issueNumber + '.csv'
+  }
 }
 
 function gotIssues(data) {

@@ -1,9 +1,9 @@
 import React from 'react'
 import {getIssue} from '../actions/PreviewsActions'
 import PreviewsStore from '../stores/PreviewsStore'
-import DataGrid from 'react-datagrid'
+import {Table} from 'reactabular'
 
-import 'style!css!react-datagrid/index.css'
+import 'style!css!reactabular/style.css'
 
 export default React.createClass({
     displayName: 'PreviewsGrid'
@@ -12,7 +12,7 @@ export default React.createClass({
   }
   , getInitialState() {
       return {
-        gridData: null
+        gridData: []
       }
   }
   , componentWillMount() {
@@ -32,37 +32,31 @@ export default React.createClass({
   , render() {
       var columns = [
         {
-            name: 'id'
-          , title: "Previews Code"
+            property: 'id'
+          , header: "Previews Code"
         }
       , {
-            name: 'title'
-          , title: 'Description'
+            property: 'title'
+          , header: 'Description'
         }
       , {
-            name: 'price'
-          , title: 'Price'
+            property: 'price'
+          , header: 'Price'
         }
       , {
-            name: 'listPrice'
-          , title: 'Was'
+            property: 'listPrice'
+          , header: 'Was'
         }
       , {
-            name: 'publisher'
-          , title: 'Publisher'
+            property: 'publisher'
+          , header: 'Publisher'
         }
       ]
       return(
-        <div>
-          <p>This is the grid for {this.props.issueNumber}</p>
-          <DataGrid
-            idProperty="id"
-            dataSource={this.state.gridData}
-            columns={columns}
-            pagination='true'
-            pageSize='50'
-          />
-        </div>
+        <Table
+          data={this.state.gridData}
+          columns={columns}
+        />
       )
   }
 })

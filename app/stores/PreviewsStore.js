@@ -21,7 +21,7 @@ let PreviewsStore = assign({}, EventEmitter.prototype, {
       return issuesList
   }
   , getIssue(issueNumber) {
-      return issuesStore[issueNumber] || null
+      return issuesStore["" + issueNumber] || null
   }
 })
 

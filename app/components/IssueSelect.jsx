@@ -28,8 +28,6 @@ export default React.createClass({
   , handleSelected(props, e) {
       if (props.onSelectIssue) {
         props.onSelectIssue(e.currentTarget.selectedOptions[0].value)
-      } else {
-        console.log("No handler")
       }
     }
 })
