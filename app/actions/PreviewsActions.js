@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatcher/AppDispatcher'
-import {GET_ISSUES, GOT_ISSUES, GET_ISSUE, GOT_ISSUE} from '../consts'
+import {GET_ISSUES, GOT_ISSUES, GET_ISSUE, GOT_ISSUE, CHANGED_ISSUE} from '../consts'
 import d3 from 'd3'
 
 export function getIssues() {
@@ -14,19 +14,17 @@ export function getIssues() {
   ])
 }
 
-export function getIssue(issueNumber) {
+export function changedIssue(issueNumber) {
   AppDispatcher.handleAction({
-    type: GET_ISSUE
+    type: CHANGED_ISSUE
+  , issue: issueNumber
   })
 
   d3.text(url(issueNumber), function(err, data) {
-    if (err) {
-      console.error(err)
-    }
-    else {
-      var parsedData = d3.csv.parseRows(data)
-      gotIssueData(issueNumber, parsedData)
-    }
+    if (err) return console.error(err)
+    
+    var parsedData = d3.csv.parseRows(data)
+    gotIssueData(issueNumber, parsedData)
   })
 
   function url(issueNumber) {

@@ -1,8 +1,7 @@
 import React from 'react'
 import IssueSelect from './IssueSelect.jsx'
 import PreviewsStore from '../stores/PreviewsStore'
-import {getIssues} from '../actions/PreviewsActions'
-import {choseIssue} from '../actions/ChosenIssueActions'
+import {getIssues, changedIssue} from '../actions/PreviewsActions'
 import R from 'ramda'
 
 const indexByIssue = R.map(R.prop('issue'))
@@ -30,7 +29,7 @@ export default React.createClass({
       })
   }
   , onSelectIssue(issue) {
-      choseIssue(issue)
+      changedIssue(issue)
   }
   , render() {
       const issues = indexByIssue(this.state.all)

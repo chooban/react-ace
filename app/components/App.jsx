@@ -1,7 +1,7 @@
 import React from 'react'
 import IssuePickerContainer from './IssuePickerContainer.jsx'
 import OrderDetails from './OrderDetails.jsx'
-import PreviewsGridContainer from './PreviewsGridContainer.jsx'
+import PreviewsGrid from './PreviewsGrid.jsx'
 
 export default React.createClass({
     displayName: "AceItApp"
@@ -12,7 +12,7 @@ export default React.createClass({
             <IssuePickerContainer />
             <OrderDetails />
           </div>
-          <PreviewsGridContainer />
+          <PreviewsGrid/>
         </div>
       )
     }

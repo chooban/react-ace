@@ -6,7 +6,6 @@ import Paginator from 'react-pagify'
 import segmentize from 'segmentize'
 
 import 'style!css!react-pagify/style.css'
-
 import 'style!css!reactabular/style.css'
 
 export default React.createClass({
@@ -26,13 +25,8 @@ export default React.createClass({
   , componentWillMount() {
       PreviewsStore.addChangeListener(this.previewsStoreUpdate)
   }
-  , componentWillReceiveProps(nextProps) {
-      if (nextProps.issueNumber > 0 && this.props.issueNumber != nextProps.issueNumber) {
-        getIssue(nextProps.issueNumber)
-      }
-  }
   , previewsStoreUpdate() {
-      const data = PreviewsStore.getIssue(this.props.issueNumber)
+      const data = PreviewsStore.getIssue()
       this.setState({
         gridData: data
       })

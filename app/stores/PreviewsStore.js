@@ -2,9 +2,11 @@ import {EventEmitter} from 'events'
 import assign from 'object-assign'
 import Ramda from 'ramda'
 import AppDispatcher from '../dispatcher/AppDispatcher'
-import {CHANGE_EVENT, GOT_ISSUES, GOT_ISSUE} from '../consts'
+import {CHANGE_EVENT, GOT_ISSUES, GOT_ISSUE, CHANGED_ISSUE} from '../consts'
+import {getIssue} from '../actions/PreviewsActions'
 
 let issuesList = null
+  , currentIssue = null
   , issuesStore = {}
 
 let PreviewsStore = assign({}, EventEmitter.prototype, {
@@ -20,8 +22,8 @@ let PreviewsStore = assign({}, EventEmitter.prototype, {
   , getIssues() {
       return issuesList
   }
-  , getIssue(issueNumber) {
-      return issuesStore["" + issueNumber] || null
+  , getIssue() {
+      return issuesStore["" + currentIssue] || null
   }
 })
 
@@ -32,10 +34,13 @@ PreviewsStore.dispatchToken = AppDispatcher.register(payload => {
       issuesList = action.all
       PreviewsStore.emitChange()
       break;
+    case CHANGED_ISSUE:
+      currentIssue = action.issue
+      break;
     case GOT_ISSUE:
       issuesStore[action.issue] = csvToModel(action.issueData)
       PreviewsStore.emitChange()
-      break
+      break;
   }
 
   return true
