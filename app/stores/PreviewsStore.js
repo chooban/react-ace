@@ -31,7 +31,9 @@ PreviewsStore.dispatchToken = AppDispatcher.register(payload => {
   let action = payload.action
   switch (action.type) {
     case GOT_ISSUES:
-      issuesList = action.all
+      issuesList = action.all.sort(function(a, b) {
+        return b.issue - a.issue
+      })
       PreviewsStore.emitChange()
       break;
     case CHANGED_ISSUE:

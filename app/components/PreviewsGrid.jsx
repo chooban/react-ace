@@ -1,6 +1,7 @@
 import React from 'react'
 import {getIssue} from '../actions/PreviewsActions'
 import PreviewsStore from '../stores/PreviewsStore'
+import PreviewsLink from './PreviewsLink'
 import {Table} from 'reactabular'
 import Paginator from 'react-pagify'
 import segmentize from 'segmentize'
@@ -47,6 +48,11 @@ export default React.createClass({
         {
             property: 'id'
           , header: "Previews Code"
+          , cell: (v) => {
+              return {
+                value: <PreviewsLink previewsCode={v} />
+              }
+          }
         }
       , {
             property: 'title'

@@ -11,6 +11,7 @@ export function getIssues() {
     { issue: 324 }
   , { issue: 326 }
   , { issue: 327 }
+  , { issue: 330 }
   ])
 }
 
@@ -22,7 +23,7 @@ export function changedIssue(issueNumber) {
 
   d3.text(url(issueNumber), function(err, data) {
     if (err) return console.error(err)
-    
+
     var parsedData = d3.csv.parseRows(data)
     gotIssueData(issueNumber, parsedData)
   })
