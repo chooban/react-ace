@@ -2,6 +2,7 @@ import React from 'react'
 import {getIssue} from '../actions/PreviewsActions'
 import PreviewsStore from '../stores/PreviewsStore'
 import PreviewsLink from './PreviewsLink'
+import AddToOrder from './AddToOrder'
 import {Table, Search} from 'reactabular'
 import Paginator from 'react-pagify'
 import segmentize from 'segmentize'
@@ -9,6 +10,43 @@ import R from 'ramda'
 
 import 'style!css!react-pagify/style.css'
 import 'style!css!reactabular/style.css'
+const columns = [
+  {
+      property: 'id'
+    , header: "Previews Code"
+    , cell: (v) => {
+        return {
+          value: <PreviewsLink previewsCode={v} />
+        }
+      }
+  }
+, {
+      property: 'title'
+    , header: 'Description'
+  }
+, {
+      property: 'price'
+    , header: 'Price'
+  }
+, {
+      property: 'listPrice'
+    , header: 'Was'
+  }
+, {
+      property: 'publisher'
+    , header: 'Publisher'
+  }
+, {
+      header: 'Include'
+    , cell: (v, d, idx) => {
+        const pc = d[idx].id
+        return {
+          value: <AddToOrder previewsCode={pc} />
+        }
+      }
+  }
+]
+const searchColumns = R.filter(R.where({property: R.contains(R.__, ['title', 'publisher'])}))(columns)
 
 export default React.createClass({
     displayName: 'PreviewsGrid'
@@ -54,40 +92,10 @@ export default React.createClass({
     });
   }
   , render() {
-      const columns = [
-        {
-            property: 'id'
-          , header: "Previews Code"
-          , cell: (v) => {
-              return {
-                value: <PreviewsLink previewsCode={v} />
-              }
-            }
-        }
-      , {
-            property: 'title'
-          , header: 'Description'
-        }
-      , {
-            property: 'price'
-          , header: 'Price'
-        }
-      , {
-            property: 'listPrice'
-          , header: 'Was'
-        }
-      , {
-            property: 'publisher'
-          , header: 'Publisher'
-        }
-      ]
-      const searchColumns = R.filter(R.where({property: R.contains(R.__, ['title', 'publisher'])}))(columns)
       let pagination = this.state.pagination
       let data = this.state.gridData
       const currentPage = pagination.page
-      const pages = Math.ceil(data.length / Math.max(
-        isNaN(pagination.perPage) ? 1 : pagination.perPage, 1)
-      )
+      const pages = Math.ceil(data.length / pagination.perPage);
 
       if (this.state.search.query) {
         data = Search.search(
@@ -128,7 +136,6 @@ export default React.createClass({
 function paginate(data, o) {
   data = data || [];
 
-  console.log(o)
   const page = o.page - 1 || 0;
   const perPage = o.perPage;
 
