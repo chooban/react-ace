@@ -2,9 +2,10 @@ import React from 'react'
 import {getIssue} from '../actions/PreviewsActions'
 import PreviewsStore from '../stores/PreviewsStore'
 import PreviewsLink from './PreviewsLink'
-import {Table} from 'reactabular'
+import {Table, Search} from 'reactabular'
 import Paginator from 'react-pagify'
 import segmentize from 'segmentize'
+import R from 'ramda'
 
 import 'style!css!react-pagify/style.css'
 import 'style!css!reactabular/style.css'
@@ -20,6 +21,10 @@ export default React.createClass({
       , pagination: {
           page: 1,
           perPage: 25
+        }
+      , search: {
+          column: '',
+          query: ''
         }
       }
   }
@@ -43,6 +48,11 @@ export default React.createClass({
         pagination: pagination
       });
   }
+  , onSearch(search) {
+    this.setState({
+        search: search
+    });
+  }
   , render() {
       const columns = [
         {
@@ -52,7 +62,7 @@ export default React.createClass({
               return {
                 value: <PreviewsLink previewsCode={v} />
               }
-          }
+            }
         }
       , {
             property: 'title'
@@ -71,18 +81,33 @@ export default React.createClass({
           , header: 'Publisher'
         }
       ]
+      const searchColumns = R.filter(R.where({property: R.contains(R.__, ['title', 'publisher'])}))(columns)
       let pagination = this.state.pagination
+      let data = this.state.gridData
       const currentPage = pagination.page
-      const paginated = paginate(this.state.gridData, pagination)
-      const pages = Math.ceil(this.state.gridData.length / Math.max(
+      const pages = Math.ceil(data.length / Math.max(
         isNaN(pagination.perPage) ? 1 : pagination.perPage, 1)
-      );
+      )
+
+      if (this.state.search.query) {
+        data = Search.search(
+            data,
+            columns,
+            this.state.search.column,
+            this.state.search.query
+        )
+      }
+      const paginated = paginate(data, pagination)
 
       return(
         <div>
+          <div className='search-container'>
+            Search <Search columns={searchColumns} data={this.state.gridData} onChange={this.onSearch} />
+          </div>
           <Table
             data={paginated.data}
             columns={columns}
+            rowKey={'id'}
           />
         <Paginator.Context className="pagify-pagination"
             segments={segmentize({
