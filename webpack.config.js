@@ -12,7 +12,8 @@ const PATHS = {
 }
 
 const common = {
-    entry: {
+    devtool: 'cheap-module-source-map'
+  , entry: {
       app: PATHS.app
     }
   , resolve: {
@@ -31,10 +32,10 @@ const common = {
       }
     , {
         test: /\.jsx?$/
-        // Enable caching for improved performance during development
-        // It uses default OS directory by default. If you need something
-        // more custom, pass a path to it. I.e., babel?cacheDirectory=<path>
-      , loaders: ['babel?cacheDirectory']
+      , exclude: /node_modules/
+      , loaders: [
+          'babel-loader?compact=false'
+        ]
         // Parse only app files! Without this it will go through entire project.
         // In addition to being slow, that will most likely result in an error.
       , include: PATHS.app
@@ -43,9 +44,19 @@ const common = {
   }
   , plugins: [
       new webpack.optimize.DedupePlugin()
+    , new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en-gb|uk)$/)
+    , new webpack.ProvidePlugin({
+          Promise: 'imports?this=>global!exports?global.Promise!es6-promise'
+        , fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+      })
+    , new webpack.DefinePlugin({
+        'process.env': {
+          'NODE_ENV': '"production"'
+        }
+      })
     , new webpack.optimize.UglifyJsPlugin({
         compress: {
-            warnings: false
+          warnings: false
         }
       })
   ]
