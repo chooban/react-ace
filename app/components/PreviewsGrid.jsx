@@ -41,7 +41,7 @@ const columns = [
     , cell: (v, d, idx) => {
         const pc = d[idx].id
         return {
-          value: <AddToOrder previewsCode={pc} />
+          value: <AddToOrder issueNumber={PreviewsStore.getCurrentIssue()} previewsCode={pc} />
         }
       }
   }

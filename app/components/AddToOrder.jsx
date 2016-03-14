@@ -7,12 +7,13 @@ export default React.createClass({
     displayName: "AddToOrder"
   , propTypes: {
       previewsCode: React.PropTypes.string
+    , issueNumber: React.PropTypes.string
   }
   , onChange(e) {
       var node = ReactDOM.findDOMNode(this)
       return (node.checked)
-              ? addToOrder(this.props.previewsCode)
-              : removeFromOrder(this.props.previewsCode)
+              ? addToOrder(this.props.issueNumber, this.props.previewsCode)
+              : removeFromOrder(this.props.issueNumber, this.props.previewsCode)
   }
   , render() {
       return(

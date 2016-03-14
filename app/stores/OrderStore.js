@@ -3,6 +3,8 @@ import assign from 'object-assign'
 import AppDispatcher from '../dispatcher/AppDispatcher'
 import {CHANGE_EVENT, ADD_TO_ORDER, REMOVE_FROM_ORDER, CHANGED_ISSUE} from '../consts'
 
+const orders = {}
+
 let OrderStore = assign({}, EventEmitter.prototype, {
     emitChange() {
       this.emit(CHANGE_EVENT)
@@ -18,14 +20,18 @@ let OrderStore = assign({}, EventEmitter.prototype, {
 OrderStore.dispatchToken = AppDispatcher.register(payload => {
   let action = payload.action
   switch (action.type) {
+    case CHANGED_ISSUE:
+      if (!Object.keys(orders).indexOf(action.issue) > -1)
+        orders[action.issue] = []
+      break
     case ADD_TO_ORDER:
-      console.log("Adding " + action.previewsCode + " to order")
+      orders[action.issueNumber].push(action.previewsCode)
       OrderStore.emitChange()
-      break;
+      break
     case REMOVE_FROM_ORDER:
       console.log("Removing " + action.previewsCode + " from order")
       OrderStore.emitChange()
-      break;
+      break
   }
 
   return true

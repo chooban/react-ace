@@ -25,6 +25,9 @@ let PreviewsStore = assign({}, EventEmitter.prototype, {
   , getIssue() {
       return issuesStore["" + currentIssue] || null
   }
+  , getCurrentIssue() {
+      return currentIssue
+  }
 })
 
 PreviewsStore.dispatchToken = AppDispatcher.register(payload => {
