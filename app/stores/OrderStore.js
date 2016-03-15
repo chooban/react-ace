@@ -29,12 +29,10 @@ let OrderStore = assign({}, EventEmitter.prototype, {
 OrderStore.dispatchToken = AppDispatcher.register(payload => {
   let action = payload.action
   switch (action.type) {
-    case CHANGED_ISSUE:
+    case ADD_TO_ORDER:
       if (Object.keys(orders).indexOf(keyForIssue(action.issue)) < 0)
         orders[keyForIssue(action.issue)] = []
 
-      break
-    case ADD_TO_ORDER:
       orders[keyForIssue(action.issueNumber)].push(action.previewsCode)
       OrderStore.emitChange()
       break
