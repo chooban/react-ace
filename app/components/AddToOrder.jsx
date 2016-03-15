@@ -10,18 +10,22 @@ export default React.createClass({
     , issueNumber: React.PropTypes.string
   }
   , getInitialState() {
-      return {
-        checked: false
+      const state = {
+        checked: OrderStore.isOrdered(this.props.previewsCode)
       }
+      return state
   }
   , onChange(e) {
       var node = ReactDOM.findDOMNode(this)
       this.setState({
         checked: node.checked
-      })
-      return (node.checked)
-              ? addToOrder(this.props.issueNumber, this.props.previewsCode)
-              : removeFromOrder(this.props.issueNumber, this.props.previewsCode)
+      }, updateOrder)
+
+      function updateOrder() {
+        return (this.state.checked)
+                ? addToOrder(this.props.issueNumber, this.props.previewsCode)
+                : removeFromOrder(this.props.issueNumber, this.props.previewsCode)
+      }
   }
   , render() {
       return(
