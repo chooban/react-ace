@@ -1,5 +1,5 @@
 import React from 'react'
-import IssuePickerContainer from './IssuePickerContainer.jsx'
+import IssueSelectContainer from './IssueSelectContainer.jsx'
 import OrderDetails from './OrderDetails.jsx'
 import PreviewsGrid from './PreviewsGrid.jsx'
 
@@ -9,7 +9,7 @@ export default React.createClass({
       return(
         <div className="previewsApp">
           <div className="controlBar">
-            <IssuePickerContainer />
+            <IssueSelectContainer />
             <OrderDetails />
           </div>
           <PreviewsGrid/>

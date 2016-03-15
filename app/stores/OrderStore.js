@@ -23,7 +23,6 @@ let OrderStore = assign({}, EventEmitter.prototype, {
           , issueNumber = components[0]
           , key = keyForIssue(issueNumber)
 
-      console.log(JSON.stringify(orders))
       return (orders[key] && orders[key].indexOf(previewsCode) > -1)
     }
 })
