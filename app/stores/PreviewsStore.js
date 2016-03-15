@@ -40,10 +40,10 @@ PreviewsStore.dispatchToken = AppDispatcher.register(payload => {
       PreviewsStore.emitChange()
       break;
     case CHANGED_ISSUE:
-      currentIssue = action.issue
+      currentIssue = action.issueNumber
       break;
     case GOT_ISSUE:
-      issuesStore[action.issue] = csvToModel(action.issueData)
+      issuesStore[action.issueNumber] = csvToModel(action.issueData)
       PreviewsStore.emitChange()
       break;
   }

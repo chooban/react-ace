@@ -21,23 +21,26 @@ let OrderStore = assign({}, EventEmitter.prototype, {
   , isOrdered(previewsCode) {
       const components = previewsCode.split('/')
           , issueNumber = components[0]
+          , key = keyForIssue(issueNumber)
 
-      return (orders[keyForIssue(issueNumber)] && orders[keyForIssue(issueNumber)].indexOf(previewsCode) > -1)
+      console.log(JSON.stringify(orders))
+      return (orders[key] && orders[key].indexOf(previewsCode) > -1)
     }
 })
 
 OrderStore.dispatchToken = AppDispatcher.register(payload => {
-  let action = payload.action
+  const action = payload.action
+  const key = keyForIssue(action.issueNumber)
+
   switch (action.type) {
     case ADD_TO_ORDER:
-      if (Object.keys(orders).indexOf(keyForIssue(action.issue)) < 0)
-        orders[keyForIssue(action.issue)] = []
+      if (Object.keys(orders).indexOf(key) < 0) orders[key] = []
 
-      orders[keyForIssue(action.issueNumber)].push(action.previewsCode)
+      orders[key].push(action.previewsCode)
       OrderStore.emitChange()
       break
     case REMOVE_FROM_ORDER:
-      var a = orders[keyForIssue(action.issueNumber)]
+      const a = orders[key]
       a.splice(a.indexOf(action.previewsCode), 1)
       OrderStore.emitChange()
       break

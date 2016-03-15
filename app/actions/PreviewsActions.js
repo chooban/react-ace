@@ -13,7 +13,7 @@ export function getIssues() {
 export function changedIssue(issueNumber) {
   AppDispatcher.handleAction({
     type: CHANGED_ISSUE
-  , issue: issueNumber
+  , issueNumber: issueNumber
   })
 
   getIssue(issueNumber, gotIssueData)
@@ -29,7 +29,7 @@ function gotIssues(data) {
 function gotIssueData(issueNumber, issueData) {
   AppDispatcher.handleAction({
     type: GOT_ISSUE
-  , issue: issueNumber
+  , issueNumber: issueNumber
   , issueData: issueData
   })
 }
