@@ -39,6 +39,8 @@ OrderStore.dispatchToken = AppDispatcher.register(payload => {
       OrderStore.emitChange()
       break
     case REMOVE_FROM_ORDER:
+      var a = orders[keyForIssue(action.issueNumber)]
+      a.splice(a.indexOf(action.previewsCode), 1)
       OrderStore.emitChange()
       break
   }
