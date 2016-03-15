@@ -22,9 +22,9 @@ export default React.createClass({
   , componentWillMount() {
       const components = this.props.previewsCode.split('/')
       const issueNumber = +components[0]
-      const epoch = new Date(1988, 9, 1)
-      epoch.setDate(epoch.getDate() + issueNumber)
-      const slug = MonthNames[epoch.getMonth()] + components[1]
+      const epoch = new Date(1988, 8, 1)
+      epoch.setMonth(epoch.getMonth() + issueNumber)
+      const slug = MonthNames[epoch.getMonth()] + (epoch.getFullYear() - 2000) + components[1]
 
       this.setState({
         url: `http://www.previewsworld.com/Catalog/${slug}`
