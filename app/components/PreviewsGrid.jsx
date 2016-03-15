@@ -1,6 +1,7 @@
 import React from 'react'
 import {getIssue} from '../actions/PreviewsActions'
 import PreviewsStore from '../stores/PreviewsStore'
+import OrderStore from '../stores/OrderStore'
 import PreviewsLink from './PreviewsLink'
 import AddToOrder from './AddToOrder'
 import {Table, Search} from 'reactabular'
@@ -38,10 +39,14 @@ const columns = [
   }
 , {
       header: 'Include'
-    , cell: (v, d, idx) => {
-        const pc = d[idx].id
+    , cell: (v, data, idx) => {
+        const previewsCode = data[idx].id
+        const currentIssue = PreviewsStore.getCurrentIssue()
         return {
-          value: <AddToOrder issueNumber={PreviewsStore.getCurrentIssue()} previewsCode={pc} />
+          value: <AddToOrder
+                    issueNumber={currentIssue}
+                    previewsCode={previewsCode}
+                  />
         }
       }
   }

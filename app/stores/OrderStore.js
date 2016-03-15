@@ -15,6 +15,12 @@ let OrderStore = assign({}, EventEmitter.prototype, {
   , removeChangeListener(done) {
       this.removeListener(CHANGE_EVENT, done)
   }
+  , isOrdered(previewsCode) {
+      const components = previewsCode.split('/')
+          , issueNumber = components[0]
+
+      return (orders[issueNumber] && orders[issueNumber].indexOf(previewsCode) > -1) 
+    }
 })
 
 OrderStore.dispatchToken = AppDispatcher.register(payload => {
