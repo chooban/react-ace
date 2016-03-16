@@ -1,35 +1,32 @@
 import React from 'react'
-import {addToOrder, removeFromOrder} from '../actions/OrderActions'
-import OrderStore from '../stores/OrderStore'
 import ReactDOM from 'react-dom'
 
 export default React.createClass({
     displayName: "AddToOrder"
   , propTypes: {
-      previewsCode: React.PropTypes.string
-    , issueNumber: React.PropTypes.string
-  }
-  , getInitialState() {
-      const state = {
-        checked: OrderStore.isOrdered(this.props.previewsCode)
-      }
-      return state
+      checked: React.PropTypes.boolean
+    , onChange: React.PropTypes.function
   }
   , onChange(e) {
       var node = ReactDOM.findDOMNode(this)
       this.setState({
         checked: node.checked
-      }, updateOrder)
-
-      function updateOrder() {
-        return (this.state.checked)
-                ? addToOrder(this.props.issueNumber, this.props.previewsCode)
-                : removeFromOrder(this.props.issueNumber, this.props.previewsCode)
+      }, () => {
+        this.props.onChange(node.checked)
+      })
+  }
+  , getInitialState() {
+      // Set initial checked status
+      return {
+        checked: this.props.checked
       }
   }
   , render() {
       return(
-        <input type="checkbox" value="{previewsCode}" onChange={this.onChange} checked={this.state.checked}></input>
+        <input
+            type="checkbox"
+            onChange={this.onChange}
+            checked={this.state.checked} />
       )
   }
 })

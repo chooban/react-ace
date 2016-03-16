@@ -3,7 +3,7 @@ import {getIssue} from '../actions/PreviewsActions'
 import PreviewsStore from '../stores/PreviewsStore'
 import OrderStore from '../stores/OrderStore'
 import PreviewsLink from './PreviewsLink'
-import AddToOrder from './AddToOrder'
+import AddToOrderContainer from './AddToOrderContainer'
 import {Table, Search} from 'reactabular'
 import Paginator from 'react-pagify'
 import segmentize from 'segmentize'
@@ -57,12 +57,12 @@ const columns = [
 , {
       header: 'Include'
     , cell: (v, data, idx) => {
-        const previewsCode = data[idx].id
-        const currentIssue = PreviewsStore.getCurrentIssue()
+        const previewsItemDetails = R.merge(data[idx], {
+          issueNumber: OrderStore.getCurrentIssue()
+        })
         return {
-          value: <AddToOrder
-                    issueNumber={currentIssue}
-                    previewsCode={previewsCode}
+          value: <AddToOrderContainer
+                    lineItemDetails={previewsItemDetails}
                   />
         }
       }
@@ -92,9 +92,8 @@ export default React.createClass({
       PreviewsStore.addChangeListener(this.previewsStoreUpdate)
   }
   , previewsStoreUpdate() {
-      const data = PreviewsStore.getIssue()
       this.setState({
-        gridData: data
+        gridData: PreviewsStore.getCurrentIssue()
       })
   }
   , onSelect(page) {
@@ -109,9 +108,9 @@ export default React.createClass({
       });
   }
   , onSearch(search) {
-    this.setState({
-        search: search
-    });
+      this.setState({
+          search: search
+      });
   }
   , render() {
       let pagination = this.state.pagination

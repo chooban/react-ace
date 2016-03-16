@@ -1,5 +1,5 @@
 import React from 'react'
-import IssueSelect from '../../app/components/IssueSelect.jsx'
+import IssueSelect from '../IssueSelect.jsx'
 import TestUtils from 'react-addons-test-utils'
 import test from 'tape'
 import Ramda from 'ramda'

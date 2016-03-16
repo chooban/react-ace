@@ -1,7 +1,7 @@
 import React from 'react'
-import IssueSelectContainer from './IssueSelectContainer.jsx'
-import OrderDetails from './OrderDetails.jsx'
-import PreviewsGrid from './PreviewsGrid.jsx'
+import IssueSelectContainer from './components/IssueSelectContainer.jsx'
+import OrderDetails from './components/OrderDetails.jsx'
+import PreviewsGrid from './components/PreviewsGrid.jsx'
 
 export default React.createClass({
     displayName: "AceItApp"

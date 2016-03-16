@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatcher/AppDispatcher'
-import {GET_ISSUES, GOT_ISSUES, GET_ISSUE, GOT_ISSUE, CHANGED_ISSUE} from '../consts'
+import {GET_ISSUES, GOT_ISSUES, GOT_ISSUE, CHANGED_ISSUE} from '../consts'
 import {getIssueList, getIssue} from '../api/PreviewsWebApi'
 
 export function getIssues() {

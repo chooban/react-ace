@@ -1,19 +1,17 @@
 import React from 'react'
 import IssueSelect from './IssueSelect.jsx'
 import PreviewsStore from '../stores/PreviewsStore'
-import {getIssues, changedIssue} from '../actions/PreviewsActions'
+import {getIssues} from '../actions/PreviewsActions'
+import {changedIssue} from '../actions/PreviewsActions'
 import R from 'ramda'
 
 const indexByIssue = R.map(R.prop('issue'))
 
 export default React.createClass({
     displayName: 'IssueSelect'
-  , propTypes: {
-      all: React.PropTypes.array
-    }
   , getInitialState() {
       return {
-        all: []
+        issues: []
       }
   }
   , componentWillMount() {
@@ -25,14 +23,13 @@ export default React.createClass({
   }
   , onStoreChange() {
       this.setState({
-        all: PreviewsStore.getIssues()
+        issues: indexByIssue(PreviewsStore.getIssues())
       })
   }
   , onSelectIssue(issue) {
       changedIssue(issue)
   }
   , render() {
-      const issues = indexByIssue(this.state.all)
-      return( <IssueSelect issues={issues} onSelectIssue={this.onSelectIssue}/> )
+      return( <IssueSelect issues={this.state.issues} onSelectIssue={this.onSelectIssue}/> )
   }
 })
