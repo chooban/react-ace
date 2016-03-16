@@ -5,6 +5,18 @@ import test from 'tape'
 import Ramda from 'ramda'
 
 
+test('Previews Link component', (t) => {
+
+  fixtures.forEach((v) => {
+    t.test('Testing previews link for ' + v.previewsCode, (t) => {
+      const result = shallowRender(v.previewsCode)
+      t.equal(result.props.href, v.url, "Should generate Previews World link")
+      t.equal(result.props.children, v.previewsCode, "Should display Previews Code")
+      t.end()
+    })
+  })
+})
+
 function shallowRender(previewsCode) {
   const renderer = TestUtils.createRenderer()
   renderer.render(<PreviewsLink previewsCode={previewsCode}/>)
@@ -66,15 +78,3 @@ const fixtures = [
 function previewsUrl(pc) {
   return `http://www.previewsworld.com/Catalog/${pc}`
 }
-
-test('Previews Link component', (t) => {
-
-  fixtures.forEach((v) => {
-    t.test('Testing ' + v.previewsCode, (t) => {
-      const result = shallowRender(v.previewsCode)
-      t.equal(result.props.href, v.url)
-      t.equal(result.props.children, v.previewsCode)
-      t.end()
-    })
-  })
-})
