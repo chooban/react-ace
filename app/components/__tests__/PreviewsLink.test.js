@@ -3,7 +3,6 @@ import PreviewsLink from '../PreviewsLink.jsx'
 import TestUtils from 'react-addons-test-utils'
 import test from 'tape'
 
-
 test('Previews Link component', (t) => {
 
   fixtures.forEach((v) => {

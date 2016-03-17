@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "babel-tape-runner app/**/__tests__/*.test.js",
+    "test": "babel-tape-runner app/**/__tests__/*.test.js | tap-spec",
     "build": "webpack",
     "start": "webpack-dev-server --watch-poll --inline --hot --port 8091 --content-base /home/rhendry/src/react-ace/build/"
   },
@@ -20,6 +20,8 @@
     "babel-preset-react-hmre": "^1.1.0",
     "babel-tape-runner": "^2.0.1",
     "css-loader": "^0.23.1",
+    "enzyme": "^2.1.0",
+    "es6-promise": "^3.1.2",
     "exports-loader": "^0.6.3",
     "imports-loader": "^0.6.5",
     "jsdom": "^8.1.0",
@@ -27,6 +29,7 @@
     "react-addons-test-utils": "^0.14.7",
     "sinon": "^1.17.3",
     "style-loader": "^0.13.0",
+    "tap-spec": "^4.1.1",
     "tape": "^4.4.0",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
