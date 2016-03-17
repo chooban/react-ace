@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom'
 export default React.createClass({
     displayName: "AddToOrder"
   , propTypes: {
-      checked: React.PropTypes.boolean
-    , onChange: React.PropTypes.function
+      checked: React.PropTypes.bool
+    , onChange: React.PropTypes.func
   }
   , onChange(e) {
       var node = ReactDOM.findDOMNode(this)
@@ -16,7 +16,6 @@ export default React.createClass({
       })
   }
   , getInitialState() {
-      // Set initial checked status
       return {
         checked: this.props.checked
       }
@@ -26,7 +25,8 @@ export default React.createClass({
         <input
             type="checkbox"
             onChange={this.onChange}
-            checked={this.state.checked} />
+            checked={this.state.checked}
+        />
       )
   }
 })

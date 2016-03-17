@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "babel-tape-runner test/**/*.test.js",
+    "test": "babel-tape-runner app/**/__tests__/*.test.js",
     "build": "webpack",
     "start": "webpack-dev-server --watch-poll --inline --hot --port 8091 --content-base /home/rhendry/src/react-ace/build/"
   },
@@ -25,6 +25,7 @@
     "jsdom": "^8.1.0",
     "npm-install-webpack-plugin": "^2.0.2",
     "react-addons-test-utils": "^0.14.7",
+    "sinon": "^1.17.3",
     "style-loader": "^0.13.0",
     "tape": "^4.4.0",
     "webpack": "^1.12.14",

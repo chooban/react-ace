@@ -2,7 +2,6 @@ import React from 'react'
 import PreviewsLink from '../PreviewsLink.jsx'
 import TestUtils from 'react-addons-test-utils'
 import test from 'tape'
-import Ramda from 'ramda'
 
 
 test('Previews Link component', (t) => {

@@ -8,18 +8,27 @@ export default React.createClass({
   , propTypes: {
       lineItemDetails: React.PropTypes.object
     }
-  , onChange(isChecked) {
-      const details = this.props.lineItemDetails
-      return (isChecked)
-              ? addToOrder(details.issueNumber, details.id)
-              : removeFromOrder(details.issueNumber, details.id)
+  , addItemToOrder() {
+      addToOrder(
+        this.props.lineItemDetails.issueNumber
+      , this.props.lineItemDetails.id
+      )
+    }
+  , removeItemFromOrder() {
+      removeFromOrder(
+        this.props.lineItemDetails.issueNumber
+      , this.props.lineItemDetails.id
+      )
   }
   , render() {
       const details = this.props.lineItemDetails
+          , ordered = OrderStore.isOrdered(details.id)
+          , onChange = (!ordered) ? this.addItemToOrder : this.removeItemFromOrder
+
       return(
         <AddToOrder
-          onChange={this.onChange}
-          checked={OrderStore.isOrdered(details.id)}
+          onChange={onChange}
+          checked={ordered}
         />
       )
     }
