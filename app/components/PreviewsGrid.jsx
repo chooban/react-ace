@@ -17,8 +17,8 @@ const formatAsGBP = v => {
   return {
     value: (v)
             ? '£' + v.toLocaleString(null, { style: 'currency', currency: 'GBP' })
-            : ''
-    }
+            : '',
+  };
 };
 
 const formatAddToOrder = (v, data, idx) => {
@@ -32,7 +32,7 @@ const columns = [
   {
     property: 'id',
     header: 'Previews Code',
-    cell: v => { return { value: <PreviewsLink previewsCode={v} /> } },
+    cell: v => { return { value: <PreviewsLink previewsCode={v} /> }; },
   },
   {
     property: 'title',
@@ -51,7 +51,7 @@ const columns = [
   {
     property: 'publisher',
     header: 'Publisher',
-    cell: v => { return { value: capitalize(v.toLowerCase()) } },
+    cell: v => { return { value: capitalize(v.toLowerCase()) }; },
   },
   {
     header: 'Include',
