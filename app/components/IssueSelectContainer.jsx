@@ -1,4 +1,4 @@
-import {createClass} from 'react'
+import React from 'react'
 import IssueSelect from './IssueSelect.jsx'
 import PreviewsStore from '../stores/PreviewsStore'
 import {getIssues} from '../actions/PreviewsActions'
@@ -7,7 +7,7 @@ import {map,prop} from 'ramda'
 
 const indexByIssue = map(prop('issue'))
 
-export default createClass({
+export default React.createClass({
     displayName: 'IssueSelect'
   , getInitialState() {
       return {

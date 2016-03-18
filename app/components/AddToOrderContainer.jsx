@@ -1,9 +1,9 @@
-import {createClass} from 'react'
+import React from 'react'
 import {addToOrder, removeFromOrder} from '../actions/OrderActions'
 import AddToOrder from './AddToOrder.jsx'
 import OrderStore from '../stores/OrderStore'
 
-export default createClass({
+export default React.createClass({
     displayName: "AddToOrderContainer"
   , propTypes: {
       lineItemDetails: React.PropTypes.object
