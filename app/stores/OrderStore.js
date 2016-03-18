@@ -1,58 +1,61 @@
-import {EventEmitter} from 'events'
-import assign from 'object-assign'
-import AppDispatcher from '../dispatcher/AppDispatcher'
-import {CHANGE_EVENT, ADD_TO_ORDER, REMOVE_FROM_ORDER, CHANGED_ISSUE} from '../consts'
+import {EventEmitter} from 'events';
+import assign from 'object-assign';
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import {CHANGE_EVENT, ADD_TO_ORDER, REMOVE_FROM_ORDER, CHANGED_ISSUE} from '../consts';
 
-const orders = {}
-    , keyForIssue = (issue) => {
-        return "previews" + issue
-      }
-let currentIssue = null
+const orders = {};
+const keyForIssue = issue => 'previews' + issue;
+
+let currentIssue = null;
 
 let OrderStore = assign({}, EventEmitter.prototype, {
-    emitChange() {
-      this.emit(CHANGE_EVENT)
-    }
-  , addChangeListener(done) {
-      this.on(CHANGE_EVENT, done)
-  }
-  , removeChangeListener(done) {
-      this.removeListener(CHANGE_EVENT, done)
-  }
-  , getCurrentIssue() {
-      return currentIssue
-  }
-  , isOrdered(previewsCode) {
-      const components = previewsCode.split('/')
-          , issueNumber = components[0]
-          , key = keyForIssue(issueNumber)
+  emitChange() {
+    this.emit(CHANGE_EVENT);
+  },
 
-      return (orders[key] && orders[key].indexOf(previewsCode) > -1)
-    }
-})
+  addChangeListener(done) {
+    this.on(CHANGE_EVENT, done);
+  },
+
+  removeChangeListener(done) {
+    this.removeListener(CHANGE_EVENT, done);
+  },
+
+  getCurrentIssue() {
+    return currentIssue;
+  },
+
+  isOrdered(previewsCode) {
+    const components = previewsCode.split('/');
+    const issueNumber = components[0];
+    const key = keyForIssue(issueNumber);
+
+    return (orders[key] && orders[key].indexOf(previewsCode) > -1);
+  },
+});
 
 OrderStore.dispatchToken = AppDispatcher.register(payload => {
-  const action = payload.action
-  const key = keyForIssue(action.issueNumber)
+  const action = payload.action;
+  const key = keyForIssue(action.issueNumber);
 
   switch (action.type) {
     case CHANGED_ISSUE:
-      currentIssue = action.issueNumber
-      break
+      currentIssue = action.issueNumber;
+      break;
     case ADD_TO_ORDER:
-      if (Object.keys(orders).indexOf(key) < 0) orders[key] = []
+      if (Object.keys(orders).indexOf(key) < 0) orders[key] = [];
 
-      orders[key].push(action.previewsCode)
-      OrderStore.emitChange()
-      break
+      orders[key].push(action.previewsCode);
+      OrderStore.emitChange();
+      break;
     case REMOVE_FROM_ORDER:
-      const a = orders[key]
-      a.splice(a.indexOf(action.previewsCode), 1)
-      OrderStore.emitChange()
-      break
+      const a = orders[key];
+      a.splice(a.indexOf(action.previewsCode), 1);
+      OrderStore.emitChange();
+      break;
   }
 
-  return true
-})
+  return true;
+});
 
-export default OrderStore
+export default OrderStore;

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "style": "jscs --fix app/",
     "test": "babel-tape-runner app/**/__tests__/*.test.js | tap-spec",
     "build": "webpack",
     "start": "webpack-dev-server --watch-poll --inline --hot --port 8091 --content-base /home/rhendry/src/react-ace/build/"
@@ -24,6 +25,7 @@
     "es6-promise": "^3.1.2",
     "exports-loader": "^0.6.3",
     "imports-loader": "^0.6.5",
+    "jscs": "^2.11.0",
     "jsdom": "^8.1.0",
     "npm-install-webpack-plugin": "^2.0.2",
     "react-addons-test-utils": "^0.14.7",

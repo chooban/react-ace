@@ -1,11 +1,11 @@
-import {Dispatcher} from 'flux'
-import assign from 'object-assign'
+import {Dispatcher} from 'flux';
+import assign from 'object-assign';
 
 export default assign(new Dispatcher(), {
   handleAction(action) {
-    console.log("Dispatching ", action)
+    console.log('Dispatching', action);
     this.dispatch({
-      action: action
-    })
-  }
-})
+      action: action,
+    });
+  },
+});
