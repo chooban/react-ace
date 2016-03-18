@@ -32,12 +32,10 @@ const common = {
       }
     , {
         test: /\.jsx?$/
-      , exclude: /node_modules/
+      , exclude: /(node_modules|__tests__)/
       , loaders: [
           'babel-loader?compact=false'
         ]
-        // Parse only app files! Without this it will go through entire project.
-        // In addition to being slow, that will most likely result in an error.
       , include: PATHS.app
       }
     ]
@@ -54,17 +52,17 @@ const common = {
           'NODE_ENV': '"production"'
         }
       })
-    , new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false
-        }
-      })
+    // , new webpack.optimize.UglifyJsPlugin({
+    //     compress: {
+    //       warnings: false
+    //     }
+    //   })
   ]
 }
 
 if (TARGET === 'start' || !TARGET) {
-  module.exports = merge(common, devConfig(PATHS.build))
-  // module.exports = merge(common, {})
+  // module.exports = merge(common, devConfig(PATHS.build))
+  module.exports = merge(common, {})
 }
 
 if (TARGET === 'build') {

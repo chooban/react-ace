@@ -1,8 +1,8 @@
-import React from 'react'
+import {createClass} from 'react'
 
-export default React.createClass({
+export default createClass({
     displayName: "OrderDetails"
   , render() {
       return(<div className="orderDetails">Controls will go here</div>)
     }
-}) 
+})

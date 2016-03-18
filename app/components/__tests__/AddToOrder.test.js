@@ -37,11 +37,7 @@ test('Add To Order component', (t) => {
               checked={false}
             />)
 
-      wrapper.find('input').simulate('change', {
-        target: {
-          checked: v
-        }
-      })
+      wrapper.find('input').simulate('change', { target: { checked: v } })
 
       t.equal(onChangeEvent.calledOnce, true, "Callback invoked")
       t.equal(onChangeEvent.calledWith(v), true, "Callback invoked with checked status")
