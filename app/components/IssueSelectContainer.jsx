@@ -1,35 +1,36 @@
-import React from 'react'
-import IssueSelect from './IssueSelect.jsx'
-import PreviewsStore from '../stores/PreviewsStore'
-import {getIssues} from '../actions/PreviewsActions'
-import {changedIssue} from '../actions/PreviewsActions'
-import {map,prop} from 'ramda'
+import React from 'react';
+import IssueSelect from './IssueSelect.jsx';
+import PreviewsStore from '../stores/PreviewsStore';
+import {getIssues} from '../actions/PreviewsActions';
+import {changedIssue} from '../actions/PreviewsActions';
+import {map, prop} from 'ramda';
 
-const indexByIssue = map(prop('issue'))
+const indexByIssue = map(prop('issue'));
 
 export default React.createClass({
-    displayName: 'IssueSelect'
-  , getInitialState() {
-      return {
-        issues: []
-      }
-  }
-  , componentWillMount() {
-      PreviewsStore.addChangeListener(this.onStoreChange)
-      getIssues()
-  }
-  , componentWillUnmount() {
-      PreviewsStore.removeChangeListener(this.onStoreChange)
-  }
-  , onStoreChange() {
-      this.setState({
-        issues: indexByIssue(PreviewsStore.getIssues())
-      })
-  }
-  , onSelectIssue(issue) {
-      changedIssue(issue)
-  }
-  , render() {
-      return( <IssueSelect issues={this.state.issues} onSelectIssue={this.onSelectIssue}/> )
-  }
-})
+  displayName: 'IssueSelect',
+  getInitialState() {
+    return {
+        issues: [],
+      };
+  },
+
+  componentWillMount() {
+    PreviewsStore.addChangeListener(this.onStoreChange);
+    getIssues();
+  },
+
+  componentWillUnmount() {
+    PreviewsStore.removeChangeListener(this.onStoreChange);
+  },
+
+  onStoreChange() {
+    this.setState({
+        issues: indexByIssue(PreviewsStore.getIssues()),
+      });
+  },
+
+  render() {
+    return (<IssueSelect issues={this.state.issues} onSelectIssue={changedIssue}/>);
+  },
+});
