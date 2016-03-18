@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 export default React.createClass({
-  displayName: 'AddToOrder', propTypes: {
+  displayName: 'AddToOrder',
+  propTypes: {
     checked: React.PropTypes.bool, onChange: React.PropTypes.func,
-  }, onChange(e) {
+  },
+  onChange(e) {
     this.props.onChange(e.target.checked);
-  }, render() {
+  },
 
+  render() {
     return (
       <input
           type="checkbox"

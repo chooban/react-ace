@@ -22,7 +22,6 @@ export default React.createClass({
   },
 
   render() {
-
     const details = this.props.lineItemDetails;
     const ordered = OrderStore.isOrdered(details.id);
     const onChange = (!ordered) ? this.addItemToOrder : this.removeItemFromOrder;

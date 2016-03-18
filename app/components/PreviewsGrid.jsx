@@ -14,76 +14,84 @@ import 'style!css!react-pagify/style.css';
 import 'style!css!reactabular/style.css';
 
 const formatAsGBP = v => {
-  value: (v)
-          ? '£' + v.toLocaleString(null, { style: 'currency', currency: 'GBP' })
-          : '';
+  return {
+    value: (v)
+            ? '£' + v.toLocaleString(null, { style: 'currency', currency: 'GBP' })
+            : ''
+    }
+};
+
+const formatAddToOrder = (v, data, idx) => {
+  const previewsItemDetails = R.merge(data[idx], {
+        issueNumber: OrderStore.getCurrentIssue(),
+      });
+  return { value: <AddToOrderContainer lineItemDetails={previewsItemDetails} />, };
 };
 
 const columns = [
   {
     property: 'id',
     header: 'Previews Code',
-    cell: v => { value: <PreviewsLink previewsCode={v} />; },
+    cell: v => { return { value: <PreviewsLink previewsCode={v} /> } },
   },
   {
-  property: 'title',
-  header: 'Description',
-},
-{
-  property: 'price',
-  header: 'Price',
-  cell: formatAsGBP,
-},
-{
-  property: 'listPrice',
-  header: 'Was',
-  cell: formatAsGBP,
-},
-{
-  property: 'publisher',
-  header: 'Publisher',
-  cell: v => { value: capitalize(v.toLowerCase()); },
-},
-{
-  header: 'Include', cell: (v, data, idx) => {
-    const previewsItemDetails = R.merge(data[idx], {
-          issueNumber: OrderStore.getCurrentIssue(),
-        });
-    return {
-          value: <AddToOrderContainer
-                    lineItemDetails={previewsItemDetails}
-                  />,
-        };
+    property: 'title',
+    header: 'Description',
   },
-},
+  {
+    property: 'price',
+    header: 'Price',
+    cell: formatAsGBP,
+  },
+  {
+    property: 'listPrice',
+    header: 'Was',
+    cell: formatAsGBP,
+  },
+  {
+    property: 'publisher',
+    header: 'Publisher',
+    cell: v => { return { value: capitalize(v.toLowerCase()) } },
+  },
+  {
+    header: 'Include',
+    cell: formatAddToOrder,
+  },
 ];
 const propertiesToSearch = ['title', 'publisher'];
 const searchColumnsFilter = R.filter(R.where({ property: R.contains(R.__, propertiesToSearch) }));
 const searchColumns = searchColumnsFilter(columns);
 
 export default React.createClass({
-  displayName: 'PreviewsGrid', propTypes: {
+  displayName: 'PreviewsGrid',
+  propTypes: {
     issueNumber: React.PropTypes.number,
-  }, getInitialState() {
+  },
+  getInitialState() {
     return {
-        gridData: [], pagination: {
+        gridData: [],
+        pagination: {
           page: 1,
           perPage: 25,
-        }, search: {
+        },
+        search: {
           column: '',
           query: '',
         },
       };
-  }, componentWillMount() {
+  },
 
+  componentWillMount() {
     PreviewsStore.addChangeListener(this.previewsStoreUpdate);
-  }, previewsStoreUpdate() {
+  },
 
+  previewsStoreUpdate() {
     this.setState({
         gridData: PreviewsStore.getCurrentIssue(),
       });
-  }, onSelect(page) {
+  },
 
+  onSelect(page) {
     const state = this.state;
     const pagination = state.pagination || {};
     const pages = Math.ceil(state.gridData.length / pagination.perPage);
@@ -93,13 +101,15 @@ export default React.createClass({
     this.setState({
         pagination: pagination,
       });
-  }, onSearch(search) {
+  },
 
+  onSearch(search) {
     this.setState({
       search: search,
     });
-  }, render() {
+  },
 
+  render() {
     let pagination = this.state.pagination;
     let data = this.state.gridData;
     const currentPage = pagination.page;
