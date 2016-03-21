@@ -1,6 +1,5 @@
 import React from 'react';
 import AddToOrder from '../AddToOrder.jsx';
-import TestUtils from 'react-addons-test-utils';
 import test from 'tape';
 import {shallow} from 'enzyme';
 import sinon from 'sinon';
@@ -8,37 +7,39 @@ import sinon from 'sinon';
 test('Add To Order component', (t) => {
 
   t.test('Renders a checked component', (t) => {
-    const result = shallowRender({
-      onChange: sinon.spy(), checked: true,
-    });
+    const changeSpy = sinon.spy();
 
-    t.equal(result.props.checked, true);
-    t.notOk(result.props.onChange.called);
+    const result = shallowRender({
+      onChange: changeSpy, checked: true,
+    });
+    t.equal(result.node.props.checked, true);
+    t.equal(changeSpy.called, false);
     t.end();
   });
 
   t.test('Renders an unchecked component', (t) => {
+    const changeSpy = sinon.spy();
     const result = shallowRender({
-      onChange: sinon.spy(), checked: false,
+      onChange: changeSpy, checked: false,
     });
 
-    t.equal(result.props.checked, false);
-    t.equal(result.props.onChange.called, undefined);
+    t.equal(result.node.props.checked, false);
+    t.equal(changeSpy.called, false);
     t.end();
   })
 
   ;[true, false].forEach((v) => {
     t.test('Invokes the passed function on change events', (t) => {
-      const onChangeEvent = sinon.spy();
+      const changeSpy = sinon.spy();
       const wrapper = shallow(<AddToOrder
-              onChange={onChangeEvent}
+              onChange={changeSpy}
               checked={false}
             />);
 
       wrapper.find('input').simulate('change', { target: { checked: v } });
 
-      t.equal(onChangeEvent.calledOnce, true, 'Callback invoked');
-      t.equal(onChangeEvent.calledWith(v), true, 'Callback invoked with checked status');
+      t.equal(changeSpy.calledOnce, true, 'Callback invoked');
+      t.equal(changeSpy.calledWith(v), true, 'Callback invoked with checked status');
       t.end();
     });
 
@@ -46,11 +47,9 @@ test('Add To Order component', (t) => {
 });
 
 function shallowRender(props) {
-  const renderer = TestUtils.createRenderer();
-  renderer.render(<AddToOrder
+  return shallow(<AddToOrder
       onChange={props.onChange}
       checked={props.checked}
     />
   );
-  return renderer.getRenderOutput();
 }

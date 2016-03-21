@@ -1,5 +1,5 @@
 import React from 'react';
-import Ramda from 'ramda';
+import {map} from 'ramda';
 
 export default React.createClass({
   displayName: 'IssueSelect',
@@ -8,7 +8,6 @@ export default React.createClass({
     onSelectIssue: React.PropTypes.func,
   },
   componentDidMount() {
-    // First render only, I hope
     this.props.onSelectIssue(this.props.issues[0]);
   },
 
@@ -23,12 +22,11 @@ export default React.createClass({
   },
 
   render() {
-    var issues = Ramda.map(this.renderIssue, this.props.issues);
     return (
       <div>
         <span>Pick an issue: </span>
         <select onChange={this.handleSelected.bind(this, this.props)}>
-            {issues}
+          {map(this.renderIssue, this.props.issues)}
         </select>
       </div>
     );
