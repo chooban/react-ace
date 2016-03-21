@@ -35,14 +35,14 @@ test('Issue Select component', (t) => {
     wrapper.find('select').simulate('change', selectedIssueEvent(101));
 
     t.equal(onChangeHandler.calledOnce, true);
-    t.end()
+    t.end();
 
     function selectedIssueEvent(issueNumber) {
       return {
         currentTarget: {
-          selectedOptions: [ '' + issueNumber, ]
-        }
-      }
+          selectedOptions: ['' + issueNumber, ],
+        },
+      };
     }
   });
 

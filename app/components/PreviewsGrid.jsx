@@ -14,10 +14,10 @@ import 'style!css!react-pagify/style.css';
 import 'style!css!reactabular/style.css';
 
 const formatAsGBP = v => {
-  return {
+  {
     value: (v)
             ? '£' + v.toLocaleString(null, { style: 'currency', currency: 'GBP' })
-            : '',
+            : '';
   };
 };
 
@@ -32,7 +32,9 @@ const columns = [
   {
     property: 'id',
     header: 'Previews Code',
-    cell: v => { return { value: <PreviewsLink previewsCode={v} /> }; },
+    cell: v => {
+      { value: <PreviewsLink previewsCode={v} />; };
+    },
   },
   {
     property: 'title',
@@ -51,7 +53,9 @@ const columns = [
   {
     property: 'publisher',
     header: 'Publisher',
-    cell: v => { return { value: capitalize(v.toLowerCase()) }; },
+    cell: v => {
+      { value: capitalize(v.toLowerCase()); };
+    },
   },
   {
     header: 'Include',
