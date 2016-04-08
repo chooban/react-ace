@@ -32,9 +32,15 @@ let OrderStore = assign({}, EventEmitter.prototype, {
 
     return (orders[key] && orders[key].indexOf(previewsCode) > -1);
   },
+
+  getCurrentOrderMetadata() {
+    var currentOrder = orders[keyForIssue(currentIssue)];
+
+    return currentOrder.length;
+  },
 });
 
-OrderStore.dispatchToken = AppDispatcher.register(payload => {
+const registeredCallback = (payload) => {
   const action = payload.action;
   const key = keyForIssue(action.issueNumber);
 
@@ -56,6 +62,8 @@ OrderStore.dispatchToken = AppDispatcher.register(payload => {
   }
 
   return true;
-});
+};
+
+OrderStore.dispatchToken = AppDispatcher.register(registeredCallback);
 
 export default OrderStore;

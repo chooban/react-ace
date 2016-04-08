@@ -27,26 +27,27 @@
     "imports-loader": "^0.6.5",
     "jscs": "^2.11.0",
     "jsdom": "^8.1.0",
-    "npm-install-webpack-plugin": "^2.0.2",
-    "react-addons-test-utils": "^0.14.7",
+    "npm-install-webpack-plugin": "^3.0.0",
+    "react-addons-test-utils": "^15.0.0",
+    "rewire": "^2.5.1",
     "sinon": "^1.17.3",
     "style-loader": "^0.13.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.4.0",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
-    "webpack-merge": "^0.7.3"
+    "webpack-merge": "^0.8.4"
   },
   "dependencies": {
     "babyparse": "^0.4.3",
     "flux": "^2.1.1",
     "lodash": "^4.6.1",
     "object-assign": "^4.0.1",
-    "ramda": "^0.19.1",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7",
+    "ramda": "^0.20.1",
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0",
     "react-pagify": "^2.0.1",
-    "reactabular": "^0.11.2",
+    "reactabular": "^0.12.1",
     "segmentize": "^0.4.1"
   }
 }

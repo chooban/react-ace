@@ -23,6 +23,9 @@ const common = {
       path: PATHS.build
     , filename: 'bundle.js'
   }
+  , node: {
+      fs: "empty"
+  }
   , module: {
     loaders: [
       {
