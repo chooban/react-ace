@@ -27,21 +27,22 @@ const common = {
       fs: "empty"
   }
   , module: {
-    loaders: [
-      {
-        test: /\.css$/
-      , loader: 'style-loader!css-loader'
-      , include: PATHS.app
-      }
-    , {
-        test: /\.jsx?$/
-      , exclude: /(node_modules|__tests__)/
-      , loaders: [
-          'babel-loader?compact=false'
-        ]
-      , include: PATHS.app
-      }
-    ]
+      loaders: [
+        {
+          test: /\.css$/
+        , loader: 'style-loader!css-loader'
+        , include: PATHS.app
+        }
+      , {
+          test: /\.jsx?$/
+        , exclude: /(node_modules|__tests__)/
+        , loader: 'babel-loader'
+        , query: {
+            presets: ['react', 'es2015']
+        }
+        , include: PATHS.app
+        }
+      ]
   }
   , plugins: [
       new webpack.optimize.DedupePlugin()

@@ -36,7 +36,8 @@
     "tape": "^4.4.0",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
-    "webpack-merge": "^0.12.0"
+    "webpack-merge": "^0.12.0",
+    "whatwg-fetch": "^1.0.0"
   },
   "dependencies": {
     "babyparse": "^0.4.3",
