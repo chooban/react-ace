@@ -7,7 +7,8 @@ const TARGET = process.env.npm_lifecycle_event;
 process.env.BABEL_ENV = TARGET;
 
 const PATHS = {
-  app: path.join(__dirname, 'app'), build: path.join(__dirname, 'build'),
+  app: path.join(__dirname, 'app'),
+  build: path.join(__dirname, 'build'),
 };
 
 const common = {
@@ -49,8 +50,7 @@ const common = {
 };
 
 if (TARGET === 'start' || !TARGET) {
-  // module.exports = merge(common, devConfig(PATHS.build))
-  module.exports = merge(common, {});
+  module.exports = merge(common, devConfig(PATHS.build))
 }
 
 if (TARGET === 'build') {

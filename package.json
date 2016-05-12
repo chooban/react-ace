@@ -7,7 +7,7 @@
     "style": "jscs --fix app/ conf/ webpack.config.js",
     "test": "babel-tape-runner app/**/__tests__/*.test.js | tap-spec",
     "build": "webpack",
-    "start": "webpack-dev-server --watch-poll --inline --hot --port 8091 --content-base /home/rhendry/src/react-ace/build/"
+    "start": "webpack-dev-server --port 8091 --content-base build/"
   },
   "keywords": [],
   "author": "",
