@@ -19,7 +19,8 @@ const common = {
     extensions: ['', '.js', '.jsx'],
   },
   output: {
-    path: PATHS.build, filename: 'bundle.js',
+    path: PATHS.build,
+    filename: 'bundle.js',
   },
   node: {
     fs: 'empty',
@@ -48,12 +49,7 @@ const common = {
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
       },
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress:{
-        warnings: false,
-      },
-    }),
+    })
   ],
 };
 
@@ -63,5 +59,10 @@ if (TARGET === 'start' || !TARGET) {
 }
 
 if (TARGET === 'build') {
+  common.plugins.push(new webpack.optimize.UglifyJsPlugin({
+      compress:{
+        warnings: false,
+      },
+  })):
   module.exports = merge(common, {});
 }
