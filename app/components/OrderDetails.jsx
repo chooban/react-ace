@@ -12,7 +12,7 @@ export default React.createClass({
   },
 
   componentWillMount() {
-      OrderStore.addChangeListener(this.onStoreChange);
+    OrderStore.addChangeListener(this.onStoreChange);
   },
 
   onStoreChange() {
