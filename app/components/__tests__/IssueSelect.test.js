@@ -3,7 +3,7 @@ import IssueSelect from '../IssueSelect.jsx';
 import TestUtils from 'react-addons-test-utils';
 import test from 'tape';
 import Ramda from 'ramda';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 test('Issue Select component', (t) => {

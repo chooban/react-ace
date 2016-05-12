@@ -1,7 +1,7 @@
 import React from 'react';
 import AddToOrder from '../AddToOrder.jsx';
 import test from 'tape';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 test('Add To Order component', (t) => {

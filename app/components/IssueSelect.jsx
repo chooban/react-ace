@@ -1,5 +1,5 @@
 import React from 'react';
-import {map} from 'ramda';
+import { map } from 'ramda';
 
 export default React.createClass({
   displayName: 'IssueSelect',

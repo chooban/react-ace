@@ -1,7 +1,7 @@
-import {EventEmitter} from 'events';
+import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import {CHANGE_EVENT, ADD_TO_ORDER, REMOVE_FROM_ORDER, CHANGED_ISSUE} from '../consts';
+import { CHANGE_EVENT, ADD_TO_ORDER, REMOVE_FROM_ORDER, CHANGED_ISSUE } from '../consts';
 
 const orders = {};
 const keyForIssue = issue => 'previews' + issue;

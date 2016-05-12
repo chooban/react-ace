@@ -1,9 +1,9 @@
 import React from 'react';
 import IssueSelect from './IssueSelect.jsx';
 import PreviewsStore from '../stores/PreviewsStore';
-import {getIssues} from '../actions/PreviewsActions';
-import {changedIssue} from '../actions/PreviewsActions';
-import {map, prop} from 'ramda';
+import { getIssues } from '../actions/PreviewsActions';
+import { changedIssue } from '../actions/PreviewsActions';
+import { map, prop } from 'ramda';
 
 const indexByIssue = map(prop('issue'));
 

@@ -1,4 +1,4 @@
-import {Dispatcher} from 'flux';
+import { Dispatcher } from 'flux';
 import assign from 'object-assign';
 
 export default assign(new Dispatcher(), {

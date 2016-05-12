@@ -1,8 +1,8 @@
-import {EventEmitter} from 'events';
+import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import Ramda from 'ramda';
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import {CHANGE_EVENT, GOT_ISSUES, GOT_ISSUE, CHANGED_ISSUE} from '../consts';
+import { CHANGE_EVENT, GOT_ISSUES, GOT_ISSUE, CHANGED_ISSUE } from '../consts';
 
 const issuesStore = {};
 

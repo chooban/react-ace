@@ -1,10 +1,10 @@
 import React from 'react';
-import {getIssue} from '../actions/PreviewsActions';
+import { getIssue } from '../actions/PreviewsActions';
 import PreviewsStore from '../stores/PreviewsStore';
 import OrderStore from '../stores/OrderStore';
 import PreviewsLink from './PreviewsLink';
 import AddToOrderContainer from './AddToOrderContainer';
-import {Table, Search} from 'reactabular';
+import { Table, Search } from 'reactabular';
 import Paginator from 'react-pagify';
 import segmentize from 'segmentize';
 import R from 'ramda';

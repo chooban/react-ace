@@ -5,14 +5,14 @@ import PreviewsGrid from './components/PreviewsGrid.jsx';
 
 export default React.createClass({
   displayName: 'AceItApp', render() {
-      return (
-        <div className="previewsApp">
+    return (
+      <div className="previewsApp">
           <div className="controlBar">
             <IssueSelectContainer />
             <OrderDetails />
           </div>
           <PreviewsGrid/>
         </div>
-      );
-    },
+    );
+  },
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {addToOrder, removeFromOrder} from '../actions/OrderActions';
+import { addToOrder, removeFromOrder } from '../actions/OrderActions';
 import AddToOrder from './AddToOrder.jsx';
 import OrderStore from '../stores/OrderStore';
 
@@ -10,10 +10,10 @@ export default React.createClass({
   },
 
   addItemToOrder() {
-      addToOrder(
-        this.props.lineItemDetails.issueNumber, this.props.lineItemDetails.id
-      );
-    },
+    addToOrder(
+      this.props.lineItemDetails.issueNumber, this.props.lineItemDetails.id
+    );
+  },
 
   removeItemFromOrder() {
     removeFromOrder(
