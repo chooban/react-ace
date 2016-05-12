@@ -1,5 +1,3 @@
-import Papa from 'BabyParse';
-
 export function getIssueList(done) {
   done([
     { issue: 324 }, { issue: 326 }, { issue: 327 }, { issue: 330 },
@@ -28,7 +26,7 @@ export function getIssue(issueNumber, done) {
   }
 
   function parseData(text) {
-    var parsedData = Papa.parse(text);
+    var parsedData = Baby.parse(text);
     return parsedData.data;
   }
 }

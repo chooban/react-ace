@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "style": "jscs --fix app/ webpack.config.js",
+    "style": "jscs --fix app/ conf/ webpack.config.js",
     "test": "babel-tape-runner app/**/__tests__/*.test.js | tap-spec",
-    "build": "webpack --debug",
+    "build": "webpack",
     "start": "webpack-dev-server --watch-poll --inline --hot --port 8091 --content-base /home/rhendry/src/react-ace/build/"
   },
   "keywords": [],

@@ -13,7 +13,7 @@ const PATHS = {
 const common = {
   devtool: 'cheap-module-source-map',
   entry: {
-      app: PATHS.app,
+    app: PATHS.app,
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -33,7 +33,7 @@ const common = {
       }, {
         test: /\.jsx?$/,
         loader: 'babel',
-        include: PATHS.app
+        include: PATHS.app,
       },
     ],
   },
@@ -46,7 +46,12 @@ const common = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"production"',
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress:{
+        warnings: false,
       },
     }),
   ],
