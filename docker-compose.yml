@@ -1,0 +1,26 @@
+version: '2'
+services:
+  ace_data:
+    image: chooban/ace-data-container:latest
+  previewsapi:
+    image: chooban/ace-previews-api:latest
+    depends_on:
+      - ace_data
+    volumes_from:
+      - ace_data:ro
+    ports:
+      - 8100
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=debug
+  web:
+    image: chooban/ace-nginx:react
+    depends_on:
+      - site
+      - previewsapi
+    volumes_from:
+      - site
+    ports:
+      - 80:80
+  site:
+    build: .

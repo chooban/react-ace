@@ -18,13 +18,13 @@ export function changedIssue(issueNumber) {
   getIssue(issueNumber, gotIssueData);
 }
 
-function gotIssues(data) {
+function gotIssues(err, data) {
   AppDispatcher.handleAction({
     type: GOT_ISSUES, all: data,
   });
 }
 
-function gotIssueData(issueNumber, issueData) {
+function gotIssueData(err, issueNumber, issueData) {
   AppDispatcher.handleAction({
     type: GOT_ISSUE, issueNumber: issueNumber, issueData: issueData,
   });
