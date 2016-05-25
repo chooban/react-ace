@@ -1,7 +1,6 @@
 import React from 'react';
 import IssueSelect from './IssueSelect.jsx';
 import PreviewsStore from '../stores/PreviewsStore';
-import { getIssues } from '../actions/PreviewsActions';
 import { changedIssue } from '../actions/PreviewsActions';
 import { map, prop } from 'ramda';
 
@@ -11,26 +10,29 @@ export default React.createClass({
   displayName: 'IssueSelect',
   getInitialState() {
     return {
-        issues: [],
-      };
+      issues: [],
+      selected: null
+    };
   },
 
   componentWillMount() {
-    PreviewsStore.addChangeListener(this.onStoreChange);
-    getIssues();
+    PreviewsStore.addChangeListener(this.onPreviewsStoreChange);
   },
 
   componentWillUnmount() {
-    PreviewsStore.removeChangeListener(this.onStoreChange);
+    PreviewsStore.removeChangeListener(this.onPreviewsStoreChange);
   },
 
-  onStoreChange() {
+  onPreviewsStoreChange() {
     this.setState({
-        issues: indexByIssue(PreviewsStore.getIssues()),
-      });
+      issues: PreviewsStore.getIssues()
+    });
   },
 
   render() {
-    return (<IssueSelect issues={this.state.issues} onSelectIssue={changedIssue}/>);
+    return (<IssueSelect
+              issues={this.state.issues}
+              onSelectIssue={changedIssue}
+            />);
   },
 });

@@ -1,34 +1,41 @@
-export function getIssueList(done) {
-  //done([
-    //{ issue: 324 }, { issue: 326 }, { issue: 327 }, { issue: 330 },
-  //]);
-  fetch('api/previews/')
-    .then(checkStatus)
-    .then((data) => data(null, data))
-    .catch((err) => {
-      console.error(err);
-      done(err);
-    });
-}
-
-export function getIssue(issueNumber, done) {
-  fetch(url(issueNumber))
+export function getIssueList() {
+  return fetch('/api/previews/', {
+      headers: {
+        'Accept': 'application/json',
+      }
+    })
     .then(checkStatus)
     .then(parseData)
-    .then((issueData) => {
-      done(null, issueNumber, issueData);
-    })
     .catch((err) => {
       console.error(err);
-      done(err);
+      throw new Error(err);
+    });
+
+  function parseData(data) {
+    return JSON.parse(data);
+  }
+}
+
+export function getIssue(issueNumber) {
+  return fetch(url(issueNumber), {
+      headers: {
+        'Accept': 'application/json',
+      }
+    })
+    .then(checkStatus)
+    .then(parseData)
+    .catch((err) => {
+      console.error(err);
+      throw new Error(err);
     });
 
   function url(issueNumber) {
-    return 'data/ecmail' + issueNumber + '.csv';
+    return '/api/previews/' + issueNumber;
   }
 
   function parseData(resp) {
-    return resp.body;
+    const parsedResponse = JSON.parse(resp);
+    return parsedResponse.contents;
   }
 }
 

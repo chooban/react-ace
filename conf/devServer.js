@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
 
 module.exports = function (contentBase) {
-  console.log('Going to listen on', process.env.PORT);
   return {
     devServer: {
       contentBase: contentBase,

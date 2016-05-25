@@ -1,23 +1,21 @@
 import React from 'react';
-import { map } from 'ramda';
 
 export default React.createClass({
   displayName: 'IssueSelect',
+
   propTypes: {
     issues: React.PropTypes.array,
     onSelectIssue: React.PropTypes.func,
-  },
-  componentDidMount() {
-    this.props.onSelectIssue(this.props.issues[0]);
   },
 
   renderIssue(issueNumber) {
     return <option key={issueNumber}>{issueNumber}</option>;
   },
 
-  handleSelected(props, e) {
-    if (props.onSelectIssue) {
-      props.onSelectIssue(e.currentTarget.selectedOptions[0].value);
+  handleSelected(e) {
+    if (this.props.onSelectIssue) {
+      const target = e.currentTarget.selectedOptions[0];
+      this.props.onSelectIssue(target.value);
     }
   },
 
@@ -25,8 +23,12 @@ export default React.createClass({
     return (
       <div>
         <span>Pick an issue: </span>
-        <select onChange={this.handleSelected.bind(this, this.props)}>
-          {map(this.renderIssue, this.props.issues)}
+        <select
+          onChange={this.handleSelected}
+          >
+          {this.props.issues.map(function(issue, idx) {
+            return (<option key={issue} value={issue}>{issue}</option>);
+          })}
         </select>
       </div>
     );

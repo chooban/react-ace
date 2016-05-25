@@ -30,7 +30,7 @@ const formatAddToOrder = (v, data, idx) => {
 
 const columns = [
   {
-    property: 'id',
+    property: 'previewsCode',
     header: 'Previews Code',
     cell: v => {
       { value: <PreviewsLink previewsCode={v} />; };
@@ -54,12 +54,12 @@ const columns = [
     property: 'publisher',
     header: 'Publisher',
     cell: v => {
-      { value: capitalize(v.toLowerCase()); };
+      { value: v ? capitalize(v.toLowerCase()) : ''; };
     },
   },
   {
     header: 'Include',
-    cell: formatAddToOrder,
+    //cell: formatAddToOrder,
   },
 ];
 const propertiesToSearch = ['title', 'publisher'];
@@ -68,9 +68,11 @@ const searchColumns = searchColumnsFilter(columns);
 
 export default React.createClass({
   displayName: 'PreviewsGrid',
+
   propTypes: {
     issueNumber: React.PropTypes.number,
   },
+
   getInitialState() {
     return {
         gridData: [],
@@ -91,8 +93,8 @@ export default React.createClass({
 
   previewsStoreUpdate() {
     this.setState({
-        gridData: PreviewsStore.getCurrentIssue(),
-      });
+      gridData: PreviewsStore.getCurrentIssue()
+    });
   },
 
   onSelect(page) {
@@ -111,6 +113,10 @@ export default React.createClass({
     this.setState({
       search: search,
     });
+  },
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !!(nextState.gridData && nextState.gridData.length);
   },
 
   render() {

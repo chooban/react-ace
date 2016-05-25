@@ -8,19 +8,27 @@ services:
       - ace_data
     volumes_from:
       - ace_data:ro
-    ports:
-      - 8100
     environment:
       - NODE_ENV=production
       - LOG_LEVEL=debug
+  ordersapi:
+    image: chooban/ace-orders-api:latest
+    environment:
+      - NODE_ENV=production
   web:
     image: chooban/ace-nginx:react
     depends_on:
       - site
       - previewsapi
+      - ordersapi
     volumes_from:
       - site
+      - oldsite
     ports:
       - 80:80
+  oldsite:
+    image: chooban/ace-website
   site:
     build: .
+    volumes:
+      - ./build:/var/www/acereact/public_html

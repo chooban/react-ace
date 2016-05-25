@@ -7,7 +7,11 @@ export function getIssues() {
     type: GET_ISSUES,
   });
 
-  getIssueList(gotIssues);
+  getIssueList().then((data) => {
+    AppDispatcher.handleAction({
+      type: GOT_ISSUES, all: data,
+    });
+  });
 }
 
 export function changedIssue(issueNumber) {
@@ -15,17 +19,11 @@ export function changedIssue(issueNumber) {
     type: CHANGED_ISSUE, issueNumber: issueNumber,
   });
 
-  getIssue(issueNumber, gotIssueData);
-}
-
-function gotIssues(err, data) {
-  AppDispatcher.handleAction({
-    type: GOT_ISSUES, all: data,
-  });
-}
-
-function gotIssueData(err, issueNumber, issueData) {
-  AppDispatcher.handleAction({
-    type: GOT_ISSUE, issueNumber: issueNumber, issueData: issueData,
+  getIssue(issueNumber).then((contents) => {
+    AppDispatcher.handleAction({
+      type: GOT_ISSUE,
+      issueNumber: issueNumber,
+      issueData: contents,
+    });
   });
 }

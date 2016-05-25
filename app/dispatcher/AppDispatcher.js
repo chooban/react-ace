@@ -7,5 +7,6 @@ export default assign(new Dispatcher(), {
     this.dispatch({
       action: action,
     });
+    console.log('Dispatched', action);
   },
 });

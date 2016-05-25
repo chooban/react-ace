@@ -49,12 +49,7 @@ const common = {
   ],
 };
 
-if (TARGET === 'start' || !TARGET) {
-  module.exports = merge(common, devConfig(PATHS.build))
-}
-
 if (TARGET === 'build') {
-  console.log("Adding the Uglify plugin");
   module.exports = merge(common, {
     plugins: [
       new webpack.optimize.UglifyJsPlugin({
@@ -69,4 +64,6 @@ if (TARGET === 'build') {
       }),
     ]
   });
+} else {
+  module.exports = merge(common, devConfig(PATHS.build))
 }

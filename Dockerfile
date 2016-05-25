@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:5.11.1
+FROM mhart/alpine-node:6.1.0
 MAINTAINER Ross Hendry "rhendry@googlemail.com"
 
 ADD . /build
