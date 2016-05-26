@@ -1,9 +1,6 @@
 import React from 'react';
-import { getIssue } from '../actions/PreviewsActions';
-import PreviewsStore from '../stores/PreviewsStore';
-import OrderStore from '../stores/OrderStore';
 import PreviewsLink from './PreviewsLink';
-import AddToOrderContainer from './AddToOrderContainer';
+import AddToOrderContainer from '../containers/AddToOrderContainer';
 import { Table, Search } from 'reactabular';
 import Paginator from 'react-pagify';
 import segmentize from 'segmentize';
@@ -13,27 +10,20 @@ import capitalize from '../capitalize';
 import 'style!css!react-pagify/style.css';
 import 'style!css!reactabular/style.css';
 
-const formatAsGBP = v => {
-  {
+const formatAsGBP = (v) => {
+  return {
     value: (v)
             ? '£' + v.toLocaleString(null, { style: 'currency', currency: 'GBP' })
-            : '';
+            : ''
   };
-};
-
-const formatAddToOrder = (v, data, idx) => {
-  const previewsItemDetails = R.merge(data[idx], {
-        issueNumber: OrderStore.getCurrentIssue(),
-      });
-  return { value: <AddToOrderContainer lineItemDetails={previewsItemDetails} />, };
 };
 
 const columns = [
   {
     property: 'previewsCode',
     header: 'Previews Code',
-    cell: v => {
-      { value: <PreviewsLink previewsCode={v} />; };
+    cell: (v) => {
+      return { value: <PreviewsLink previewsCode={v} /> };
     },
   },
   {
@@ -53,29 +43,25 @@ const columns = [
   {
     property: 'publisher',
     header: 'Publisher',
-    cell: v => {
-      { value: v ? capitalize(v.toLowerCase()) : ''; };
+    cell: (v) => {
+      return { value: v ? capitalize(v.toLowerCase()) : '' };
     },
   },
   {
-    header: 'Include',
-    //cell: formatAddToOrder,
+    header: 'Include'
   },
 ];
-const propertiesToSearch = ['title', 'publisher'];
-const searchColumnsFilter = R.filter(R.where({ property: R.contains(R.__, propertiesToSearch) }));
-const searchColumns = searchColumnsFilter(columns);
 
 export default React.createClass({
   displayName: 'PreviewsGrid',
 
   propTypes: {
-    issueNumber: React.PropTypes.number,
+    gridData: React.PropTypes.array,
+    searchableProperties: React.PropTypes.array
   },
 
   getInitialState() {
     return {
-        gridData: [],
         pagination: {
           page: 1,
           perPage: 25,
@@ -87,20 +73,10 @@ export default React.createClass({
       };
   },
 
-  componentWillMount() {
-    PreviewsStore.addChangeListener(this.previewsStoreUpdate);
-  },
-
-  previewsStoreUpdate() {
-    this.setState({
-      gridData: PreviewsStore.getCurrentIssue()
-    });
-  },
-
   onSelect(page) {
     const state = this.state;
     const pagination = state.pagination || {};
-    const pages = Math.ceil(state.gridData.length / pagination.perPage);
+    const pages = Math.ceil(this.props.gridData.length / pagination.perPage);
 
     pagination.page = Math.min(Math.max(page, 1), pages);
 
@@ -115,15 +91,13 @@ export default React.createClass({
     });
   },
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return !!(nextState.gridData && nextState.gridData.length);
-  },
-
   render() {
     let pagination = this.state.pagination;
-    let data = this.state.gridData;
+    let data = this.props.gridData;
     const currentPage = pagination.page;
     const pages = Math.ceil(data.length / pagination.perPage);
+    const searchColumnsFilter = R.filter(R.where({ property: R.contains(R.__, this.props.searchableProperties) }));
+    const searchColumns = searchColumnsFilter(columns);
 
     if (this.state.search.query) {
       data = Search.search(
@@ -142,7 +116,7 @@ export default React.createClass({
           Search
           <Search
             columns={searchColumns}
-            data={this.state.gridData}
+            data={this.props.gridData}
             onChange={this.onSearch}
           />
         </div>

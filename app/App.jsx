@@ -1,25 +1,14 @@
 import React from 'react';
-import IssueSelectContainer from './components/IssueSelectContainer.jsx';
-import OrderDetails from './components/OrderDetails.jsx';
-import PreviewsGrid from './components/PreviewsGrid.jsx';
-import { getIssues } from './actions/PreviewsActions';
+import IssueSelect from './containers/IssueSelectContainer.jsx';
+import PreviewsGrid from './containers/PreviewsGridContainer.jsx';
 
-export default React.createClass({
-  displayName: 'AceItApp',
+const App = () => (
+  <div className="previewsApp">
+    <div className="controlBar">
+      <IssueSelect />
+    </div>
+    <PreviewsGrid />
+  </div>
+)
 
-  componentDidMount() {
-    getIssues();
-  },
-
-  render() {
-    return (
-      <div className="previewsApp">
-        <div className="controlBar">
-          <IssueSelectContainer />
-          <OrderDetails />
-        </div>
-        <PreviewsGrid/>
-      </div>
-    );
-  },
-});
+export default App;

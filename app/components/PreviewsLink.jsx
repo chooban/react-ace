@@ -1,28 +1,26 @@
 import React from 'react';
+
 const MonthNames = [
     'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC',
 ];
 
-export default React.createClass({
-  displayName: 'PreviewsLink',
+const codeToUrl = (previewsCode) => {
+  const components = previewsCode.split('/');
+  const issueNumber = +components[0];
+  const epoch = new Date(1988, 8, 1);
 
-  propTypes: {
-    previewsCode: React.PropTypes.string,
-  },
+  epoch.setMonth(epoch.getMonth() + issueNumber);
+  const slug = MonthNames[epoch.getMonth()] + (epoch.getFullYear() - 2000) + components[1];
 
-  componentWillMount() {
-    const components = this.props.previewsCode.split('/');
-    const issueNumber = +components[0];
-    const epoch = new Date(1988, 8, 1);
-    epoch.setMonth(epoch.getMonth() + issueNumber);
-    const slug = MonthNames[epoch.getMonth()] + (epoch.getFullYear() - 2000) + components[1];
+  return `http://www.previewsworld.com/Catalog/${slug}`;
+}
 
-    this.setState({
-        url: `http://www.previewsworld.com/Catalog/${slug}`,
-      });
-  },
+const PreviewsLink = ({ previewsCode }) => (
+  <a href={codeToUrl(previewsCode)}>{previewsCode}</a>
+);
 
-  render() {
-    return <a href={this.state.url}>{this.props.previewsCode}</a>;
-  },
-});
+PreviewsLink.propTypes = {
+  previewsCode: React.PropTypes.string
+};
+
+export default PreviewsLink;

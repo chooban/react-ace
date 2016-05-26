@@ -1,36 +1,29 @@
 import React from 'react';
 
-export default React.createClass({
-  displayName: 'IssueSelect',
+const devNull = () => {};
 
-  propTypes: {
-    issues: React.PropTypes.array,
-    onSelectIssue: React.PropTypes.func,
-  },
-
-  renderIssue(issueNumber) {
-    return <option key={issueNumber}>{issueNumber}</option>;
-  },
-
-  handleSelected(e) {
-    if (this.props.onSelectIssue) {
+const IssueSelect = ({ issues, onSelectIssue = devNull }) => (
+  <div>
+    <span>Pick an issue: </span>
+    <select onChange={(e) => {
       const target = e.currentTarget.selectedOptions[0];
-      this.props.onSelectIssue(target.value);
+      onSelectIssue(target.value);
+    }}>
+    {
+      issues.map((issue, idx) => (
+        <option key={issue} value={issue}>{issue}</option>
+        )
+      )
     }
-  },
+    </select>
+  </div>
+)
 
-  render() {
-    return (
-      <div>
-        <span>Pick an issue: </span>
-        <select
-          onChange={this.handleSelected}
-          >
-          {this.props.issues.map(function(issue, idx) {
-            return (<option key={issue} value={issue}>{issue}</option>);
-          })}
-        </select>
-      </div>
-    );
-  },
-});
+IssueSelect.propTypes = {
+  issues: React.PropTypes.array,
+  onSelectIssue: React.PropTypes.func,
+}
+
+IssueSelect.displayName = 'Issue Dropdown';
+
+export default IssueSelect;
