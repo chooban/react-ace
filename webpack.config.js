@@ -1,80 +1,20 @@
 const path = require('path');
-const webpack = require('webpack');
 const merge = require('webpack-merge');
-const devConfig = require('./conf/devServer');
 
-const TARGET = process.env.npm_lifecycle_event;
-process.env.BABEL_ENV = TARGET;
+const common = require('./.webpack/common');
+const productionConfig = require('./.webpack/production');
+const devConfig = require('./.webpack/devserver');
 
-const PATHS = {
+const paths = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build'),
 };
 
-const common = {
-  devtool: 'cheap-module-source-map',
-  entry: {
-    app: PATHS.app,
-    vendor: ['react',
-      'react-dom',
-      'react-redux',
-      'redux-thunk',
-      'redux-logger',
-      'reactabular',
-      'react-pagify',
-      'segmentize',
-      'ramda'
-    ]
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
-  },
-  output: {
-    path: PATHS.build,
-    filename: 'bundle.js',
-  },
-  node: {
-    fs: 'empty',
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader',
-        include: PATHS.app,
-      }, {
-        test: /\.jsx?$/,
-        loader: 'babel',
-        include: PATHS.app,
-      },
-    ],
-  },
-  plugins: [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en-gb|uk)$/),
-    new webpack.ProvidePlugin({
-      Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
-      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
-    }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js', Infinity)
-  ],
-};
+const TARGET = process.env.npm_lifecycle_event;
+process.env.BABEL_ENV = TARGET;
 
 if (TARGET === 'build') {
-  module.exports = merge(common, {
-    plugins: [
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false,
-        },
-      }),
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: JSON.stringify('production'),
-        },
-      }),
-    ],
-  });
+  module.exports = merge(common(paths), productionConfig(paths));
 } else {
-  module.exports = merge(common, devConfig(PATHS.build));
+  module.exports = merge(common(paths), devConfig(paths));
 }

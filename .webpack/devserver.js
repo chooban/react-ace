@@ -1,10 +1,10 @@
 const webpack = require('webpack');
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
 
-module.exports = function (contentBase) {
+module.exports = function (paths) {
   return {
     devServer: {
-      contentBase: contentBase,
+      contentBase: paths.build,
       historyApiFallback: true,
       hot: true,
       inline: true,
