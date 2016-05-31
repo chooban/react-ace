@@ -45,7 +45,7 @@ const common = {
     new webpack.ProvidePlugin({
       Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
-    })
+    }),
   ],
 };
 
@@ -62,8 +62,8 @@ if (TARGET === 'build') {
           NODE_ENV: JSON.stringify('production'),
         },
       }),
-    ]
+    ],
   });
 } else {
-  module.exports = merge(common, devConfig(PATHS.build))
+  module.exports = merge(common, devConfig(PATHS.build));
 }
