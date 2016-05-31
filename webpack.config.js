@@ -15,6 +15,16 @@ const common = {
   devtool: 'cheap-module-source-map',
   entry: {
     app: PATHS.app,
+    vendor: ['react',
+      'react-dom',
+      'react-redux',
+      'redux-thunk',
+      'redux-logger',
+      'reactabular',
+      'react-pagify',
+      'segmentize',
+      'ramda'
+    ]
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -46,6 +56,7 @@ const common = {
       Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
     }),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js', Infinity)
   ],
 };
 
