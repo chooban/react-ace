@@ -5,10 +5,23 @@ import { Table, Search } from 'reactabular';
 import Paginator from 'react-pagify';
 import segmentize from 'segmentize';
 import R from 'ramda';
-import capitalize from '../capitalize';
 
 import 'style!css!react-pagify/style.css';
 import 'style!css!reactabular/style.css';
+
+const capitalize = (s) => (
+  s.toLowerCase().replace(/(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g, m => m.toUpperCase())
+);
+
+// Rather than being fancy about it, I'll just handle the small number of edge cases
+// for acronyms in this context.
+const titleFormat = (title) => {
+  return capitalize(title)
+    .replace(/Dc /, 'DC ')
+    .replace(/Idw /, 'IDW ')
+    .replace(/ Tp ?/, ' TP ')
+    .replace(/ Hc ?/, ' HC ');
+}
 
 const formatAsGBP = (v) => {
   return {
@@ -29,6 +42,9 @@ const columns = [
   {
     property: 'title',
     header: 'Description',
+    cell: (v) => {
+      return { value: v ? titleFormat(v) : '' };
+    }
   },
   {
     property: 'price',
@@ -44,7 +60,7 @@ const columns = [
     property: 'publisher',
     header: 'Publisher',
     cell: (v) => {
-      return { value: v ? capitalize(v.toLowerCase()) : '' };
+      return { value: v ? titleFormat(v) : '' };
     },
   },
   {
