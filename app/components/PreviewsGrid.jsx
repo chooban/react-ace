@@ -73,9 +73,10 @@ function paginate(data = [], o) {
   };
 }
 
-export class PreviewsGrid extends React.Component {
-  getInitialState() {
-    return {
+export default class PreviewsGrid extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       pagination: {
         page: 1,
         perPage: 25,
@@ -85,6 +86,9 @@ export class PreviewsGrid extends React.Component {
         query: '',
       },
     };
+
+    this.onSearch = this.onSearch.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
   onSelect(page) {
@@ -162,7 +166,6 @@ export class PreviewsGrid extends React.Component {
   }
 }
 
-PreviewsGrid.displayName = 'PreviewsGrid';
 PreviewsGrid.propTypes = {
   gridData: React.PropTypes.array,
   searchableProperties: React.PropTypes.array
