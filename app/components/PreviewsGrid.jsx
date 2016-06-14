@@ -53,10 +53,7 @@ const columns = [
     property: 'publisher',
     header: 'Publisher',
     cell: (v) => ({ value: v ? titleFormat(v) : '' }),
-  },
-  {
-    header: 'Include'
-  },
+  }
 ];
 
 function paginate(data = [], o) {
@@ -76,6 +73,7 @@ function paginate(data = [], o) {
 export default class PreviewsGrid extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       pagination: {
         page: 1,
@@ -87,8 +85,13 @@ export default class PreviewsGrid extends React.Component {
       },
     };
 
-    this.onSearch = this.onSearch.bind(this);
     this.onSelect = this.onSelect.bind(this);
+
+    this.onSearch = (search) => {
+      this.setState({
+        search
+      });
+    };
   }
 
   onSelect(page) {
@@ -100,12 +103,6 @@ export default class PreviewsGrid extends React.Component {
 
     this.setState({
       pagination,
-    });
-  }
-
-  onSearch(search) {
-    this.setState({
-      search
     });
   }
 
@@ -146,6 +143,9 @@ export default class PreviewsGrid extends React.Component {
           data={paginated.data}
           columns={columns}
           rowKey={'id'}
+          row={(d) => ({
+            onClick: () => this.props.onItemSelected(d)
+          })}
         />
         <Paginator.Context
           className="pagify-pagination"
@@ -168,6 +168,7 @@ export default class PreviewsGrid extends React.Component {
 
 PreviewsGrid.propTypes = {
   gridData: React.PropTypes.array,
-  searchableProperties: React.PropTypes.array
+  searchableProperties: React.PropTypes.array,
+  onItemSelected: React.PropTypes.func
 };
 

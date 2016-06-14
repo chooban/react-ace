@@ -3,7 +3,8 @@ import PreviewsGrid from '../components/PreviewsGrid';
 
 const props = {
   gridData: [],
-  searchableProperties: ['title', 'publisher']
+  searchableProperties: ['title', 'publisher'],
+  onItemSelected: (d) => console.log(d) //eslint-disable-line
 };
 
 const mapStateToProps = (state) => (
