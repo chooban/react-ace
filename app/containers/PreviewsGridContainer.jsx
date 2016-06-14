@@ -4,17 +4,15 @@ import PreviewsGrid from '../components/PreviewsGrid';
 const props = {
   gridData: [],
   searchableProperties: ['title', 'publisher']
-}
+};
 
-const mapStateToProps = (state) => {
-  return Object.assign({}, props, {
+const mapStateToProps = (state) => (
+  Object.assign({}, props, {
     gridData: state.issues.data
-  });
-}
+  })
+);
 
-const mapDispatchToProps = (dispatch) => {
-  return {};
-}
+const mapDispatchToProps = () => ({});
 
 const PreviewsGridContainer = connect(
   mapStateToProps,

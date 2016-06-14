@@ -3,15 +3,15 @@ import { getIssueList, getIssue } from '../api/PreviewsWebApi';
 export const REQUESTED_ISSUES = 'REQUESTED_ISSUES';
 export const RECEIVED_ISSUES = 'RECEIVED_ISSUES';
 
-function receiveIssuesAction(issuesList) {
-  return {
+const receiveIssuesAction = (issuesList) => (
+  {
     type: RECEIVED_ISSUES,
     issues: issuesList
   }
-}
+);
 
 export function requestIssues() {
-  return function(dispatch) {
+  return (dispatch) => {
     dispatch({
       type: REQUESTED_ISSUES
     });
@@ -19,24 +19,26 @@ export function requestIssues() {
     return getIssueList()
             .then(receiveIssuesAction)
             .then(dispatch);
-  }
+  };
 }
 
 export function requestIssue(issueNumber) {
-  return function(dispatch) {
+  const receivedIssueAction = (issueData) => (
+    {
+      type: 'RECEIVED_ISSUE_DATA',
+      issueNumber,
+      issueData
+    }
+  );
+
+  return (dispatch) => {
     dispatch({
       type: 'REQUESTED_ISSUE_DATA',
-      issueNumber: issueNumber
+      issueNumber
     });
 
     return getIssue(issueNumber)
-            .then((issueData) => {
-              return {
-                type: 'RECEIVED_ISSUE_DATA',
-                issueNumber: issueNumber,
-                issueData: issueData
-              }
-            })
+            .then(receivedIssueAction)
             .then(dispatch);
-  }
+  };
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OrderDetails = ({}) => (
+const OrderDetails = () => (
   <div className="orderDetails">
     <strong>Items: </strong> ???
   </div>

@@ -1,6 +1,9 @@
 {
   "parserOptions": {
     "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "impliedStrict": true,
     "sourceType": "module"
   },
@@ -10,5 +13,16 @@
   },
   "plugins": [
     "react"
-  ]
+  ],
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "15.0"
+    }
+  },
+  "extends": ["airbnb", "plugin:react/recommended"],
+  "rules": {
+    "comma-dangle": 0,
+    "no-underscore-dangle": 0
+  }
 }

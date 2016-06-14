@@ -1,11 +1,19 @@
+/* eslint no-shadow: 0 */
+
 import React from 'react';
 import AddToOrder from '../AddToOrder.jsx';
-import test from 'tape';
+import tape from 'tape';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-test('Add To Order component', (t) => {
+function shallowRender(props) {
+  return shallow(<AddToOrder
+    onChange={props.onChange}
+    checked={props.checked}
+  />);
+}
 
+tape('Add To Order component', (t) => {
   t.test('Renders a checked component', (t) => {
     const changeSpy = sinon.spy();
 
@@ -32,9 +40,9 @@ test('Add To Order component', (t) => {
     t.test('Invokes the passed function on change events', (t) => {
       const changeSpy = sinon.spy();
       const wrapper = shallow(<AddToOrder
-              onChange={changeSpy}
-              checked={false}
-            />);
+        onChange={changeSpy}
+        checked={false}
+      />);
 
       wrapper.find('input').simulate('change', { target: { checked: v } });
 
@@ -42,14 +50,6 @@ test('Add To Order component', (t) => {
       t.equal(changeSpy.calledWith(v), true, 'Callback invoked with checked status');
       t.end();
     });
-
   });
 });
 
-function shallowRender(props) {
-  return shallow(<AddToOrder
-      onChange={props.onChange}
-      checked={props.checked}
-    />
-  );
-}

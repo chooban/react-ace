@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const HtmlPlugin = require('html-webpack-plugin');
 
 const config = function(paths) {
   return {
@@ -27,6 +28,13 @@ const config = function(paths) {
       fs: 'empty',
     },
     module: {
+      preLoaders: [
+        {
+          test: /\.jsx?$/,
+          loader: 'eslint',
+          include: paths.app
+        }
+      ],
       loaders: [
         {
           test: /\.css$/,
@@ -39,8 +47,16 @@ const config = function(paths) {
         },
       ],
     },
+    eslint: {
+      failOnWarning: false,
+      failOnError: false
+    },
     plugins: [
       new webpack.optimize.DedupePlugin(),
+      new HtmlPlugin({
+        title: "Ace My Order",
+        template: "public/index.html"
+      }),
       new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en-gb|uk)$/),
       new webpack.ProvidePlugin({
         Promise: 'imports?this=>global!exports?global.Promise!es6-promise',

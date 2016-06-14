@@ -6,7 +6,7 @@ const initialState = {
     issuesList: [],
     data: []
   }
-}
+};
 
 function issues(state = initialState.issues, action) {
   switch (action.type) {
@@ -36,5 +36,5 @@ function issues(state = initialState.issues, action) {
 export default function app(state = initialState, action) {
   return {
     issues: issues(state.issues, action)
-  }
+  };
 }

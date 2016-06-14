@@ -18,7 +18,7 @@ actors(store);
 store.dispatch(requestIssues());
 
 render(<Provider store={store}>
-         <RootApp />
-       </Provider>,
-       document.getElementById('app')
+  <RootApp />
+</Provider>,
+document.getElementById('app')
 );

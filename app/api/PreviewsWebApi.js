@@ -1,46 +1,33 @@
+const acceptJsonHeaders = {
+  headers: {
+    Accept: 'application/json',
+  }
+};
+
+function checkStatus(resp) {
+  if (resp.status === 200) return resp.text();
+
+  return Promise.reject(new Error(resp.statusText));
+}
+
 export function getIssueList() {
-  return fetch('/api/previews/', {
-      headers: {
-        'Accept': 'application/json',
-      }
-    })
+  const parseData = (data) => JSON.parse(data);
+
+  return fetch('/api/previews/', acceptJsonHeaders)
     .then(checkStatus)
     .then(parseData)
     .catch((err) => {
-      console.error(err);
       throw new Error(err);
     });
-
-  function parseData(data) {
-    return JSON.parse(data);
-  }
 }
 
 export function getIssue(issueNumber) {
-  return fetch(url(issueNumber), {
-      headers: {
-        'Accept': 'application/json',
-      }
-    })
+  const parseData = (resp) => JSON.parse(resp).contents;
+
+  return fetch(`/api/previews/${issueNumber}`, acceptJsonHeaders)
     .then(checkStatus)
     .then(parseData)
     .catch((err) => {
-      console.error(err);
       throw new Error(err);
     });
-
-  function url(issueNumber) {
-    return '/api/previews/' + issueNumber;
-  }
-
-  function parseData(resp) {
-    const parsedResponse = JSON.parse(resp);
-    return parsedResponse.contents;
-  }
-}
-
-function checkStatus(resp) {
-  if (200 >= resp.status < 300) return resp.text();
-
-  return Promise.reject(new Error(response.statusText));
 }

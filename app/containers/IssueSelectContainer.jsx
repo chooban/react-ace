@@ -1,23 +1,17 @@
 import { connect } from 'react-redux';
 import IssueSelect from '../components/IssueSelect';
-import { map, prop } from 'ramda';
 import { requestIssue } from '../actions';
 
-const indexByIssue = map(prop('issue'));
-
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = (state) => (
+  {
     issues: state.issues.issuesList
   }
-}
+);
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    onSelectIssue: (issueNumber) => {
-      dispatch(requestIssue(issueNumber));
-    }
-  }
-}
+  const onSelectIssue = (issueNumber) => dispatch(requestIssue(issueNumber));
+  return { onSelectIssue };
+};
 
 const IssueSelectContainer = connect(
   mapStateToProps,

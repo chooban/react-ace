@@ -9,6 +9,6 @@ const App = () => (
     </div>
     <PreviewsGrid />
   </div>
-)
+);
 
 export default App;

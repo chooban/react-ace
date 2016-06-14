@@ -1,14 +1,8 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import AddToOrder from '../components/AddToOrder.jsx';
 
-const mapStateToProps = (state) => {
-  return {};
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {};
-}
+const mapStateToProps = () => ({});
+const mapDispatchToProps = () => ({});
 
 const AddToOrderContainer = connect(
   mapStateToProps,
