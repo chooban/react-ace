@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
+import { addToOrder } from '../actions';
 import PreviewsGrid from '../components/PreviewsGrid';
 
 const props = {
   gridData: [],
-  searchableProperties: ['title', 'publisher'],
-  onItemSelected: (d) => console.log(d) //eslint-disable-line
+  searchableProperties: ['title', 'publisher']
 };
 
 const mapStateToProps = (state) => (
@@ -13,7 +13,11 @@ const mapStateToProps = (state) => (
   })
 );
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = (dispatch) => (
+  {
+    onItemSelected: (d) => dispatch(addToOrder(d))
+  }
+);
 
 const PreviewsGridContainer = connect(
   mapStateToProps,

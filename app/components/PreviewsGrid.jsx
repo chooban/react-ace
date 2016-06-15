@@ -32,7 +32,7 @@ const columns = [
   {
     property: 'previewsCode',
     header: 'Previews Code',
-    cell: (v) => ({ value: <PreviewsLink previewsCode={v} /> }),
+    cell: (v) => ({ value: <PreviewsLink previewsCode={v} /> })
   },
   {
     property: 'title',
@@ -42,17 +42,17 @@ const columns = [
   {
     property: 'price',
     header: 'Price',
-    cell: formatAsGBP,
+    cell: formatAsGBP
   },
   {
     property: 'listPrice',
     header: 'Was',
-    cell: formatAsGBP,
+    cell: formatAsGBP
   },
   {
     property: 'publisher',
     header: 'Publisher',
-    cell: (v) => ({ value: v ? titleFormat(v) : '' }),
+    cell: (v) => ({ value: v ? titleFormat(v) : '' })
   }
 ];
 
@@ -66,7 +66,7 @@ function paginate(data = [], o) {
   return {
     amount: amountOfPages,
     data: data.slice(startPage * perPage, startPage * perPage + perPage),
-    page: startPage,
+    page: startPage
   };
 }
 
@@ -77,12 +77,12 @@ export default class PreviewsGrid extends React.Component {
     this.state = {
       pagination: {
         page: 1,
-        perPage: 25,
+        perPage: 25
       },
       search: {
         column: '',
-        query: '',
-      },
+        query: ''
+      }
     };
 
     this.onSelect = this.onSelect.bind(this);
@@ -102,7 +102,7 @@ export default class PreviewsGrid extends React.Component {
     pagination.page = Math.min(Math.max(page, 1), pages);
 
     this.setState({
-      pagination,
+      pagination
     });
   }
 
@@ -154,7 +154,7 @@ export default class PreviewsGrid extends React.Component {
             pages,
             beginPages: 1,
             endPages: 1,
-            sidePages: 2,
+            sidePages: 2
           })}
           onSelect={this.onSelect}
         >

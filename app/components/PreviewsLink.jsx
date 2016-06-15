@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MonthNames = [
-  'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC',
+  'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'
 ];
 
 const codeToUrl = (previewsCode) => {

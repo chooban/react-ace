@@ -1,4 +1,5 @@
-import { RECEIVED_ISSUES, REQUESTED_ISSUES } from '../actions';
+import { REQUESTED_ISSUES } from '../actions';
+import { RECEIVED_ISSUES } from '../actions/ActionCreators';
 
 const initialState = {
   issues: {

@@ -1,6 +1,6 @@
 const acceptJsonHeaders = {
   headers: {
-    Accept: 'application/json',
+    Accept: 'application/json'
   }
 };
 
