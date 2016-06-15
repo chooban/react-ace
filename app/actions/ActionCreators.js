@@ -1,27 +1,39 @@
-export const RECEIVED_ISSUES = 'RECEIVED_ISSUES';
-export const REQUESTED_ISSUES = 'REQUESTED_ISSUES';
+const RECEIVED_ISSUES = 'RECEIVED_ISSUES';
+const REQUESTED_ISSUES = 'REQUESTED_ISSUES';
 
-export const receivedIssues = (issues) => (
+const receivedIssues = (issues) => (
   {
     type: RECEIVED_ISSUES,
     issues
   }
 );
 
-export const requestedIssues = () => ({
+const requestedIssues = () => ({
   type: REQUESTED_ISSUES
 });
 
-export const receivedIssue = (issueData) => (
+const receivedIssue = (issueData) => (
   {
     type: 'RECEIVED_ISSUE_DATA',
     issueData
   }
 );
 
-export const requestedIssue = (issueNumber) => (
+const requestedIssue = (issueNumber) => (
   {
     type: 'REQUESTED_ISSUE_DATA',
     issueNumber
   }
 );
+
+export {
+  receivedIssues,
+  receivedIssue,
+  requestedIssues,
+  requestedIssue
+};
+
+export {
+  RECEIVED_ISSUES,
+  REQUESTED_ISSUES
+};
