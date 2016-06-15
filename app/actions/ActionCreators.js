@@ -25,12 +25,18 @@ const addToOrder = (orderItem) => ({
   orderItem
 });
 
+const removeFromOrder = (orderItem) => ({
+  type: 'REMOVE_FROM_ORDER',
+  orderItem
+});
+
 export {
   receivedIssues,
   receivedIssue,
   requestedIssues,
   requestedIssue,
-  addToOrder
+  addToOrder,
+  removeFromOrder
 };
 
 export {

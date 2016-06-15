@@ -17,7 +17,7 @@ function shallowRenderIssueSelect(issues, onChangeHandler) {
 
 test('Issue Select component', (t) => {
   const issues = [
-    '100', '101', '102',
+    '100', '101', '102'
   ];
 
   t.test('It renders a label and options', (t) => {
@@ -41,8 +41,8 @@ test('Issue Select component', (t) => {
     function selectedIssueEvent(issueNumber) {
       return {
         currentTarget: {
-          selectedOptions: [`${issueNumber}`],
-        },
+          selectedOptions: [`${issueNumber}`]
+        }
       };
     }
 

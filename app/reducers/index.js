@@ -1,5 +1,4 @@
-import { REQUESTED_ISSUES } from '../actions';
-import { RECEIVED_ISSUES } from '../actions/ActionCreators';
+import { RECEIVED_ISSUES, REQUESTED_ISSUES } from '../actions/ActionCreators';
 
 const initialState = {
   issues: {
@@ -8,7 +7,7 @@ const initialState = {
     data: []
   },
   order: {
-    items: []
+    items: new Set()
   }
 };
 
@@ -39,10 +38,22 @@ function issues(state = initialState.issues, action) {
 
 function order(state = initialState.order, action) {
   switch (action.type) {
-    case 'ADD_TO_ORDER':
+    case 'ADD_TO_ORDER': {
+      const nextItems = new Set(state.items);
+      nextItems.add(action.orderItem);
+
       return Object.assign({}, state, {
-        items: [...state.items, action.orderItem]
+        items: nextItems
       });
+    }
+    case 'REMOVE_FROM_ORDER': {
+      if (state.items.has(action.orderItem)) {
+        const items = new Set(state.items);
+        items.delete(action.orderItem);
+        return Object.assign({}, state, { items });
+      }
+      return state;
+    }
     default:
       return state;
   }
