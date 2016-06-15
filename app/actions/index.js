@@ -22,7 +22,7 @@ const requestIssue = (issueNumber) => (
 );
 
 const addToOrder = (orderItem) => (
-  (dispatch) => dispatch(Actions.addToOrder(orderItem))
+  Actions.addToOrder(orderItem)
 );
 
 export {
