@@ -12,7 +12,11 @@ import actors from './actors';
 
 import RootApp from './App.jsx';
 
-let store = createStore(app, applyMiddleware(thunkMiddleware, createLogger()));
+const loggerConfig = {
+  level: 'error'
+};
+
+let store = createStore(app, applyMiddleware(thunkMiddleware, createLogger(loggerConfig)));
 
 actors(store);
 store.dispatch(requestIssues());

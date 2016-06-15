@@ -13,11 +13,9 @@ const mapStateToProps = (state) => (
   })
 );
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    onItemSelected: (d) => dispatch(addToOrder(d))
-  }
-);
+const mapDispatchToProps = (dispatch) => ({
+  onItemSelected: (d) => dispatch(addToOrder(d))
+});
 
 const PreviewsGridContainer = connect(
   mapStateToProps,

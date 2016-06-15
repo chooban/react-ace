@@ -1,6 +1,7 @@
 import React from 'react';
-import IssueSelect from './containers/IssueSelectContainer.jsx';
-import PreviewsGrid from './containers/PreviewsGridContainer.jsx';
+import IssueSelect from './containers/IssueSelectContainer';
+import PreviewsGrid from './containers/PreviewsGridContainer';
+import OrderView from './components/OrderView';
 
 const App = () => (
   <div className="previewsApp">
@@ -8,6 +9,7 @@ const App = () => (
       <IssueSelect />
     </div>
     <PreviewsGrid />
+    <OrderView />
   </div>
 );
 

@@ -6,6 +6,9 @@ const initialState = {
     isFetching: false,
     issuesList: [],
     data: []
+  },
+  order: {
+    items: []
   }
 };
 
@@ -34,8 +37,20 @@ function issues(state = initialState.issues, action) {
   }
 }
 
+function order(state = initialState.order, action) {
+  switch (action.type) {
+    case 'ADD_TO_ORDER':
+      return Object.assign({}, state, {
+        items: [...state.items, action.orderItem]
+      });
+    default:
+      return state;
+  }
+}
+
 export default function app(state = initialState, action) {
   return {
-    issues: issues(state.issues, action)
+    issues: issues(state.issues, action),
+    order: order(state.order, action)
   };
 }

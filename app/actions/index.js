@@ -1,7 +1,7 @@
 import { getIssueList, getIssue } from '../api/PreviewsWebApi';
 import * as Actions from './ActionCreators';
 
-export const requestIssues = () => (
+const requestIssues = () => (
   (dispatch) => {
     dispatch(Actions.requestedIssues());
 
@@ -11,7 +11,7 @@ export const requestIssues = () => (
   }
 );
 
-export const requestIssue = (issueNumber) => (
+const requestIssue = (issueNumber) => (
   (dispatch) => {
     dispatch(Actions.requestedIssue(issueNumber));
 
@@ -20,3 +20,13 @@ export const requestIssue = (issueNumber) => (
             .then(dispatch);
   }
 );
+
+const addToOrder = (orderItem) => (
+  (dispatch) => dispatch(Actions.addToOrder(orderItem))
+);
+
+export {
+  requestIssues,
+  requestIssue,
+  addToOrder
+};
