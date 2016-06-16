@@ -1,0 +1,9 @@
+machine:
+  node:
+    version: 6.1.0
+
+test:
+  pre:
+    - npm run style
+  post:
+    - npm run build
