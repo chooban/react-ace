@@ -1,5 +1,5 @@
 import React from 'react';
-import PreviewsLink from '../PreviewsLink.jsx';
+import PreviewsLink from '../PreviewsLink';
 import TestUtils from 'react-addons-test-utils';
 import test from 'tape';
 

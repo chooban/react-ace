@@ -1,6 +1,6 @@
 /* eslint no-shadow: 0 */
 import React from 'react';
-import IssueSelect from '../IssueSelect.jsx';
+import IssueSelect from '../IssueSelect';
 import test from 'tape';
 import Ramda from 'ramda';
 import { shallow } from 'enzyme';

@@ -5,8 +5,8 @@ import Paginator from 'react-pagify';
 import segmentize from 'segmentize';
 import R from 'ramda';
 
-import 'style!css!react-pagify/style.css'; // eslint-disable-line
-import 'style!css!reactabular/style.css'; // eslint-disable-line
+//import 'style!css!react-pagify/style.css'; // eslint-disable-line
+//import 'style!css!reactabular/style.css'; // eslint-disable-line
 
 const firstLowerCaseLetter = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 const capitalize = (s) => s.toLowerCase().replace(firstLowerCaseLetter, m => m.toUpperCase());
