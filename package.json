@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "style": "eslint . --ext jsx,js",
+    "style": "eslint app --ext jsx,js",
     "test": "babel-tape-runner 'app/**/__tests__/*.test.js' | tap-min",
     "coverage": "NODE_ENV=test nyc --reporter=text tape 'app/**/__tests__/*.test.js'",
     "build": "webpack",
@@ -54,7 +54,6 @@
     "whatwg-fetch": "^1.0.0"
   },
   "dependencies": {
-    "flux": "^2.1.1",
     "object-assign": "^4.0.1",
     "ramda": "^0.21.0",
     "react": "^15.0.0",
