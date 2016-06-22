@@ -6,7 +6,8 @@ const config = function(paths) {
     devtool: 'cheap-module-source-map',
     entry: {
       app: paths.app,
-      vendor: ['react',
+      vendor: [
+        'react',
         'react-dom',
         'react-redux',
         'redux-thunk',
@@ -18,7 +19,7 @@ const config = function(paths) {
       ]
     },
     resolve: {
-      extensions: ['', '.js', '.jsx'],
+      extensions: ['', '.js', '.jsx', '.css'],
     },
     output: {
       path: paths.build,
@@ -38,7 +39,7 @@ const config = function(paths) {
       loaders: [
         {
           test: /\.css$/,
-          loader: 'style-loader!css-loader',
+          loader: 'style!css',
           include: paths.app,
         }, {
           test: /\.jsx?$/,

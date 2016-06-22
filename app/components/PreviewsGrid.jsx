@@ -6,9 +6,7 @@ import segmentize from 'segmentize';
 import R from 'ramda';
 
 // eslint-disable-next-line
-//import 'style!css!react-pagify/style.css';
-// eslint-disable-next-line
-//import 'style!css!reactabular/style.css'; // eslint-disable-line
+import './PreviewsGrid.css';
 
 const firstLowerCaseLetter = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 const capitalize = (s) => s.toLowerCase().replace(firstLowerCaseLetter, m => m.toUpperCase());

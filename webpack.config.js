@@ -1,5 +1,6 @@
 const path = require('path');
 const merge = require('webpack-merge');
+const validate = require('webpack-validator');
 
 const common = require('./.webpack/common');
 const productionConfig = require('./.webpack/production');
@@ -14,7 +15,7 @@ const TARGET = process.env.npm_lifecycle_event;
 process.env.BABEL_ENV = TARGET;
 
 if (TARGET === 'build') {
-  module.exports = merge(common(paths), productionConfig(paths));
+  module.exports = validate(merge(common(paths), productionConfig(paths)));
 } else {
-  module.exports = merge(common(paths), devConfig(paths));
+  module.exports = validate(merge(common(paths), devConfig(paths)));
 }

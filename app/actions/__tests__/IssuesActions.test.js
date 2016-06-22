@@ -29,4 +29,25 @@ test('Issues Actions', (t) => {
         fetchMock.restore();
       });
   });
+
+  t.test('Requesting a single issue', (t) => {
+    const apiURL = '/api/previews/333';
+    fetchMock
+      .mock(apiURL, 'GET', '{"contents": {}}');
+
+    const store = mockStore({});
+    const expectedActions = [
+      { type: 'REQUESTED_ISSUE_DATA', issueNumber: 333 },
+      { type: 'RECEIVED_ISSUE_DATA', issueData: {}
+      }
+    ];
+
+    return store.dispatch(Actions.requestIssue(333))
+      .then(() => {
+        t.deepEqual(store.getActions(), expectedActions, 'Expected actions match');
+        t.equal(fetchMock.called(apiURL), true, 'Web API was called');
+        t.equal(fetchMock.calls().unmatched.length, 0, 'No unexpected web requests');
+        fetchMock.restore();
+      });
+  });
 });
