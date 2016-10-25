@@ -1,4 +1,3 @@
-import './main.css';
 
 import React from 'react';
 import { render } from 'react-dom';
@@ -9,14 +8,15 @@ import createLogger from 'redux-logger';
 import app from './reducers';
 import { requestIssues } from './actions';
 import actors from './actors';
+import './main.css';
 
-import RootApp from './App.jsx';
+import RootApp from './App';
 
 const loggerConfig = {
   level: 'error'
 };
 
-let store = createStore(app, applyMiddleware(thunkMiddleware, createLogger(loggerConfig)));
+const store = createStore(app, applyMiddleware(thunkMiddleware, createLogger(loggerConfig)));
 
 actors(store);
 store.dispatch(requestIssues());

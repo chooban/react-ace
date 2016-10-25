@@ -16,7 +16,7 @@ services:
     environment:
       - NODE_ENV=production
   web:
-    image: chooban/ace-nginx:latest
+    image: chooban/ace-nginx:react
     depends_on:
       - site
       - previewsapi

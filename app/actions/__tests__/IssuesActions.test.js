@@ -11,7 +11,7 @@ const mockStore = configureMockStore(middlewares);
 test('Issues Actions', (t) => {
   t.test('Requesting issues', (t) => {
     fetchMock
-      .mock('/api/previews/', 'GET', '[331, 332, 333]');
+      .get('/api/previews/', '[331, 332, 333]');
 
     const store = mockStore({});
     const expectedActions = [
@@ -33,7 +33,7 @@ test('Issues Actions', (t) => {
   t.test('Requesting a single issue', (t) => {
     const apiURL = '/api/previews/333';
     fetchMock
-      .mock(apiURL, 'GET', '{"contents": {}}');
+      .get(apiURL, '{"contents": {}}');
 
     const store = mockStore({});
     const expectedActions = [

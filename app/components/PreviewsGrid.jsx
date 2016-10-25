@@ -1,9 +1,10 @@
 import React from 'react';
-import PreviewsLink from './PreviewsLink';
 import { Table, Search } from 'reactabular';
 import Paginator from 'react-pagify';
 import segmentize from 'segmentize';
 import R from 'ramda';
+
+import PreviewsLink from './PreviewsLink';
 
 // eslint-disable-next-line
 import './PreviewsGrid.css';
@@ -65,7 +66,7 @@ function paginate(data = [], o) {
 
   return {
     amount: amountOfPages,
-    data: data.slice(startPage * perPage, startPage * perPage + perPage),
+    data: data.slice(startPage * perPage, (startPage * perPage) + perPage),
     page: startPage
   };
 }
