@@ -8,11 +8,11 @@ module.exports = function (paths) {
       historyApiFallback: true,
       hot: true,
       inline: true,
-      progress: true,
+      //progress: true,
       stats: 'errors-only',
       host: process.env.HOST,
       port: process.env.PORT,
-      devtool: 'eval-source-map',
+      //devtool: 'eval-source-map',
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),

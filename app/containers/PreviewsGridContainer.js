@@ -3,8 +3,7 @@ import { addToOrder } from '../actions';
 import PreviewsGrid from '../components/PreviewsGrid';
 
 const props = {
-  gridData: [],
-  searchableProperties: ['title', 'publisher']
+  gridData: []
 };
 
 const mapStateToProps = (state) => (

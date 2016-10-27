@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import app from './reducers';
-import { requestIssues } from './actions';
+import { requestLatestIssue } from './actions';
 import actors from './actors';
 import './main.css';
 
@@ -19,7 +19,7 @@ const loggerConfig = {
 const store = createStore(app, applyMiddleware(thunkMiddleware, createLogger(loggerConfig)));
 
 actors(store);
-store.dispatch(requestIssues());
+store.dispatch(requestLatestIssue());
 
 render(<Provider store={store}>
   <RootApp />

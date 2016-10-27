@@ -31,3 +31,12 @@ export function getIssue(issueNumber) {
       throw new Error(err);
     });
 }
+
+export function getLatestIssue() {
+  const parseData = (resp) => JSON.parse(resp).contents;
+
+  return fetch('/api/previews/latest', acceptJsonHeaders)
+    .then(checkStatus)
+    .then(parseData)
+    .catch((err) => { throw new Error(err); });
+}

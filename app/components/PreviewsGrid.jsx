@@ -1,8 +1,4 @@
 import React from 'react';
-import { Table, Search } from 'reactabular';
-import Paginator from 'react-pagify';
-import segmentize from 'segmentize';
-import R from 'ramda';
 
 import PreviewsLink from './PreviewsLink';
 
@@ -10,7 +6,7 @@ import PreviewsLink from './PreviewsLink';
 import './PreviewsGrid.css';
 
 const firstLowerCaseLetter = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
-const capitalize = (s) => s.toLowerCase().replace(firstLowerCaseLetter, m => m.toUpperCase());
+const capitalize = (s) => s.toLowerCase().replace(firstLowerCaseLetter, (m) => m.toUpperCase());
 
 // Rather than being fancy about it, I'll just handle the small number of edge cases
 // for acronyms in this context.
@@ -20,6 +16,7 @@ const titleFormat = (title) => (
     .replace(/Idw /, 'IDW ')
     .replace(/ Tp ?/, ' TP ')
     .replace(/ Hc ?/, ' HC ')
+    .replace(/Fcbd /, 'FCBD ')
 );
 
 const formatAsGBP = (v) => {
@@ -46,7 +43,7 @@ const columns = [
     cell: formatAsGBP
   },
   {
-    property: 'listPrice',
+    property: 'reducedFrom',
     header: 'Was',
     cell: formatAsGBP
   },
@@ -57,119 +54,42 @@ const columns = [
   }
 ];
 
-function paginate(data = [], o) {
-  const page = o.page - 1 || 0;
-  const perPage = o.perPage;
-
-  const amountOfPages = Math.ceil(data.length / perPage);
-  const startPage = page < amountOfPages ? page : 0;
-
-  return {
-    amount: amountOfPages,
-    data: data.slice(startPage * perPage, (startPage * perPage) + perPage),
-    page: startPage
-  };
-}
-
 export default class PreviewsGrid extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      pagination: {
-        page: 1,
-        perPage: 25
-      },
-      search: {
-        column: '',
-        query: ''
-      }
-    };
-
-    this.onSelect = this.onSelect.bind(this);
-
-    this.onSearch = (search) => {
-      this.setState({
-        search
-      });
-    };
-  }
-
-  onSelect(page) {
-    const state = this.state;
-    const pagination = state.pagination || {};
-    const pages = Math.ceil(this.props.gridData.length / pagination.perPage);
-
-    pagination.page = Math.min(Math.max(page, 1), pages);
-
-    this.setState({
-      pagination
-    });
+    this.state = {};
   }
 
   render() {
-    let data = this.props.gridData;
-    const pagination = this.state.pagination;
-    const currentPage = pagination.page;
-    const pages = Math.ceil(data.length / pagination.perPage);
-    const searchColumnsFilter = R.filter(
-      R.where({
-        property: R.contains(R.__, this.props.searchableProperties)
-      })
-    );
-    const searchColumns = searchColumnsFilter(columns);
+    const cols = columns.map((c) => <th key={c.property}>{c.header}</th>);
+    const rows = this.props.gridData.map((row) => {
+      const cells = [];
+      columns.forEach((col, i) => {
+        const cellContent = col.cell(row[col.property]);
+        cells.push(<td key={i}>{cellContent.value}</td>);
+      });
 
-    if (this.state.search.query) {
-      data = Search.search(
-          data,
-          columns,
-          this.state.search.column,
-          this.state.search.query
-      );
-    }
-
-    const paginated = paginate(data, pagination);
+      return <tr key={row.previewsCode}>{cells}</tr>;
+    });
 
     return (
       <div>
-        <div className="search-container">
-          Search
-          <Search
-            columns={searchColumns}
-            data={this.props.gridData}
-            onChange={this.onSearch}
-          />
-        </div>
-        <Table
-          data={paginated.data}
-          columns={columns}
-          rowKey={'id'}
-          row={(d) => ({
-            onClick: () => this.props.onItemSelected(d)
-          })}
-        />
-        <Paginator.Context
-          className="pagify-pagination"
-          segments={segmentize({
-            page: pagination.page,
-            pages,
-            beginPages: 1,
-            endPages: 1,
-            sidePages: 2
-          })}
-          onSelect={this.onSelect}
-        >
-          <Paginator.Button page={currentPage - 1}>Previous</Paginator.Button>
-          <Paginator.Button page={currentPage + 1}>Next</Paginator.Button>
-        </Paginator.Context>
+        <table>
+          <thead>
+            <tr>
+              {cols}
+            </tr>
+          </thead>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
       </div>
-      );
+    );
   }
 }
 
 PreviewsGrid.propTypes = {
-  gridData: React.PropTypes.array,
-  searchableProperties: React.PropTypes.array,
-  onItemSelected: React.PropTypes.func
+  gridData: React.PropTypes.array
 };
 
