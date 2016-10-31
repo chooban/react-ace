@@ -4,7 +4,6 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
 import app from './reducers';
 import { requestLatestIssue } from './actions';
 import actors from './actors';
@@ -12,11 +11,17 @@ import './main.css';
 
 import RootApp from './App';
 
-const loggerConfig = {
-  level: 'error'
-};
+const middlewares = [thunkMiddleware];
 
-const store = createStore(app, applyMiddleware(thunkMiddleware, createLogger(loggerConfig)));
+if (process.env.NODE_ENV === 'development') {
+  const createLogger = require('redux-logger'); //eslint-disable-line
+  const loggerConfig = {
+    level: 'error'
+  };
+  middlewares.push(createLogger(loggerConfig));
+}
+
+const store = createStore(app, applyMiddleware(...middlewares));
 
 actors(store);
 store.dispatch(requestLatestIssue());

@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "style": "eslint app --ext jsx,js",
-    "test": "tape -r babel-register -r ignore-styles 'app/**/__tests__/*.test.js' | faucet",
+    "test": "tape -r babel-register -r ignore-styles 'app/**/__tests__/*.test.js*' | faucet",
     "coverage": "NODE_ENV=test nyc --reporter=lcov --reporter=text tape 'app/**/__tests__/*.test.js'",
-    "build": "webpack",
-    "devbuild": "webpack --watch",
+    "build": "webpack -p",
+    "devbuild": "webpack --watch --progress",
     "start": "webpack-dev-server --port 8091 --content-base build/"
   },
   "keywords": [],

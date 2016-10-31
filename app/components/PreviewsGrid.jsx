@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PreviewsLink from './PreviewsLink';
+import ToggleOrder from '../containers/ToggleOrderContainer';
 
 // eslint-disable-next-line
 import './PreviewsGrid.css';
@@ -69,6 +70,17 @@ export default class PreviewsGrid extends React.Component {
         cells.push(<td key={i}>{cellContent.value}</td>);
       });
 
+      cells.push(
+        <td
+          key="ordertoggle"
+        >
+          <ToggleOrder
+            ordered={row.onorder}
+            previewsCode={row.previewsCode}
+            onItemSelected={this.props.onItemSelected}
+          />
+        </td>
+      );
       return <tr key={row.previewsCode}>{cells}</tr>;
     });
 
@@ -90,6 +102,7 @@ export default class PreviewsGrid extends React.Component {
 }
 
 PreviewsGrid.propTypes = {
-  gridData: React.PropTypes.array
+  gridData: React.PropTypes.array,
+  onItemSelected: React.PropTypes.func
 };
 

@@ -12,9 +12,6 @@ const config = function(paths) {
         'react-redux',
         'redux-thunk',
         'redux-logger',
-        'reactabular',
-        'react-pagify',
-        'segmentize',
         'ramda'
       ]
     },
@@ -52,6 +49,7 @@ const config = function(paths) {
       failOnWarning: false,
       failOnError: false
     },
+    devtool: 'eval-source-map',
     plugins: [
       new webpack.optimize.DedupePlugin(),
       new HtmlPlugin({

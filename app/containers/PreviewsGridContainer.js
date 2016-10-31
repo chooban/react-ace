@@ -6,11 +6,15 @@ const props = {
   gridData: []
 };
 
-const mapStateToProps = (state) => (
-  Object.assign({}, props, {
-    gridData: state.issues.data
-  })
-);
+const mapStateToProps = (state) => {
+  const gridData = state.issues.data.map((lineItem) => (
+    Object.assign({}, lineItem, { onorder: state.order.items.has(lineItem.previewsCode) })
+  ));
+
+  return Object.assign({}, props, {
+    gridData
+  });
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onItemSelected: (d) => dispatch(addToOrder(d))
