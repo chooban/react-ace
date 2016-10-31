@@ -4,8 +4,8 @@ import OrderView from './components/OrderView';
 
 const App = () => (
   <div className="previewsApp">
-    <PreviewsGrid />
     <OrderView />
+    <PreviewsGrid />
   </div>
 );
 

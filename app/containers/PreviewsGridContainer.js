@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addToOrder } from '../actions';
+import { addToOrder, removeFromOrder } from '../actions';
 import PreviewsGrid from '../components/PreviewsGrid';
 
 const props = {
@@ -16,8 +16,11 @@ const mapStateToProps = (state) => {
   });
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onItemSelected: (d) => dispatch(addToOrder(d))
+export const mapDispatchToProps = (dispatch) => ({
+  onItemSelected: (previewsCode, onOrder) => {
+    if (!onOrder) dispatch(addToOrder(previewsCode));
+    else dispatch(removeFromOrder(previewsCode));
+  }
 });
 
 const PreviewsGridContainer = connect(

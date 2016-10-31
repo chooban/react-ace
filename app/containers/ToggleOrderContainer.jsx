@@ -7,7 +7,7 @@ const ToggleOrderComponent = ({ previewsCode, ordered, onItemSelected }) => (
   >
     <button
       className={ordered ? 'ordered' : 'notordered'}
-      onClick={() => onItemSelected(previewsCode)}
+      onClick={() => onItemSelected(previewsCode, ordered)}
     >
       Item is { ordered ? '' : ' not ' } on order
     </button>

@@ -34,9 +34,14 @@ const addToOrder = (orderItem) => (
     Actions.addToOrder(orderItem)
 );
 
+const removeFromOrder = (orderItem) => (
+    Actions.removeFromOrder(orderItem)
+);
+
 export {
     requestIssues,
     requestIssue,
     addToOrder,
+    removeFromOrder,
     requestLatestIssue
 };

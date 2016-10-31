@@ -1,7 +1,6 @@
 /* eslint no-shadow: 0 */
 import React from 'react';
 import test from 'tape';
-import Ramda from 'ramda';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -31,14 +30,25 @@ test('Toggle Order', (t) => {
     t.end();
   });
 
-  t.test('Clicking invokes callback', (t) => {
+  t.test('Clicking invokes callback (ordered)', (t) => {
     const onClick = sinon.spy();
     const previewsCode = 'ABC/1234';
     const result = render(true, onClick, previewsCode);
     result.find('button').simulate('click');
 
     t.equal(onClick.calledOnce, true);
-    t.equal(onClick.calledWith(previewsCode), true);
+    t.equal(onClick.calledWith(previewsCode, true), true);
+    t.end();
+  });
+
+  t.test('Clicking invokes callback (not ordered)', (t) => {
+    const onClick = sinon.spy();
+    const previewsCode = 'ABC/1234';
+    const result = render(false, onClick, previewsCode);
+    result.find('button').simulate('click');
+
+    t.equal(onClick.calledOnce, true);
+    t.equal(onClick.calledWith(previewsCode, false), true);
     t.end();
   });
 });
