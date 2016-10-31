@@ -15,20 +15,14 @@ services:
     image: chooban/ace-orders-api:latest
     environment:
       - NODE_ENV=production
-  web:
-    image: chooban/ace-nginx:react
-    depends_on:
-      - site
-      - previewsapi
-      - ordersapi
-    volumes_from:
-      - site
-      - oldsite
-    ports:
-      - 82:80
-  oldsite:
-    image: chooban/ace-website
   site:
     build: .
+    command: npm run devbuild
+    depends_on:
+      - previewsapi
+      - ordersapi
+    ports:
+      - 3001:3000
     volumes:
-      - ./build:/var/www/acereact/public_html
+      - .:/home/app/build
+      - /home/app/build/node_modules

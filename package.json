@@ -8,7 +8,7 @@
     "test": "tape -r babel-register -r ignore-styles 'app/**/__tests__/*.test.js*' | faucet",
     "coverage": "NODE_ENV=test nyc --reporter=lcov --reporter=text tape 'app/**/__tests__/*.test.js'",
     "build": "webpack -p",
-    "devbuild": "webpack --watch --progress",
+    "devbuild": "webpack-dev-server --watch --progress",
     "start": "webpack-dev-server --port 8091 --content-base build/"
   },
   "keywords": [],
