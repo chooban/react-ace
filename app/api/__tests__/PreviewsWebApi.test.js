@@ -2,8 +2,8 @@
 import fetchMock from 'fetch-mock';
 import test from 'tape';
 
-import { 
-  getIssueList, 
+import {
+  getIssueList,
   getIssue,
   getLatestIssue
 } from '../PreviewsWebApi';
@@ -13,8 +13,8 @@ test('Previews API', (t) => {
     const returnedList = '["337","336","335"]';
     const expectedResult = ['337', '336', '335'];
 
-    fetchMock.get('/api/previews/', returnedList)
-      
+    fetchMock.get('/api/previews/', returnedList);
+
     return getIssueList().then((d) => {
       t.deepEqual(d, expectedResult);
       fetchMock.restore();
@@ -24,8 +24,8 @@ test('Previews API', (t) => {
   t.test('Get an issue', (t) => {
     const returnedData = '{"file":"ecmail337","contents":[{"previewsCode": "337/0001", "title": "Previews Only #339"}]}';
     const expectedResult = [{
-      previewsCode: "337/0001",
-      title: "Previews Only #339"
+      previewsCode: '337/0001',
+      title: 'Previews Only #339'
     }];
 
     fetchMock.get('/api/previews/337', returnedData);
@@ -38,8 +38,8 @@ test('Previews API', (t) => {
   t.test('Get the latest', (t) => {
     const returnedData = '{"file":"ecmail337","contents":[{"previewsCode": "337/0001", "title": "Previews Only #339"}]}';
     const expectedResult = [{
-      previewsCode: "337/0001",
-      title: "Previews Only #339"
+      previewsCode: '337/0001',
+      title: 'Previews Only #339'
     }];
 
     fetchMock.get('/api/previews/latest', returnedData);
@@ -47,6 +47,5 @@ test('Previews API', (t) => {
       t.deepEqual(d, expectedResult);
       fetchMock.restore();
     });
-    
   });
 });

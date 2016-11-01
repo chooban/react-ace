@@ -67,7 +67,6 @@ test('Issues Actions', (t) => {
         t.equal(fetchMock.called(apiURL), true, 'Web API was called');
         t.equal(fetchMock.calls().unmatched.length, 0, 'No unexpected web requests');
         fetchMock.restore();
-
       });
   });
 });
