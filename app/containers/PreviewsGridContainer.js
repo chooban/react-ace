@@ -1,20 +1,26 @@
 import { connect } from 'react-redux';
-import { addToOrder } from '../actions';
+import { addToOrder, removeFromOrder } from '../actions';
 import PreviewsGrid from '../components/PreviewsGrid';
 
 const props = {
-  gridData: [],
-  searchableProperties: ['title', 'publisher']
+  gridData: []
 };
 
-const mapStateToProps = (state) => (
-  Object.assign({}, props, {
-    gridData: state.issues.data
-  })
-);
+const mapStateToProps = (state) => {
+  const gridData = state.issues.data.map((lineItem) => (
+    Object.assign({}, lineItem, { onorder: state.order.items.has(lineItem.previewsCode) })
+  ));
 
-const mapDispatchToProps = (dispatch) => ({
-  onItemSelected: (d) => dispatch(addToOrder(d))
+  return Object.assign({}, props, {
+    gridData
+  });
+};
+
+export const mapDispatchToProps = (dispatch) => ({
+  onItemSelected: (previewsCode, onOrder) => {
+    if (!onOrder) dispatch(addToOrder(previewsCode));
+    else dispatch(removeFromOrder(previewsCode));
+  }
 });
 
 const PreviewsGridContainer = connect(

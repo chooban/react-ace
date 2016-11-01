@@ -7,8 +7,8 @@ const productionConfig = require('./.webpack/production');
 const devConfig = require('./.webpack/devserver');
 
 const paths = {
-  app: path.join(__dirname, 'app'),
-  build: path.join(__dirname, 'build')
+  app: path.join(__dirname, 'app/'),
+  build: path.join(__dirname, 'build/')
 };
 
 const TARGET = process.env.npm_lifecycle_event;

@@ -1,10 +1,11 @@
 /* eslint no-shadow: 0 */
 import React from 'react';
-import IssueSelect from '../IssueSelect';
 import test from 'tape';
 import Ramda from 'ramda';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
+
+import IssueSelect from '../IssueSelect';
 
 function shallowRenderIssueSelect(issues, onChangeHandler) {
   return shallow(
@@ -27,7 +28,7 @@ test('Issue Select component', (t) => {
     t.equal(options.length, 3);
     t.equal(result.node.props.children[0].props.children, 'Pick an issue: ');
 
-    let opt = undefined;
+    let opt;
     issues.forEach((issue, idx) => {
       opt = result.node.props.children[1].props.children[idx];
       t.equal(opt.key, issues[idx]);

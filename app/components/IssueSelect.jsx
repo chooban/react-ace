@@ -11,9 +11,9 @@ const IssueSelect = ({ issues, onSelectIssue = devNull }) => (
         onSelectIssue(target.value);
       }}
     >
-    {
+      {
       issues.map((issue) => <option key={issue} value={issue}>{issue}</option>)
-    }
+      }
     </select>
   </div>
 );

@@ -1,32 +1,47 @@
-import { getIssueList, getIssue } from '../api/PreviewsWebApi';
+import {
+    getIssueList,
+    getIssue,
+    getLatestIssue
+} from '../api/PreviewsWebApi';
+
 import * as Actions from './ActionCreators';
 
 const requestIssues = () => (
-  (dispatch) => {
-    dispatch(Actions.requestedIssues());
+    (dispatch) => {
+      dispatch(Actions.requestedIssues());
 
-    return getIssueList()
-            .then(Actions.receivedIssues)
-            .then(dispatch);
-  }
+      return getIssueList()
+          .then(Actions.receivedIssues)
+          .then(dispatch);
+    }
 );
 
-const requestIssue = (issueNumber) => (
-  (dispatch) => {
-    dispatch(Actions.requestedIssue(issueNumber));
+const requestIssue = (issueNumber) => (dispatch) => {
+  dispatch(Actions.requestedIssue(issueNumber));
 
-    return getIssue(issueNumber)
-            .then(Actions.receivedIssue)
-            .then(dispatch);
-  }
+  return getIssue(issueNumber)
+      .then(Actions.receivedIssue)
+      .then(dispatch);
+};
+
+const requestLatestIssue = () => (dispatch) => (
+    getLatestIssue()
+      .then(Actions.receivedIssue)
+      .then(dispatch)
 );
 
 const addToOrder = (orderItem) => (
-  Actions.addToOrder(orderItem)
+    Actions.addToOrder(orderItem)
+);
+
+const removeFromOrder = (orderItem) => (
+    Actions.removeFromOrder(orderItem)
 );
 
 export {
-  requestIssues,
-  requestIssue,
-  addToOrder
+    requestIssues,
+    requestIssue,
+    addToOrder,
+    removeFromOrder,
+    requestLatestIssue
 };

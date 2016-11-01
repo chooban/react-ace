@@ -1,7 +1,8 @@
 import React from 'react';
-import PreviewsLink from '../PreviewsLink';
 import TestUtils from 'react-addons-test-utils';
 import test from 'tape';
+
+import PreviewsLink from '../PreviewsLink';
 
 function previewsUrl(pc) {
   return `http://www.previewsworld.com/Catalog/${pc}`;
