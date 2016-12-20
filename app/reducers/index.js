@@ -8,6 +8,10 @@ const initialState = {
   },
   order: {
     items: new Set()
+  },
+  gridConfig: {
+    pageSize: 25,
+    page: 2
   }
 };
 
@@ -59,9 +63,14 @@ function order(state = initialState.order, action) {
   }
 }
 
+function gridConfig(state = initialState.gridConfig, action) {
+  return state;
+}
+
 export default function app(state = initialState, action) {
   return {
     issues: issues(state.issues, action),
-    order: order(state.order, action)
+    order: order(state.order, action),
+    gridConfig: gridConfig(state.gridConfig, action)
   };
 }

@@ -7,6 +7,7 @@ module.exports = function() {
         compress: {
           warnings: false,
         },
+        comments: false
       }),
       new webpack.DefinePlugin({
         'process.env': {

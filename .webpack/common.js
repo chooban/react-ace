@@ -11,8 +11,7 @@ const config = function(paths) {
         'react-dom',
         'react-redux',
         'redux-thunk',
-        'redux-logger',
-        'ramda'
+        'redux-logger'
       ]
     },
     resolve: {

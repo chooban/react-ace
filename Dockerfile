@@ -1,20 +1,16 @@
-FROM mhart/alpine-node:6.1.0
+FROM mhart/alpine-node:6.9.2
 MAINTAINER Ross Hendry "rhendry@googlemail.com"
 
-RUN addgroup -S app && adduser -S -g app app
-ENV HOME=/home/app
-RUN mkdir -p /var/www/acereact/public_html && \
-  chgrp app /var/www/acereact/public_html
+RUN mkdir -p /usr/src/app
+RUN mkdir -p /var/www/acereact/public_html
 
-ADD package.json $HOME/build/package.json
-RUN chown -R app:app $HOME/*
-WORKDIR $HOME/build
-USER app
+WORKDIR /usr/src/app
+ADD package.json ./package.json
 RUN npm install --progress=false && npm cache clean
 
-ADD . $HOME/build
+ADD . ./
 RUN npm run build && \
-  cp -r $HOME/build/* /var/www/acereact/public_html/
+  cp -r ./build/* /var/www/acereact/public_html/
 
 VOLUME /var/www/acereact/public_html/
 

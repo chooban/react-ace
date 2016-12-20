@@ -7,7 +7,11 @@ const props = {
 };
 
 const mapStateToProps = (state) => {
-  const gridData = state.issues.data.map((lineItem) => (
+  console.log(state);
+  const gridConfig = state.gridConfig;
+  const recordsStart = (gridConfig.page - 1) * gridConfig.pageSize;
+  const records = state.issues.data.slice(recordsStart, gridConfig.pageSize);
+  const gridData = records.map((lineItem) => (
     Object.assign({}, lineItem, { onorder: state.order.items.has(lineItem.previewsCode) })
   ));
 
