@@ -6,6 +6,7 @@
   "scripts": {
     "style": "eslint app --ext jsx,js",
     "test": "tape -r babel-register -r ignore-styles 'app/**/__tests__/*.test.js*' | faucet",
+    "watchtest": "tape-watch -r babel-register -r ignore-styles 'app/**/__tests__/*.test.js*' | faucet",
     "coverage": "NODE_ENV=test nyc --reporter=lcov --reporter=text tape 'app/**/__tests__/*.test.js'",
     "build": "webpack -p",
     "devbuild": "webpack-dev-server --watch --progress",
@@ -50,6 +51,7 @@
     "style-loader": "0.13.1",
     "tap-min": "1.1.0",
     "tape": "4.6.3",
+    "tape-watch": "^2.2.4",
     "webpack": "1.14.0",
     "webpack-dashboard": "0.2.0",
     "webpack-dev-server": "1.16.2",

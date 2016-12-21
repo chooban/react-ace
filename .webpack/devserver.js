@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
 
 module.exports = function (paths) {
-  console.log('dev server');
   return {
     devServer: {
       contentBase: paths.build,
@@ -16,6 +15,10 @@ module.exports = function (paths) {
         '/api/previews': {
           target: 'http://previewsapi:8100',
           pathRewrite: { '^/api/previews' : '/previews' }
+        },
+        '/api/orders': {
+          target: 'http://ordersapi:8100',
+          pathRewrite: { '^/api/orders' : '/orders' }
         }
       }
     },

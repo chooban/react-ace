@@ -4,6 +4,10 @@ import {
     getLatestIssue
 } from '../api/PreviewsWebApi';
 
+import {
+    exportOrder as exportOrderApi
+} from '../api/OrdersWebApi';
+
 import * as Actions from './ActionCreators';
 
 const requestIssues = () => (
@@ -38,10 +42,25 @@ const removeFromOrder = (orderItem) => (
     Actions.removeFromOrder(orderItem)
 );
 
+const exportOrder = (order) => (dispatch) => {
+  dispatch(Actions.requestedExport());
+
+  return exportOrderApi(order)
+    .then(Actions.receivedExportedOrder())
+    .then(dispatch);
+};
+
+const nextPage = () => Actions.nextPage();
+
+const previousPage = () => Actions.previousPage();
+
 export {
     requestIssues,
     requestIssue,
     addToOrder,
     removeFromOrder,
-    requestLatestIssue
+    exportOrder,
+    requestLatestIssue,
+    nextPage,
+    previousPage
 };

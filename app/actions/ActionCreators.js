@@ -30,13 +30,34 @@ const removeFromOrder = (orderItem) => ({
   orderItem
 });
 
+const requestedExport = () => ({
+  type: 'EXPORTING_ORDER'
+});
+
+const receivedExportedOrder = (order) => ({
+  type: 'RECEIVED_EXPORT',
+  order
+});
+
+const nextPage = () => ({
+  type: 'NEXT_PAGE'
+});
+
+const previousPage = () => ({
+  type: 'PREVIOUS_PAGE'
+});
+
 export {
   receivedIssues,
   receivedIssue,
   requestedIssues,
   requestedIssue,
   addToOrder,
-  removeFromOrder
+  removeFromOrder,
+  requestedExport,
+  receivedExportedOrder,
+  nextPage,
+  previousPage
 };
 
 export {

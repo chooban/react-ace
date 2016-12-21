@@ -12,25 +12,6 @@ test('Order reducer functions', (t) => {
     title: 'AVATAR LAST AIRBENDER TP 04 SEARCH PART 1'
   };
 
-  t.test('should return the initial state', (t) => {
-    const expectedInitialState = {
-      issues: {
-        isFetching: false,
-        issuesList: [],
-        data: []
-      },
-      order: {
-        items: []
-      }
-    };
-
-    t.deepEqual(
-      reducer(undefined, {}),
-      expectedInitialState,
-      'Incorrect initial state');
-    t.end();
-  });
-
   t.test('adding a unique item to an empty order', (t) => {
     let state = reducer(undefined, {});
     state = reducer(state, Actions.addToOrder(orderItem));

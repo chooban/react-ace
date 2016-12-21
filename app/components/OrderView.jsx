@@ -1,18 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-const OrderView = ({ items }) => (
-  <p>Ordered items: {items.size}</p>
+const OrderView = ({ items, exportOrder }) => (
+  <div>
+    Ordered items: {items.size} <br />
+    <input
+      type="button"
+      value="Export"
+      onClick={exportOrder}
+      disabled={items.size === 0}
+    />
+  </div>
 );
 
 OrderView.propTypes = {
-  items: React.PropTypes.instanceOf(Set)
+  items: React.PropTypes.instanceOf(Set),
+  exportOrder: React.PropTypes.func
 };
 
-const stateToProps = (state) => (
-  { items: state.order.items }
-);
-
-const OrderViewComponent = connect(stateToProps)(OrderView);
-
-export default OrderViewComponent;
+export default OrderView;

@@ -19,7 +19,7 @@ const config = function(paths) {
     },
     output: {
       path: paths.build,
-      filename: 'bundle.js',
+      filename: 'bundle.js'
     },
     node: {
       fs: 'empty',

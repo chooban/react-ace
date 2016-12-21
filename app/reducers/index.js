@@ -11,7 +11,7 @@ const initialState = {
   },
   gridConfig: {
     pageSize: 25,
-    page: 2
+    page: 1
   }
 };
 
@@ -64,7 +64,19 @@ function order(state = initialState.order, action) {
 }
 
 function gridConfig(state = initialState.gridConfig, action) {
-  return state;
+  switch (action.type) {
+    case 'NEXT_PAGE':
+      return Object.assign({}, state, {
+        page: state.page + 1,
+        pageSize: state.pageSize
+      });
+    case 'PREVIOUS_PAGE':
+      return Object.assign({}, state, {
+        page: Math.max(1, state.page - 1),
+        pageSize: state.pageSize
+      });
+    default: return state;
+  }
 }
 
 export default function app(state = initialState, action) {

@@ -96,6 +96,18 @@ export default class PreviewsGrid extends React.Component {
             {rows}
           </tbody>
         </table>
+        <input
+          type="button"
+          value="Previous"
+          disabled={!this.props.hasPrevious}
+          onClick={this.props.previousPage}
+        />
+        <input
+          type="button"
+          value="Next"
+          disabled={!this.props.hasNext}
+          onClick={this.props.nextPage}
+        />
       </div>
     );
   }
@@ -103,6 +115,9 @@ export default class PreviewsGrid extends React.Component {
 
 PreviewsGrid.propTypes = {
   gridData: React.PropTypes.array,
-  onItemSelected: React.PropTypes.func
+  onItemSelected: React.PropTypes.func,
+  hasPrevious: React.PropTypes.bool,
+  hasNext: React.PropTypes.bool,
+  previousPage: React.PropTypes.func,
+  nextPage: React.PropTypes.func
 };
-

@@ -2,6 +2,7 @@ const webpack = require('webpack');
 
 module.exports = function() {
   return {
+    devtool: 'source-map',
     plugins: [
       new webpack.optimize.UglifyJsPlugin({
         compress: {

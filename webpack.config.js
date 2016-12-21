@@ -14,8 +14,6 @@ const paths = {
 const TARGET = process.env.npm_lifecycle_event;
 process.env.BABEL_ENV = TARGET;
 
-if (TARGET === 'build') {
-  module.exports = validate(merge(common(paths), productionConfig(paths)));
-} else {
-  module.exports = validate(merge(common(paths), devConfig(paths)));
-}
+module.exports = (TARGET === 'build')
+  ? validate(merge(common(paths), productionConfig(paths)))
+  : validate(merge(common(paths), devConfig(paths)));

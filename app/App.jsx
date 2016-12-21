@@ -1,6 +1,6 @@
 import React from 'react';
 import PreviewsGrid from './containers/PreviewsGridContainer';
-import OrderView from './components/OrderView';
+import OrderView from './containers/OrderViewContainer';
 
 const App = () => (
   <div className="previewsApp">
