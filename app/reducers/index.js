@@ -1,5 +1,3 @@
-import { RECEIVED_ISSUES, REQUESTED_ISSUES } from '../actions/ActionCreators';
-
 const initialState = {
   issues: {
     isFetching: false,
@@ -7,25 +5,18 @@ const initialState = {
     data: []
   },
   order: {
-    items: new Set()
+    issue: undefined,
+    items: []
   },
   gridConfig: {
     pageSize: 25,
-    page: 1
+    page: 1,
+    searchTerm: undefined
   }
 };
 
 function issues(state = initialState.issues, action) {
   switch (action.type) {
-    case REQUESTED_ISSUES:
-      return Object.assign({}, state, {
-        isFetching: true
-      });
-    case RECEIVED_ISSUES:
-      return Object.assign({}, state, {
-        isFetching: false,
-        issuesList: action.issues
-      });
     case 'REQUESTED_ISSUE_DATA':
       return Object.assign({}, state, {
         isFetching: true
@@ -33,7 +24,7 @@ function issues(state = initialState.issues, action) {
     case 'RECEIVED_ISSUE_DATA':
       return Object.assign({}, state, {
         isFetching: false,
-        data: action.issueData
+        data: action.payload.contents
       });
     default:
       return state;
@@ -43,21 +34,28 @@ function issues(state = initialState.issues, action) {
 function order(state = initialState.order, action) {
   switch (action.type) {
     case 'ADD_TO_ORDER': {
-      const nextItems = new Set(state.items);
-      nextItems.add(action.orderItem);
+      const idx = state.items.findIndex((d) => d.previews === action.payload.previews);
+      if (idx > -1) return state;
+
+      const nextItems = state.items.slice(0);
+      nextItems.push(action.payload);
 
       return Object.assign({}, state, {
         items: nextItems
       });
     }
     case 'REMOVE_FROM_ORDER': {
-      if (state.items.has(action.orderItem)) {
-        const items = new Set(state.items);
-        items.delete(action.orderItem);
+      const idx = state.items.findIndex((d) => d.previews === action.payload);
+      if (idx > -1) {
+        const items = state.items.slice(0, idx).concat(state.items.slice(idx + 1));
         return Object.assign({}, state, { items });
       }
       return state;
     }
+    case 'RECEIVED_ISSUE_DATA':
+      return Object.assign({}, state, {
+        issue: action.payload.file
+      });
     default:
       return state;
   }
@@ -75,6 +73,23 @@ function gridConfig(state = initialState.gridConfig, action) {
         page: Math.max(1, state.page - 1),
         pageSize: state.pageSize
       });
+    case 'UPDATE_SEARCH': {
+      let page = state.page;
+      let searchTerm = action.payload || '';
+      searchTerm = searchTerm.trim();
+
+      if (searchTerm.length === 0) searchTerm = undefined;
+
+      if (searchTerm && !state.searchTerm) {
+        page = 1;
+      } else if (!searchTerm) {
+        page = 1;
+      }
+      return Object.assign({}, state, {
+        searchTerm,
+        page
+      });
+    }
     default: return state;
   }
 }

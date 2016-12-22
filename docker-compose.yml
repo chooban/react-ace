@@ -8,9 +8,9 @@ services:
       - NODE_ENV=production
       - LOG_LEVEL=debug
   ordersapi:
-    image: chooban/ace-orders-api:latest
+    image: chooban/ace-orders-api:dev
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
   site:
     build: .
     command: npm run devbuild

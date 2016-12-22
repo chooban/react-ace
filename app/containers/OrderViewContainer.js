@@ -1,34 +1,22 @@
 import { connect } from 'react-redux';
 import OrderView from '../components/OrderView';
+import fileDownload from '../utils/FileDownload';
+import orderToCsv from '../utils/OrderToCsv';
 
 const mapStateToProps = (state) => ({
   items: state.order.items
 });
 
-function processAndExportOrder() {
-  return (dispatch, getState) => {
-    const orderItems = getState().order.items;
-    const catalogue = getState().issues.data;
-
-    const order = [];
-    orderItems.forEach((code) => {
-      const item = catalogue.find((d) => d.previewsCode === code);
-      order.push({
-        previews: code,
-        quantity: 1,
-        title: item.title,
-        price: item.price,
-        publisher: item.publisher,
-        comment: ''
-      });
-    });
-    console.log(order);
+function exportCurrentOrder() {
+  return (dispatch, getStore) => {
+    const store = getStore();
+    fileDownload(orderToCsv(store.order.items), `order${store.order.issue}.csv`);
   };
 }
 
 const OrderViewContainer = connect(
     mapStateToProps,
-    { exportOrder: processAndExportOrder }
+    { exportCurrentOrder }
 )(OrderView);
 
 export default OrderViewContainer;

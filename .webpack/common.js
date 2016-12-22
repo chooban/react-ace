@@ -10,6 +10,7 @@ const config = function(paths) {
         'react',
         'react-dom',
         'react-redux',
+        'redux-actions',
         'redux-thunk',
         'redux-logger'
       ]

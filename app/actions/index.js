@@ -1,66 +1,50 @@
 import {
-    getIssueList,
-    getIssue,
+  createAction
+} from 'redux-actions';
+
+import {
     getLatestIssue
 } from '../api/PreviewsWebApi';
 
-import {
-    exportOrder as exportOrderApi
-} from '../api/OrdersWebApi';
+const receivedIssue = createAction('RECEIVED_ISSUE_DATA');
+const requestedIssue = createAction('REQUESTED_ISSUE_DATA');
+const removeFromOrder = createAction('REMOVE_FROM_ORDER');
+const nextPage = createAction('NEXT_PAGE');
+const previousPage = createAction('PREVIOUS_PAGE');
+const updateSearch = createAction('UPDATE_SEARCH');
+const addToOrderCreator = createAction('ADD_TO_ORDER');
 
-import * as Actions from './ActionCreators';
+const requestLatestIssue = () => (dispatch) => {
+  dispatch(requestedIssue());
 
-const requestIssues = () => (
-    (dispatch) => {
-      dispatch(Actions.requestedIssues());
-
-      return getIssueList()
-          .then(Actions.receivedIssues)
-          .then(dispatch);
-    }
-);
-
-const requestIssue = (issueNumber) => (dispatch) => {
-  dispatch(Actions.requestedIssue(issueNumber));
-
-  return getIssue(issueNumber)
-      .then(Actions.receivedIssue)
-      .then(dispatch);
-};
-
-const requestLatestIssue = () => (dispatch) => (
-    getLatestIssue()
-      .then(Actions.receivedIssue)
-      .then(dispatch)
-);
-
-const addToOrder = (orderItem) => (
-    Actions.addToOrder(orderItem)
-);
-
-const removeFromOrder = (orderItem) => (
-    Actions.removeFromOrder(orderItem)
-);
-
-const exportOrder = (order) => (dispatch) => {
-  dispatch(Actions.requestedExport());
-
-  return exportOrderApi(order)
-    .then(Actions.receivedExportedOrder())
+  return getLatestIssue()
+    .then(receivedIssue)
     .then(dispatch);
 };
 
-const nextPage = () => Actions.nextPage();
+const addToOrder = (orderItem) => (
+  (dispatch, getStore) => {
+    const catalogue = getStore().issues.data;
+    const item = catalogue.find((d) => d.previewsCode === orderItem);
 
-const previousPage = () => Actions.previousPage();
+    dispatch(addToOrderCreator({
+      previews: item.previewsCode,
+      quantity: 1,
+      title: item.title,
+      price: item.price,
+      publisher: item.publisher,
+      comment: ''
+    }));
+  }
+);
 
 export {
-    requestIssues,
-    requestIssue,
     addToOrder,
     removeFromOrder,
-    exportOrder,
     requestLatestIssue,
     nextPage,
-    previousPage
+    previousPage,
+    updateSearch,
+    requestedIssue,
+    receivedIssue
 };

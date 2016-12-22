@@ -33,7 +33,7 @@ export function getIssue(issueNumber) {
 }
 
 export function getLatestIssue() {
-  const parseData = (resp) => JSON.parse(resp).contents;
+  const parseData = (resp) => JSON.parse(resp);
 
   return fetch('/api/previews/latest', acceptJsonHeaders)
     .then(checkStatus)

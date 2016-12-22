@@ -9,16 +9,32 @@ const mockStore = configureMockStore(middlewares);
 
 test('Adding to an order', (t) => {
   const lineItem = {
-    previewsCode: '12345MAR'
+    previews: '123/MAR',
+    publisher: 'foo',
+    title: 'bar',
+    price: 0,
+    quantity: 1,
+    comment: ''
   };
 
-  const store = mockStore({});
+  const store = mockStore({
+    issues: {
+      data: [{
+        previewsCode: '123/MAR',
+        publisher: 'foo',
+        title: 'bar',
+        price: 0
+      }]
+    },
+    order: {
+      items: []
+    }
+  });
   const expectedActions = [
-    { type: 'ADD_TO_ORDER', orderItem: lineItem }
+    { type: 'ADD_TO_ORDER', payload: lineItem }
   ];
 
-  store.dispatch(Actions.addToOrder(lineItem));
-
+  store.dispatch(Actions.addToOrder(lineItem.previews));
   t.deepEqual(store.getActions(), expectedActions);
   t.end();
 });

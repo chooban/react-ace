@@ -17,7 +17,7 @@ module.exports = function (paths) {
           pathRewrite: { '^/api/previews' : '/previews' }
         },
         '/api/orders': {
-          target: 'http://ordersapi:8100',
+          target: 'http://ordersapi:8101',
           pathRewrite: { '^/api/orders' : '/orders' }
         }
       }

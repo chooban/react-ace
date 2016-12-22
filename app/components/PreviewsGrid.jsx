@@ -86,6 +86,20 @@ export default class PreviewsGrid extends React.Component {
 
     return (
       <div>
+        <div className="gridsearch">
+          <label
+            htmlFor="search"
+          >
+            Search:
+            <input
+              type="text"
+              name="search"
+              placeholder="Search"
+              size="25"
+              onInput={(e) => this.props.onSearchUpdate(e.target.value)}
+            />
+          </label>
+        </div>
         <table>
           <thead>
             <tr>
@@ -119,5 +133,6 @@ PreviewsGrid.propTypes = {
   hasPrevious: React.PropTypes.bool,
   hasNext: React.PropTypes.bool,
   previousPage: React.PropTypes.func,
-  nextPage: React.PropTypes.func
+  nextPage: React.PropTypes.func,
+  onSearchUpdate: React.PropTypes.func
 };
