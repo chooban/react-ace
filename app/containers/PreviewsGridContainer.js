@@ -6,25 +6,22 @@ import {
   previousPage,
   updateSearch
 } from '../actions';
+
+import {
+  searchCatalogue
+} from './CatalogueSearch';
+
 import PreviewsGrid from '../components/PreviewsGrid';
 
 const props = {
   gridData: []
 };
 
-const getRecords = (gridConfig, catalogue) => {
-  let records = catalogue;
-
-  const publisherOrTitleMatches = (regex) =>
-    (d) => regex.test(d.publisher) || regex.test(d.title);
-
-  if (gridConfig.searchTerm) {
-    const regex = new RegExp(`.*${gridConfig.searchTerm}.*`, 'ig');
-    records = catalogue.filter(publisherOrTitleMatches(regex));
-  }
-
-  return records;
-};
+const getRecords = (gridConfig, catalogue) => (
+  (gridConfig.searchTerm)
+    ? searchCatalogue(gridConfig.searchTerm, catalogue)
+    : catalogue
+);
 
 const mapStateToProps = (state) => {
   const gridConfig = state.gridConfig;
