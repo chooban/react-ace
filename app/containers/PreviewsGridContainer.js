@@ -15,9 +15,12 @@ const props = {
 const getRecords = (gridConfig, catalogue) => {
   let records = catalogue;
 
+  const publisherOrTitleMatches = (regex) =>
+    (d) => regex.test(d.publisher) || regex.test(d.title);
+
   if (gridConfig.searchTerm) {
     const regex = new RegExp(`.*${gridConfig.searchTerm}.*`, 'ig');
-    records = catalogue.filter((d) => regex.test(d.publisher));
+    records = catalogue.filter(publisherOrTitleMatches(regex));
   }
 
   return records;

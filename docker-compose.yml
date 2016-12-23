@@ -7,16 +7,11 @@ services:
     environment:
       - NODE_ENV=production
       - LOG_LEVEL=debug
-  ordersapi:
-    image: chooban/ace-orders-api:dev
-    environment:
-      - NODE_ENV=development
   site:
     build: .
     command: npm run devbuild
     depends_on:
       - previewsapi
-      - ordersapi
     ports:
       - 3001:3000
     volumes:
