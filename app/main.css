@@ -7,3 +7,26 @@
   flex-flow: row nowrap;
   justify-content: space-between;
 }
+
+.ordermodal {
+  width: 800px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ordermodal .header {
+  margin: 3px;
+}
+
+.ordermodal .contents {
+  margin: 3px;
+  flex-grow: 1;
+}
+
+.ordermodal .footer {
+  margin: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}

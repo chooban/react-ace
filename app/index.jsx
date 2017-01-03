@@ -2,7 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import app from './reducers';
 import { requestLatestIssue } from './actions';
@@ -21,7 +21,8 @@ if (process.env.NODE_ENV === 'development') {
   middlewares.push(createLogger(loggerConfig));
 }
 
-const store = createStore(app, applyMiddleware(...middlewares));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(app, composeEnhancers(applyMiddleware(...middlewares)));
 
 actors(store);
 store.dispatch(requestLatestIssue());

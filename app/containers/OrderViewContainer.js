@@ -1,22 +1,19 @@
 import { connect } from 'react-redux';
 import OrderView from '../components/OrderView';
-import fileDownload from '../utils/FileDownload';
-import orderToCsv from '../utils/OrderToCsv';
+import { showOrder } from '../actions/';
 
 const mapStateToProps = (state) => ({
-  items: state.order.items
+  items: state.order.items,
+  displayOrder: state.ui.showOrder
 });
 
-function exportCurrentOrder() {
-  return (dispatch, getStore) => {
-    const store = getStore();
-    fileDownload(orderToCsv(store.order.items), `order${store.order.issue}.csv`);
-  };
-}
+const mapDispatchToProps = (dispatch) => ({
+  showCurrentOrder: () => dispatch(showOrder())
+});
 
 const OrderViewContainer = connect(
     mapStateToProps,
-    { exportCurrentOrder }
+    mapDispatchToProps
 )(OrderView);
 
 export default OrderViewContainer;

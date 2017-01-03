@@ -11,8 +11,8 @@ const config = function(paths) {
         'react-dom',
         'react-redux',
         'redux-actions',
-        'redux-thunk',
-        'redux-logger'
+        'redux-logger',
+        'redux-thunk'
       ]
     },
     resolve: {

@@ -12,6 +12,9 @@ const initialState = {
     pageSize: 25,
     page: 1,
     searchTerm: undefined
+  },
+  ui: {
+    showOrder: false
   }
 };
 
@@ -94,10 +97,25 @@ function gridConfig(state = initialState.gridConfig, action) {
   }
 }
 
+function ui(state = initialState.ui, action) {
+  switch (action.type) {
+    case 'SHOW_ORDER':
+      return Object.assign({}, state, {
+        showOrder: true
+      });
+    case 'CLOSE_ORDER':
+      return Object.assign({}, state, {
+        showOrder: false
+      });
+    default: return state;
+  }
+}
+
 export default function app(state = initialState, action) {
   return {
     issues: issues(state.issues, action),
     order: order(state.order, action),
-    gridConfig: gridConfig(state.gridConfig, action)
+    gridConfig: gridConfig(state.gridConfig, action),
+    ui: ui(state.ui, action)
   };
 }

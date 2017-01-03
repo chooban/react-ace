@@ -13,6 +13,8 @@ const nextPage = createAction('NEXT_PAGE');
 const previousPage = createAction('PREVIOUS_PAGE');
 const updateSearch = createAction('UPDATE_SEARCH');
 const addToOrderCreator = createAction('ADD_TO_ORDER');
+const showOrder = createAction('SHOW_ORDER');
+const closeOrder = createAction('CLOSE_ORDER');
 
 const requestLatestIssue = () => (dispatch) => {
   dispatch(requestedIssue());
@@ -46,5 +48,7 @@ export {
     previousPage,
     updateSearch,
     requestedIssue,
-    receivedIssue
+    receivedIssue,
+    showOrder,
+    closeOrder
 };
