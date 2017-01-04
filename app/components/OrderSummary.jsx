@@ -1,7 +1,7 @@
 import React from 'react';
 
-const OrderView = ({ items, exportCurrentOrder, showCurrentOrder }) => (
-  <div>
+const OrderSummary = ({ items, exportCurrentOrder, showCurrentOrder }) => (
+  <div className="ordersummary">
     Ordered items: {items.length} <br />
     <input
       type="button"
@@ -18,10 +18,10 @@ const OrderView = ({ items, exportCurrentOrder, showCurrentOrder }) => (
   </div>
 );
 
-OrderView.propTypes = {
+OrderSummary.propTypes = {
   items: React.PropTypes.instanceOf(Array),
   exportCurrentOrder: React.PropTypes.func,
   showCurrentOrder: React.PropTypes.func
 };
 
-export default OrderView;
+export default OrderSummary;

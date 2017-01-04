@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import OrderView from '../components/OrderView';
+import OrderSummary from '../components/OrderSummary';
 import { showOrder } from '../actions/';
 
 const mapStateToProps = (state) => ({
@@ -14,6 +14,6 @@ const mapDispatchToProps = (dispatch) => ({
 const OrderViewContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(OrderView);
+)(OrderSummary);
 
 export default OrderViewContainer;

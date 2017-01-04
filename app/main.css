@@ -1,3 +1,31 @@
+body {
+  margin: 0;
+}
+
+.previewsApp {
+  margin-left: auto;
+}
+
+.appheader {
+  background: lightblue;
+}
+
+.appheader .content {
+  width: 800px;
+  padding: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ordersummary {
+  display: inline-block;
+}
+
+.appcontent .content {
+  width: 800px;
+  padding: 8px;
+}
+
 .react-datagrid {
   width: 950px;
 }
@@ -10,7 +38,7 @@
 
 .ordermodal {
   width: 800px;
-  height: 300px;
+  height: auto;
   display: flex;
   flex-direction: column;
 }
@@ -22,6 +50,10 @@
 .ordermodal .contents {
   margin: 3px;
   flex-grow: 1;
+}
+
+.ordermodal .contents table {
+  width: 100%;
 }
 
 .ordermodal .footer {

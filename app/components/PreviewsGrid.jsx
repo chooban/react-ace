@@ -3,9 +3,6 @@ import React from 'react';
 import PreviewsLink from './PreviewsLink';
 import ToggleOrder from '../containers/ToggleOrderContainer';
 
-// eslint-disable-next-line
-import './PreviewsGrid.css';
-
 const firstLowerCaseLetter = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 const capitalize = (s) => s.toLowerCase().replace(firstLowerCaseLetter, (m) => m.toUpperCase());
 
