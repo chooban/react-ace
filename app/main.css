@@ -3,7 +3,6 @@ body {
 }
 
 .previewsApp {
-  margin-left: auto;
 }
 
 .appheader {
@@ -12,6 +11,7 @@ body {
 
 .appheader .content {
   width: 800px;
+  margin-left: auto; margin-right: auto;
   padding: 8px;
   display: flex;
   justify-content: flex-end;
@@ -22,6 +22,7 @@ body {
 }
 
 .appcontent .content {
+  margin-left: auto; margin-right: auto;
   width: 800px;
   padding: 8px;
 }
