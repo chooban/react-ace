@@ -17,8 +17,48 @@ body {
   justify-content: flex-end;
 }
 
+.appheader .content > div {
+  margin: 5px;
+}
+
+.gridsearch i {
+  margin-right: 5px;
+}
+
+.previewsgrid {
+  width: 100%;
+  margin-right: 5px;
+}
+
+.toggle-order {
+  margin-left: 5px;
+}
+
 .ordersummary {
   display: inline-block;
+}
+
+.ordersummary i:hover {
+  cursor: pointer;
+}
+
+.ordersummary i::after {
+  content: '';
+  display: inline-block;
+  position: relative;
+  top: -15px;
+  right: 5px;
+  width: 12px;
+  height: 12px;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+  background-color: red;
+  visibility: hidden;
+}
+
+.ordersummary i.hasitems::after {
+  visibility: visible;
 }
 
 .appcontent .content {

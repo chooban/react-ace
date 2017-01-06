@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = function (paths) {
   return {
@@ -32,6 +33,7 @@ module.exports = function (paths) {
           NODE_ENV: JSON.stringify('development'),
         },
       }),
+      new DashboardPlugin()
     ],
   };
 };

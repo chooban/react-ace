@@ -1,26 +1,16 @@
 import React from 'react';
 
-const OrderSummary = ({ items, exportCurrentOrder, showCurrentOrder }) => (
+const OrderSummary = ({ items, showCurrentOrder }) => (
   <div className="ordersummary">
-    Ordered items: {items.length} <br />
-    <input
-      type="button"
-      value="Show"
+    <i // eslint-disable-line
+      className={`fa fa-shopping-cart fa-2x ${(items.length > 0 ? 'hasitems' : '')}`}
       onClick={showCurrentOrder}
-      disabled={items.length === 0}
-    />
-    <input
-      type="button"
-      value="Export"
-      onClick={exportCurrentOrder}
-      disabled={items.length === 0}
     />
   </div>
 );
 
 OrderSummary.propTypes = {
   items: React.PropTypes.instanceOf(Array),
-  exportCurrentOrder: React.PropTypes.func,
   showCurrentOrder: React.PropTypes.func
 };
 

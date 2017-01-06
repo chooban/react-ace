@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const config = function(paths) {
   return {
@@ -61,7 +62,10 @@ const config = function(paths) {
         Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
         fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
       }),
-      new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js', Infinity)
+      new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js', Infinity),
+      new CopyPlugin([
+        { from: 'assets' }
+      ])
     ],
   };
 }

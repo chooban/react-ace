@@ -1,12 +1,15 @@
 import React from 'react';
+
 import OrderPopup from './containers/OrderPopupContainer';
 import PreviewsGrid from './containers/PreviewsGridContainer';
 import OrderView from './containers/OrderSummaryContainer';
+import SearchContainer from './containers/SearchContainer';
 
 const App = () => (
   <div className="previewsApp">
     <div className="appheader">
       <div className="content">
+        <SearchContainer />
         <OrderView />
       </div>
     </div>
