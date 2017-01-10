@@ -12,7 +12,9 @@
       ]
     },
     "test": {
-      "plugins": ["istanbul"],
+      "plugins": [
+        "istanbul"
+      ],
       "sourceMaps": "inline"
     }
   }

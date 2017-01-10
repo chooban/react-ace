@@ -26,8 +26,26 @@ body {
 }
 
 .previewsgrid {
+  table-layout: fixed;
   width: 100%;
   margin-right: 5px;
+}
+
+.previewsgrid th:first-of-type {
+  width: 100px;
+}
+
+.previewsgrid th:nth-of-type(2) {
+  width: 440px;
+}
+
+.previewsgrid th:nth-of-type(3),
+.previewsgrid th:nth-of-type(4) {
+  width: 55px;
+}
+
+.previewsgrid th:nth-of-type(5) {
+  width: 100px;
 }
 
 .toggle-order {

@@ -7,9 +7,14 @@ services:
     environment:
       - NODE_ENV=production
       - LOG_LEVEL=debug
+  ordersapi:
+    image: chooban/ace-orders-api:latest
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=debug
   site:
     build: .
-    command: npm run devbuild
+    command: npm run build
     depends_on:
       - previewsapi
     ports:
@@ -17,3 +22,12 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
+  nginx:
+    image: nginx:alpine
+    volumes_from:
+      - site
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d/:/etc/nginx/conf.d/

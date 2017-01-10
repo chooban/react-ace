@@ -9,6 +9,7 @@ const App = () => (
   <div className="previewsApp">
     <div className="appheader">
       <div className="content">
+        <img role="presentation" src="ace-comics-logo-header.svg" />
         <SearchContainer />
         <OrderView />
       </div>

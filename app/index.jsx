@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -11,24 +10,33 @@ import './main.css';
 
 import RootApp from './App';
 
-const middlewares = [thunkMiddleware];
+function run() {
+  const middlewares = [thunkMiddleware];
 
-if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development') {
   const createLogger = require('redux-logger'); //eslint-disable-line
-  const loggerConfig = {
-    level: 'error'
-  };
-  middlewares.push(createLogger(loggerConfig));
+    const loggerConfig = {
+      level: 'error'
+    };
+    middlewares.push(createLogger(loggerConfig));
+  }
+
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const store = createStore(app, composeEnhancers(applyMiddleware(...middlewares)));
+
+  actors(store);
+  store.dispatch(requestLatestIssue());
+
+  render(<Provider store={store}><RootApp /></Provider>, document.getElementById('app'));
 }
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(app, composeEnhancers(applyMiddleware(...middlewares)));
+// Just make an assumption base on one missing function.
+if (!Object.assign) {
+  require.ensure([], () => {
+    let polyfill = require('babel-polyfill'); //eslint-disable-line
+    run();
+  });
+} else {
+  run();
+}
 
-actors(store);
-store.dispatch(requestLatestIssue());
-
-render(<Provider store={store}>
-  <RootApp />
-</Provider>,
-document.getElementById('app')
-);
