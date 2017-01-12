@@ -41,11 +41,6 @@ const columns = [
     cell: formatAsGBP
   },
   {
-    property: 'reducedFrom',
-    header: 'Was',
-    cell: formatAsGBP
-  },
-  {
     property: 'publisher',
     header: 'Publisher',
     cell: (v) => ({ value: v ? titleFormat(v) : '' })

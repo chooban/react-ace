@@ -2,10 +2,12 @@ import React from 'react';
 
 const OrderSummary = ({ items, showCurrentOrder }) => (
   <div className="ordersummary">
-    <i // eslint-disable-line
-      className={`fa fa-shopping-cart fa-2x ${(items.length > 0 ? 'hasitems' : '')}`}
+    <i
+      className={`material-icons ${(items.length > 0 ? 'hasitems' : '')}`}
       onClick={showCurrentOrder}
-    />
+    >
+    shopping_cart
+    </i>
   </div>
 );
 

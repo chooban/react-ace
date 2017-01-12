@@ -5,24 +5,19 @@ body {
 .previewsApp {
 }
 
-.appheader {
+nav {
   background: lightblue;
 }
 
-.appheader .content {
+nav .nav-wrapper {
   width: 800px;
   margin-left: auto; margin-right: auto;
-  padding: 8px;
   display: flex;
   justify-content: flex-end;
 }
 
-.appheader .content > div {
-  margin: 5px;
-}
-
-.gridsearch i {
-  margin-right: 5px;
+nav i {
+  color: black;
 }
 
 .previewsgrid {
@@ -39,13 +34,16 @@ body {
   width: 440px;
 }
 
-.previewsgrid th:nth-of-type(3),
-.previewsgrid th:nth-of-type(4) {
+.previewsgrid th:nth-of-type(3) {
   width: 55px;
 }
 
-.previewsgrid th:nth-of-type(5) {
-  width: 100px;
+.previewsgrid th:nth-of-type(4) {
+  width: 140px;
+}
+
+.previewsgrid td:nth-of-type(5) {
+  margin-left: auto;
 }
 
 .toggle-order {
@@ -104,6 +102,9 @@ body {
 
 .ordermodal .header {
   margin: 3px;
+  background-color: lightblue;
+  padding-left: 3px;
+  font-size: 1.5rem;
 }
 
 .ordermodal .contents {
@@ -113,6 +114,18 @@ body {
 
 .ordermodal .contents table {
   width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ordermodal .contents tr.totals td:first-of-type {
+  text-align: right;
+  padding-right: 1rem;
+}
+
+.ordermodal .contents tr.totals {
+  font-weight: bold;
 }
 
 .ordermodal .footer {

@@ -17,16 +17,20 @@ const OrderPopupComponent = ({ display, exportOrder, close }) => (
         <OrderEditor />
       </div>
       <div className="footer">
-        <input
-          type="button"
-          value="Cancel"
+        <a
+          tabIndex="-2"
+          className="btn-flat"
           onClick={close}
-        />
-        <input
-          type="button"
-          value="Export"
+        >
+          Cancel
+        </a>
+        <a
+          tabIndex="-1"
+          className="btn-flat"
           onClick={exportOrder}
-        />
+        >
+          Export
+        </a>
       </div>
     </div>
   </Modal>

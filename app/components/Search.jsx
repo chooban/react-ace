@@ -1,19 +1,27 @@
 import React from 'react';
 
 const SearchComponent = ({ onSearchUpdate }) => (
-  <div className="gridsearch">
-    <label
-      htmlFor="search"
-    >
-      <i className="fa fa-search fa-lg" aria-hidden="true" />
+  <div className="input-field">
+    <form>
       <input
-        type="text"
+        type="search"
+        className="searchinput"
         name="search"
-        placeholder="Search"
         size="25"
         onInput={(e) => onSearchUpdate(e.target.value)}
       />
-    </label>
+      <label htmlFor="search">
+        <i className="material-icons">search</i>
+      </label>
+      <i
+        className="material-icons"
+        onClick={() => {
+          const node = document.querySelector('.searchinput');
+          node.value = '';
+          onSearchUpdate(node.value);
+        }}
+      >cancel</i>
+    </form>
   </div>
 );
 

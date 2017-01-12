@@ -7,13 +7,12 @@ import SearchContainer from './containers/SearchContainer';
 
 const App = () => (
   <div className="previewsApp">
-    <div className="appheader">
-      <div className="content">
-        <img role="presentation" src="ace-comics-logo-header.svg" />
+    <nav>
+      <div className="nav-wrapper">
         <SearchContainer />
         <OrderView />
       </div>
-    </div>
+    </nav>
     <div className="appcontent">
       <div className="content">
         <PreviewsGrid />

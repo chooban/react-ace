@@ -16,9 +16,15 @@ const titleFormat = (title) => (
 );
 
 const formatAsGBP = (v) => {
-  const currency = (c) => c.toLocaleString(null, { style: 'currency', currency: 'GBP' });
+  const currency = (c) => c.toLocaleString('latn', {
+    style: 'currency',
+    currency: 'GBP',
+    currencyDisplay: 'symbol',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
   return {
-    value: (v) ? `£${currency(v)}` : ''
+    value: (v) ? currency(parseFloat(v)) : ''
   };
 };
 
@@ -47,6 +53,7 @@ const columns = [
 
 const OrderEditor = ({ items }) => {
   const rows = [];
+  let total = 0;
   items.forEach((item) => {
     const cells = [];
     columns.forEach((c, i) => {
@@ -55,7 +62,16 @@ const OrderEditor = ({ items }) => {
     });
 
     rows.push(<tr key={item.previews}>{ cells }</tr>);
+
+    total += parseFloat(item.price);
   });
+
+  const orderTotal = formatAsGBP(total).value;
+
+  rows.push(<tr className="totals" key={'total'}>
+    <td colSpan="2">Total</td>
+    <td colSpan="2">{orderTotal}</td>
+  </tr>);
 
   const headers = columns.map((c) => <th key={c.property}>{c.header}</th>);
 

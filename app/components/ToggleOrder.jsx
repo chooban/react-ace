@@ -5,12 +5,14 @@ const ToggleOrderComponent = ({ previewsCode, ordered, onItemSelected }) => (
     className="toggle-order"
   >
     <i //eslint-disable-line
-      className={ordered
-        ? 'fa fa-check-square-o'
-        : 'fa fa-square-o'
-      }
+      className="material-icons"
       onClick={() => onItemSelected(previewsCode, ordered)}
-    />
+    >
+      {ordered
+        ? 'check_box'
+        : 'check_box_outline_blank'
+      }
+    </i>
   </div>
 );
 

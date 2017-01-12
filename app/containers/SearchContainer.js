@@ -4,7 +4,7 @@ import SearchComponent from '../components/Search';
 import { updateSearch } from '../actions';
 
 const mapDispatchToProps = (dispatch) => ({
-  onSearchUpdate: (d) => dispatch(updateSearch(d))
+  onSearchUpdate: (d) => requestAnimationFrame(dispatch.bind(this, updateSearch(d)))
 });
 
 const SearchContainer = connect(
