@@ -8,30 +8,28 @@ import fileDownload from '../utils/FileDownload';
 import orderToCsv from '../utils/OrderToCsv';
 
 const OrderPopupComponent = ({ display, exportOrder, close }) => (
-  <Modal isOpen={display} onClose={close}>
-    <div className="ordermodal">
-      <div className="header">
-          Order Contents
-        </div>
-      <div className="contents">
-        <OrderEditor />
-      </div>
-      <div className="footer">
-        <a
-          tabIndex="-2"
-          className="btn-flat"
-          onClick={close}
-        >
-          Cancel
-        </a>
-        <a
-          tabIndex="-1"
-          className="btn-flat"
-          onClick={exportOrder}
-        >
-          Export
-        </a>
-      </div>
+  <Modal isOpen={display}>
+    <div className="header">
+      Order Contents
+    </div>
+    <div className="contents">
+      <OrderEditor />
+    </div>
+    <div className="footer">
+      <a
+        tabIndex="-2"
+        className="btn-flat"
+        onClick={close}
+      >
+        Cancel
+      </a>
+      <a
+        tabIndex="-1"
+        className="btn-flat"
+        onClick={exportOrder}
+      >
+        Export
+      </a>
     </div>
   </Modal>
 );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OrderSummary = ({ items, showCurrentOrder }) => (
+const ShoppingCart = ({ items, showCurrentOrder }) => (
   <div className="ordersummary">
     <i
       className={`material-icons ${(items.length > 0 ? 'hasitems' : '')}`}
@@ -11,9 +11,9 @@ const OrderSummary = ({ items, showCurrentOrder }) => (
   </div>
 );
 
-OrderSummary.propTypes = {
+ShoppingCart.propTypes = {
   items: React.PropTypes.instanceOf(Array),
   showCurrentOrder: React.PropTypes.func
 };
 
-export default OrderSummary;
+export default ShoppingCart;

@@ -14,7 +14,9 @@ const initialState = {
     searchTerm: undefined
   },
   ui: {
-    showOrder: false
+    showOrder: false,
+    showItemPreview: false,
+    itemPreview: undefined
   }
 };
 
@@ -106,6 +108,15 @@ function ui(state = initialState.ui, action) {
     case 'CLOSE_ORDER':
       return Object.assign({}, state, {
         showOrder: false
+      });
+    case 'SHOW_PREVIEW':
+      return Object.assign({}, state, {
+        showItemPreview: true,
+        itemPreview: action.payload
+      });
+    case 'CLOSE_PREVIEW':
+      return Object.assign({}, state, {
+        showItemPreview: false
       });
     default: return state;
   }

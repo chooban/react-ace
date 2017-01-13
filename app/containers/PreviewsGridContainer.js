@@ -3,7 +3,8 @@ import {
   addToOrder,
   removeFromOrder,
   nextPage,
-  previousPage
+  previousPage,
+  showPreview
 } from '../actions';
 
 import {
@@ -52,7 +53,8 @@ export const mapDispatchToProps = (dispatch) => ({
   onItemSelected: (previewsCode, onOrder) => {
     if (!onOrder) dispatch(addToOrder(previewsCode));
     else dispatch(removeFromOrder(previewsCode));
-  }
+  },
+  showPreview: (p) => dispatch(showPreview(p))
 });
 
 const PreviewsGridContainer = connect(

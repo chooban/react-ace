@@ -15,18 +15,9 @@ const titleFormat = (title) => (
     .replace(/Fcbd /, 'FCBD ')
 );
 
-const formatAsGBP = (v) => {
-  const currency = (c) => c.toLocaleString('latn', {
-    style: 'currency',
-    currency: 'GBP',
-    currencyDisplay: 'symbol',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
-  return {
-    value: (v) ? currency(parseFloat(v)) : ''
-  };
-};
+const formatAsGBP = (v) => ({
+  value: (v) ? `£${parseFloat(v).toFixed(2)}` : ''
+});
 
 const columns = [
   {
@@ -51,7 +42,7 @@ const columns = [
   }
 ];
 
-const OrderEditor = ({ items }) => {
+const OrderEditor = ({ items, onRemoveItem }) => {
   const rows = [];
   let total = 0;
   items.forEach((item) => {
@@ -60,6 +51,16 @@ const OrderEditor = ({ items }) => {
       const content = c.cell(item[c.property]);
       cells.push(<td key={i}>{content.value}</td>);
     });
+
+    cells.push(<td key="remove">
+      <i
+        className="material-icons"
+        onClick={() => onRemoveItem(item.previews)}
+      >
+      remove_shopping_cart
+      </i>
+    </td>
+    );
 
     rows.push(<tr key={item.previews}>{ cells }</tr>);
 
@@ -86,7 +87,8 @@ const OrderEditor = ({ items }) => {
 };
 
 OrderEditor.propTypes = {
-  items: React.PropTypes.instanceOf(Array)
+  items: React.PropTypes.instanceOf(Array),
+  onRemoveItem: React.PropTypes.func
 };
 
 export default OrderEditor;

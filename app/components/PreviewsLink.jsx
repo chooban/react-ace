@@ -15,12 +15,20 @@ const codeToUrl = (previewsCode) => {
   return `http://www.previewsworld.com/Catalog/${slug}`;
 };
 
-const PreviewsLink = ({ previewsCode }) => (
-  <a href={codeToUrl(previewsCode)}>{previewsCode}</a>
+const PreviewsLink = ({ previewsCode, showPreview }) => (
+  <a
+    href={codeToUrl(previewsCode)}
+    onClick={(e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      showPreview(previewsCode);
+    }}
+  >{previewsCode}</a>
 );
 
 PreviewsLink.propTypes = {
-  previewsCode: React.PropTypes.string
+  previewsCode: React.PropTypes.string,
+  showPreview: React.PropTypes.func
 };
 
 export default PreviewsLink;

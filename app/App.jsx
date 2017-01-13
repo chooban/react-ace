@@ -1,8 +1,9 @@
 import React from 'react';
 
 import OrderPopup from './containers/OrderPopupContainer';
+import ItemPreview from './containers/PreviewsItemViewContainer';
 import PreviewsGrid from './containers/PreviewsGridContainer';
-import OrderView from './containers/OrderSummaryContainer';
+import OrderView from './containers/ShoppingCartContainer';
 import SearchContainer from './containers/SearchContainer';
 
 const App = () => (
@@ -19,6 +20,7 @@ const App = () => (
       </div>
     </div>
     <OrderPopup />
+    <ItemPreview />
   </div>
 );
 

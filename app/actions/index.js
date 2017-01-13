@@ -15,6 +15,8 @@ const updateSearch = createAction('UPDATE_SEARCH');
 const addToOrderCreator = createAction('ADD_TO_ORDER');
 const showOrder = createAction('SHOW_ORDER');
 const closeOrder = createAction('CLOSE_ORDER');
+const showPreview = createAction('SHOW_PREVIEW');
+const closePreview = createAction('CLOSE_PREVIEW');
 
 const requestLatestIssue = () => (dispatch) => {
   dispatch(requestedIssue());
@@ -50,5 +52,7 @@ export {
     requestedIssue,
     receivedIssue,
     showOrder,
-    closeOrder
+    closeOrder,
+    showPreview,
+    closePreview
 };

@@ -17,18 +17,15 @@ const titleFormat = (title) => (
     .replace(/Fcbd /, 'FCBD ')
 );
 
-const formatAsGBP = (v) => {
-  const currency = (c) => c.toLocaleString(null, { style: 'currency', currency: 'GBP' });
-  return {
-    value: (v) ? `£${currency(v)}` : ''
-  };
-};
+const formatAsGBP = (v) => ({
+  value: (v) ? `£${parseFloat(v).toFixed(2)}` : ''
+});
 
 const columns = [
   {
     property: 'previewsCode',
     header: 'Previews',
-    cell: (v) => ({ value: <PreviewsLink previewsCode={v} /> })
+    cell: (v, onClick) => ({ value: <PreviewsLink previewsCode={v} showPreview={onClick} /> })
   },
   {
     property: 'title',
@@ -47,63 +44,64 @@ const columns = [
   }
 ];
 
-export default class PreviewsGrid extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const cols = columns.map((c) => <th key={c.property}>{c.header}</th>);
-    const rows = this.props.gridData.map((row) => {
-      const cells = [];
-      columns.forEach((col, i) => {
-        const cellContent = col.cell(row[col.property]);
-        cells.push(<td key={i}>{cellContent.value}</td>);
-      });
-
-      cells.push(
-        <td
-          key="ordertoggle"
-        >
-          <ToggleOrder
-            ordered={row.onorder}
-            previewsCode={row.previewsCode}
-            onItemSelected={this.props.onItemSelected}
-          />
-        </td>
-      );
-      return <tr key={row.previewsCode}>{cells}</tr>;
+const PreviewsGrid = ({
+    gridData,
+    onItemSelected,
+    hasPrevious,
+    hasNext,
+    previousPage,
+    nextPage,
+    showPreview
+}) => {
+  const cols = columns.map((c) => <th key={c.property}>{c.header}</th>);
+  const rows = gridData.map((row) => {
+    const cells = [];
+    columns.forEach((col, i) => {
+      const cellContent = col.cell(row[col.property], i === 0 ? showPreview : null);
+      cells.push(<td key={i}>{cellContent.value}</td>);
     });
 
-    return (
-      <div>
-        <table className="previewsgrid">
-          <thead>
-            <tr>
-              {cols}
-            </tr>
-          </thead>
-          <tbody>
-            {rows}
-          </tbody>
-        </table>
-        <input
-          type="button"
-          value="Previous"
-          disabled={!this.props.hasPrevious}
-          onClick={this.props.previousPage}
+    cells.push(
+      <td
+        key="ordertoggle"
+      >
+        <ToggleOrder
+          ordered={row.onorder}
+          previewsCode={row.previewsCode}
+          onItemSelected={onItemSelected}
         />
-        <input
-          type="button"
-          value="Next"
-          disabled={!this.props.hasNext}
-          onClick={this.props.nextPage}
-        />
-      </div>
-    );
-  }
-}
+      </td>
+      );
+    return <tr key={row.previewsCode}>{cells}</tr>;
+  });
+
+  return (
+    <div>
+      <table className="previewsgrid">
+        <thead>
+          <tr>
+            {cols}
+          </tr>
+        </thead>
+        <tbody>
+          {rows}
+        </tbody>
+      </table>
+      <input
+        type="button"
+        value="Previous"
+        disabled={!hasPrevious}
+        onClick={previousPage}
+      />
+      <input
+        type="button"
+        value="Next"
+        disabled={!hasNext}
+        onClick={nextPage}
+      />
+    </div>
+  );
+};
 
 PreviewsGrid.propTypes = {
   gridData: React.PropTypes.array,
@@ -111,5 +109,8 @@ PreviewsGrid.propTypes = {
   hasPrevious: React.PropTypes.bool,
   hasNext: React.PropTypes.bool,
   previousPage: React.PropTypes.func,
-  nextPage: React.PropTypes.func
+  nextPage: React.PropTypes.func,
+  showPreview: React.PropTypes.func
 };
+
+export default PreviewsGrid;

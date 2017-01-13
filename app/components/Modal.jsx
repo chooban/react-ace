@@ -26,7 +26,7 @@ const Modal = ({ isOpen, children }) => {
 
   return (
     <div>
-      <div style={modalStyle}>
+      <div className="modal" style={modalStyle}>
         {children}
       </div>
       <div style={backdropStyle} />
