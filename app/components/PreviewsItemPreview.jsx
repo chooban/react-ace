@@ -36,6 +36,7 @@ class PreviewsItemPreview extends React.Component {
         this.setState({
           creators: data.creators,
           description: data.description,
+          coverImage: data.coverImage,
           haveData: true
         });
       })
@@ -45,12 +46,24 @@ class PreviewsItemPreview extends React.Component {
   render() {
     return (
       <div>
-        <p>{this.state.previewsCode}</p>
         {!this.state.haveData && <b>Loading...</b> }
         {this.state.haveData &&
-          <div>
-            <div className="creators">{this.state.creators}</div>
-            <div className="description">{this.state.description}</div>
+          <div className="item_display">
+            <div className="imagecontainer">
+              <img
+                alt="Cover"
+                width="300px"
+                height="395px"
+                src={this.state.coverImage}
+              />
+            </div>
+            <div className="item_details">
+              <div className="creators">{this.state.creators}</div>
+              <div
+                className="description"
+                dangerouslySetInnerHTML={{ __html: this.state.description}} //eslint-disable-line
+              />
+            </div>
           </div>
         }
       </div>
@@ -59,7 +72,7 @@ class PreviewsItemPreview extends React.Component {
 }
 
 PreviewsItemPreview.propTypes = {
-  previewsCode: React.PropTypes.string
+  previewsCode: React.PropTypes.string.isRequired
 };
 
 export default PreviewsItemPreview;

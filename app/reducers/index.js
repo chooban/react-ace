@@ -118,6 +118,14 @@ function ui(state = initialState.ui, action) {
       return Object.assign({}, state, {
         showItemPreview: false
       });
+    case 'ADD_TO_ORDER':
+      return Object.assign({}, state, {
+        showItemPreview: false
+      });
+    case 'REMOVE_FROM_ORDER':
+      return Object.assign({}, state, {
+        showItemPreview: false
+      });
     default: return state;
   }
 }

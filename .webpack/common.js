@@ -14,9 +14,11 @@ const config = function (paths) {
         'react',
         'react-dom',
         'react-redux',
+        'redux',
         'redux-actions',
         'redux-logger',
-        'redux-thunk'
+        'redux-thunk',
+        'sprintf'
       ]
     },
     resolve: {
@@ -24,6 +26,7 @@ const config = function (paths) {
     },
     output: {
       path: paths.build,
+      chunkFilename: '[name].js',
       filename: '[name].js'
     },
     node: {
@@ -64,7 +67,9 @@ const config = function (paths) {
         fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
       }),
       new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en-gb|uk)$/),
-      new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js', Infinity),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor'
+      }),
       new CopyPlugin([
         { from: 'assets' }
       ])

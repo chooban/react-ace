@@ -6,7 +6,7 @@ const Modal = ({ isOpen, children }) => {
   }
 
   const modalStyle = {
-    position: 'absolute',
+    position: 'fixed',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -15,7 +15,7 @@ const Modal = ({ isOpen, children }) => {
   };
 
   const backdropStyle = {
-    position: 'absolute',
+    position: 'fixed',
     width: '100%',
     height: '100%',
     top: '0px',
@@ -36,7 +36,11 @@ const Modal = ({ isOpen, children }) => {
 
 Modal.propTypes = {
   isOpen: React.PropTypes.bool,
-  children: React.PropTypes.instanceOf(Object)
+  children: React.PropTypes.instanceOf(Object).isRequired
+};
+
+Modal.defaultProps = {
+  isOpen: false
 };
 
 export default Modal;

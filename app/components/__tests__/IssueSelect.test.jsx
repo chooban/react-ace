@@ -1,7 +1,6 @@
 /* eslint no-shadow: 0 */
 import React from 'react';
 import test from 'tape';
-import Ramda from 'ramda';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -23,8 +22,7 @@ test('Issue Select component', (t) => {
 
   t.test('It renders a label and options', (t) => {
     const result = shallowRenderIssueSelect(issues);
-    const isOption = Ramda.whereEq({ type: 'option' });
-    const options = Ramda.filter(isOption, result.node.props.children[1].props.children);
+    const options = result.node.props.children[1].props.children.filter((e) => e.type === 'option');
     t.equal(options.length, 3);
     t.equal(result.node.props.children[0].props.children, 'Pick an issue: ');
 

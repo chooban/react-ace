@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
 import {
-  addToOrder,
-  removeFromOrder,
   nextPage,
   previousPage,
   showPreview
@@ -50,10 +48,6 @@ const mapStateToProps = (state) => {
 export const mapDispatchToProps = (dispatch) => ({
   nextPage: () => dispatch(nextPage()),
   previousPage: () => dispatch(previousPage()),
-  onItemSelected: (previewsCode, onOrder) => {
-    if (!onOrder) dispatch(addToOrder(previewsCode));
-    else dispatch(removeFromOrder(previewsCode));
-  },
   showPreview: (p) => dispatch(showPreview(p))
 });
 

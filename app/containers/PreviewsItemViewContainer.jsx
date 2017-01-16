@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { closePreview } from '../actions';
+import {
+  closePreview
+} from '../actions';
+
 import Modal from '../components/Modal';
 import ItemPreview from '../components/PreviewsItemPreview';
+import ToggleOrder from './ToggleOrderContainer';
 
-const PreviewsItemViewComponent = ({ display, close, previewsCode }) => (
+const PreviewsItemViewComponent = ({ display, previewsCode, close }) => (
   <Modal isOpen={display}>
     <div className="header">
       Previews Preview
@@ -19,22 +23,24 @@ const PreviewsItemViewComponent = ({ display, close, previewsCode }) => (
         className="btn-flat"
         onClick={close}
       >
-        Close
+      Close
       </a>
-      <a
-        tabIndex="-1"
-        className="btn-flat"
-      >
-        Add To Order
-      </a>
+      <ToggleOrder
+        previewsCode={previewsCode}
+        type="button"
+      />
     </div>
   </Modal>
 );
 
 PreviewsItemViewComponent.propTypes = {
   display: React.PropTypes.bool,
-  close: React.PropTypes.func,
-  previewsCode: React.PropTypes.string
+  close: React.PropTypes.func.isRequired,
+  previewsCode: React.PropTypes.string.isRequired
+};
+
+PreviewsItemViewComponent.defaultProps = {
+  display: false
 };
 
 const mapStateToProps = (state) => ({
@@ -42,11 +48,13 @@ const mapStateToProps = (state) => ({
   previewsCode: state.ui.itemPreview
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  close: () => dispatch(closePreview())
+});
+
 const PreviewsItemViewContainer = connect(
   mapStateToProps,
-  {
-    close: () => (dispatch) => dispatch(closePreview())
-  }
+  mapDispatchToProps
 )(PreviewsItemViewComponent);
 
 export default PreviewsItemViewContainer;

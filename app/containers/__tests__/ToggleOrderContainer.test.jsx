@@ -4,9 +4,9 @@ import sinon from 'sinon';
 
 import * as actions from '../../actions';
 
-import { mapDispatchToProps } from '../PreviewsGridContainer';
+import { mapDispatchToProps } from '../ToggleOrderContainer';
 
-test('Previews Grid Container', (t) => {
+test('Toggle Order Container', (t) => {
   t.test('Adds to order if selected item is not ordered', (t) => {
     const dispatchSpy = sinon.spy();
     const addToOrderSpy = sinon.spy(actions, 'addToOrder');

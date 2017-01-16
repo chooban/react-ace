@@ -14,11 +14,9 @@ const App = () => (
         <OrderView />
       </div>
     </nav>
-    <div className="appcontent">
-      <div className="content">
-        <PreviewsGrid />
-      </div>
-    </div>
+    <main className="content">
+      <PreviewsGrid />
+    </main>
     <OrderPopup />
     <ItemPreview />
   </div>

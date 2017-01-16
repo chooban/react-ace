@@ -47,9 +47,9 @@ const OrderEditor = ({ items, onRemoveItem }) => {
   let total = 0;
   items.forEach((item) => {
     const cells = [];
-    columns.forEach((c, i) => {
+    columns.forEach((c) => {
       const content = c.cell(item[c.property]);
-      cells.push(<td key={i}>{content.value}</td>);
+      cells.push(<td key={c.property}>{content.value}</td>);
     });
 
     cells.push(<td key="remove">
@@ -88,7 +88,11 @@ const OrderEditor = ({ items, onRemoveItem }) => {
 
 OrderEditor.propTypes = {
   items: React.PropTypes.instanceOf(Array),
-  onRemoveItem: React.PropTypes.func
+  onRemoveItem: React.PropTypes.func.isRequired
+};
+
+OrderEditor.defaultProps = {
+  items: []
 };
 
 export default OrderEditor;

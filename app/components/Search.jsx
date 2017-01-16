@@ -26,7 +26,7 @@ const SearchComponent = ({ onSearchUpdate }) => (
 );
 
 SearchComponent.propTypes = {
-  onSearchUpdate: React.PropTypes.func
+  onSearchUpdate: React.PropTypes.func.isRequired
 };
 
 export default SearchComponent;

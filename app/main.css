@@ -2,9 +2,6 @@ body {
   margin: 0;
 }
 
-.previewsApp {
-}
-
 nav {
   background: lightblue;
 }
@@ -55,6 +52,10 @@ nav .ordersummary {
   margin-left: 5px;
 }
 
+.toggle-order i:hover {
+  cursor: pointer;
+}
+
 .ordersummary {
   display: inline-block;
 }
@@ -82,9 +83,9 @@ nav .ordersummary {
   visibility: visible;
 }
 
-.appcontent .content {
-  margin-left: auto; margin-right: auto;
+.content {
   width: 800px;
+  margin-left: auto; margin-right: auto;
   padding: 8px;
 }
 
@@ -99,7 +100,7 @@ nav .ordersummary {
 }
 
 .modal {
-  width: 800px;
+  width: 600px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -119,9 +120,6 @@ nav .ordersummary {
 
 .modal .contents table {
   width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 .modal .contents tr.totals td:first-of-type {
@@ -138,4 +136,27 @@ nav .ordersummary {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+}
+
+.item_display {
+  display: flex;
+  flex-direction: row;
+}
+
+.item_display .imagecontainer {
+  margin-right: 10px;
+}
+
+.item_display .description br {
+  line-height: 2rem;
+}
+
+.tablecontrols {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.tablecontrols a {
+  margin-right: 4px;
 }

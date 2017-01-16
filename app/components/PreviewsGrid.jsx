@@ -46,7 +46,6 @@ const columns = [
 
 const PreviewsGrid = ({
     gridData,
-    onItemSelected,
     hasPrevious,
     hasNext,
     previousPage,
@@ -58,7 +57,7 @@ const PreviewsGrid = ({
     const cells = [];
     columns.forEach((col, i) => {
       const cellContent = col.cell(row[col.property], i === 0 ? showPreview : null);
-      cells.push(<td key={i}>{cellContent.value}</td>);
+      cells.push(<td key={col.property}>{cellContent.value}</td>);
     });
 
     cells.push(
@@ -66,9 +65,7 @@ const PreviewsGrid = ({
         key="ordertoggle"
       >
         <ToggleOrder
-          ordered={row.onorder}
           previewsCode={row.previewsCode}
-          onItemSelected={onItemSelected}
         />
       </td>
       );
@@ -87,30 +84,39 @@ const PreviewsGrid = ({
           {rows}
         </tbody>
       </table>
-      <input
-        type="button"
-        value="Previous"
-        disabled={!hasPrevious}
-        onClick={previousPage}
-      />
-      <input
-        type="button"
-        value="Next"
-        disabled={!hasNext}
-        onClick={nextPage}
-      />
+      <div className="tablecontrols">
+        <a
+          className="btn"
+          disabled={!hasPrevious}
+          onClick={previousPage}
+        >
+          Previous
+        </a>
+        <a
+          className="btn"
+          disabled={!hasNext}
+          onClick={nextPage}
+        >
+          Next
+        </a>
+      </div>
     </div>
   );
 };
 
 PreviewsGrid.propTypes = {
   gridData: React.PropTypes.array,
-  onItemSelected: React.PropTypes.func,
   hasPrevious: React.PropTypes.bool,
   hasNext: React.PropTypes.bool,
-  previousPage: React.PropTypes.func,
-  nextPage: React.PropTypes.func,
-  showPreview: React.PropTypes.func
+  previousPage: React.PropTypes.func.isRequired,
+  nextPage: React.PropTypes.func.isRequired,
+  showPreview: React.PropTypes.func.isRequired
+};
+
+PreviewsGrid.defaultProps = {
+  gridData: [],
+  hasPrevious: false,
+  hasNext: false
 };
 
 export default PreviewsGrid;

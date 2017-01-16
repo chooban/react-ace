@@ -19,16 +19,22 @@ const PreviewsLink = ({ previewsCode, showPreview }) => (
   <a
     href={codeToUrl(previewsCode)}
     onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      showPreview(previewsCode);
+      if (showPreview) {
+        e.preventDefault();
+        e.stopPropagation();
+        showPreview(previewsCode);
+      }
     }}
   >{previewsCode}</a>
 );
 
 PreviewsLink.propTypes = {
-  previewsCode: React.PropTypes.string,
+  previewsCode: React.PropTypes.string.isRequired,
   showPreview: React.PropTypes.func
+};
+
+PreviewsLink.defaultProps = {
+  showPreview: undefined
 };
 
 export default PreviewsLink;

@@ -7,13 +7,16 @@ import Modal from '../components/Modal';
 import fileDownload from '../utils/FileDownload';
 import orderToCsv from '../utils/OrderToCsv';
 
-const OrderPopupComponent = ({ display, exportOrder, close }) => (
+const OrderPopupComponent = ({ display, exportOrder, close, hasOrder }) => (
   <Modal isOpen={display}>
     <div className="header">
       Order Contents
     </div>
     <div className="contents">
-      <OrderEditor />
+      { hasOrder
+        ? <OrderEditor />
+        : <p>Your cart is empty</p>
+      }
     </div>
     <div className="footer">
       <a
@@ -27,6 +30,7 @@ const OrderPopupComponent = ({ display, exportOrder, close }) => (
         tabIndex="-1"
         className="btn-flat"
         onClick={exportOrder}
+        disabled={!hasOrder}
       >
         Export
       </a>
@@ -35,12 +39,14 @@ const OrderPopupComponent = ({ display, exportOrder, close }) => (
 );
 
 OrderPopupComponent.propTypes = {
-  display: React.PropTypes.bool,
-  exportOrder: React.PropTypes.func,
-  close: React.PropTypes.func
+  display: React.PropTypes.bool.isRequired,
+  exportOrder: React.PropTypes.func.isRequired,
+  close: React.PropTypes.func.isRequired,
+  hasOrder: React.PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
+  hasOrder: !!state.order.items.length,
   display: state.ui.showOrder
 });
 

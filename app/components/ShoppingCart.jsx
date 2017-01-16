@@ -13,7 +13,11 @@ const ShoppingCart = ({ items, showCurrentOrder }) => (
 
 ShoppingCart.propTypes = {
   items: React.PropTypes.instanceOf(Array),
-  showCurrentOrder: React.PropTypes.func
+  showCurrentOrder: React.PropTypes.func.isRequired
+};
+
+ShoppingCart.defaultProps = {
+  items: []
 };
 
 export default ShoppingCart;
