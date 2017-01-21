@@ -10,11 +10,20 @@ const HelpComponent = ({ display, close }) => (
       Help
     </div>
     <div className="contents">
-      <p>Add the items you want to the cart, export your order, and then email to Ace. Simple!</p>
+      <p>
+        Add the items you want to the cart, export your order,
+        and then email to Ace. Simple!
+      </p>
 
-      <p>If for some reason it&apos;s not working, you can <a href="/api/previews/latest.csv">download the CSV file</a> instead.</p>
+      <p>
+        If for some reason it&apos;s not working,
+        you can <a href="/api/previews/latest.csv">download the CSV file</a> instead.
+      </p>
 
-      <p>Bug reports are always welcome, just <a href="mailto:rhendry@googlemail.com">drop me an email</a>.</p>
+      <p>
+        Bug reports are always welcome,
+        just <a href="mailto:rhendry@googlemail.com">drop me an email</a>.
+      </p>
     </div>
     <div className="footer">
       <a
