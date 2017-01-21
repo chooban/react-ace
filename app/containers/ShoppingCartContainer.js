@@ -3,8 +3,7 @@ import ShoppingCart from '../components/ShoppingCart';
 import { showOrder } from '../actions/';
 
 const mapStateToProps = (state) => ({
-  items: state.order.items,
-  displayOrder: state.ui.showOrder
+  items: state.order.items
 });
 
 const mapDispatchToProps = (dispatch) => ({

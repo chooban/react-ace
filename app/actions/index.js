@@ -17,6 +17,8 @@ const showOrder = createAction('SHOW_ORDER');
 const closeOrder = createAction('CLOSE_ORDER');
 const showPreview = createAction('SHOW_PREVIEW');
 const closePreview = createAction('CLOSE_PREVIEW');
+const showHelp = createAction('SHOW_HELP');
+const closeHelp = createAction('CLOSE_HELP');
 
 const requestLatestIssue = () => (dispatch) => {
   dispatch(requestedIssue());
@@ -54,5 +56,7 @@ export {
     showOrder,
     closeOrder,
     showPreview,
-    closePreview
+    closePreview,
+    showHelp,
+    closeHelp
 };

@@ -16,6 +16,7 @@ const initialState = {
   ui: {
     showOrder: false,
     showItemPreview: false,
+    showHelp: false,
     itemPreview: undefined
   }
 };
@@ -117,6 +118,14 @@ function ui(state = initialState.ui, action) {
     case 'CLOSE_PREVIEW':
       return Object.assign({}, state, {
         showItemPreview: false
+      });
+    case 'SHOW_HELP':
+      return Object.assign({}, state, {
+        showHelp: true
+      });
+    case 'CLOSE_HELP':
+      return Object.assign({}, state, {
+        showHelp: false
       });
     case 'ADD_TO_ORDER':
       return Object.assign({}, state, {
