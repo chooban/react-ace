@@ -7,7 +7,7 @@ import {
 
 import ToggleOrderComponent from '../components/ToggleOrder';
 
-const mapStateToProps = (state, props) => ({
+export const mapStateToProps = (state, props) => ({
   ordered: !!state.order.items.find((e) => e.previews === props.previewsCode)
 });
 

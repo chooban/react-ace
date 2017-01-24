@@ -18,7 +18,7 @@ HelpIconComponent.propTypes = {
   display: React.PropTypes.func
 };
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   display: () => dispatch(showHelp())
 });
 

@@ -51,6 +51,13 @@ nav .ordersummary {
   width: 140px;
 }
 
+.previewsgrid td:nth-of-type(2),
+.previewsgrid td:nth-of-type(4) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .previewsgrid td:nth-of-type(5) {
   margin-left: auto;
 }
@@ -111,6 +118,7 @@ nav .ordersummary {
   height: auto;
   display: flex;
   flex-direction: column;
+  overflow-y: hidden;
 }
 
 .modal .header {
@@ -122,7 +130,7 @@ nav .ordersummary {
 
 .modal .contents {
   margin: 3px;
-  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .modal .contents table {

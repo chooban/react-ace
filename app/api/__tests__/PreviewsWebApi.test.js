@@ -18,9 +18,22 @@ test('Previews API', (t) => {
     };
 
     fetchMock.get('/api/previews/latest', returnedData);
+
     return getLatestIssue().then((d) => {
       t.deepEqual(d, expectedResult);
       fetchMock.restore();
+    });
+  });
+
+  t.test('Errors propagate', (t) => {
+    fetchMock.get('/api/previews/latest', 403);
+
+    return getLatestIssue().then(() => {
+      fetchMock.restore();
+      t.fail('Should have thrown an error');
+    }).catch((d) => {
+      fetchMock.restore();
+      t.ok(d instanceof Error, 'Was not an error');
     });
   });
 });

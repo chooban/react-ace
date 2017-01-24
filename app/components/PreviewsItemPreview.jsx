@@ -44,28 +44,27 @@ class PreviewsItemPreview extends React.Component {
   }
 
   render() {
+    if (!this.state.haveData) {
+      return <b>Loading...</b>;
+    }
+
     return (
-      <div>
-        {!this.state.haveData && <b>Loading...</b> }
-        {this.state.haveData &&
-          <div className="item_display">
-            <div className="imagecontainer">
-              <img
-                alt="Cover"
-                width="300px"
-                height="395px"
-                src={this.state.coverImage}
-              />
-            </div>
-            <div className="item_details">
-              <div className="creators">{this.state.creators}</div>
-              <div
-                className="description"
-                dangerouslySetInnerHTML={{ __html: this.state.description}} //eslint-disable-line
-              />
-            </div>
-          </div>
-        }
+      <div className="item_display">
+        <div className="imagecontainer">
+          <img
+            alt="Cover"
+            width="300px"
+            height="395px"
+            src={this.state.coverImage}
+          />
+        </div>
+        <div className="item_details">
+          <div className="creators">{this.state.creators}</div>
+          <div
+            className="description"
+            dangerouslySetInnerHTML={{ __html: this.state.description}} //eslint-disable-line
+          />
+        </div>
       </div>
     );
   }

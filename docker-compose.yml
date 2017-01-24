@@ -14,7 +14,7 @@ services:
       - LOG_LEVEL=debug
   site:
     build: .
-    command: npm run build
+    command: npm run devbuild
     depends_on:
       - previewsapi
     ports:

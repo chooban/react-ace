@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 import ShoppingCart from '../components/ShoppingCart';
 import { showOrder } from '../actions/';
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   items: state.order.items
 });
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   showCurrentOrder: () => dispatch(showOrder())
 });
 

@@ -8,7 +8,7 @@ const SearchComponent = ({ onSearchUpdate }) => (
         className="searchinput"
         name="search"
         size="25"
-        onInput={(e) => onSearchUpdate(e.target.value)}
+        onInput={(e) => requestAnimationFrame(onSearchUpdate.bind(this, e.target.value))}
       />
       <label htmlFor="search">
         <i className="material-icons">search</i>

@@ -4,7 +4,10 @@ import sinon from 'sinon';
 
 import * as actions from '../../actions';
 
-import { mapDispatchToProps } from '../ToggleOrderContainer';
+import {
+  mapStateToProps,
+  mapDispatchToProps
+} from '../ToggleOrderContainer';
 
 test('Toggle Order Container', (t) => {
   t.test('Adds to order if selected item is not ordered', (t) => {
@@ -29,6 +32,23 @@ test('Toggle Order Container', (t) => {
     props.onItemSelected('ABC/1234', true);
     t.equal(dispatchSpy.calledOnce, true);
     t.equal(actionSpy.calledOnce, true);
+    t.end();
+  });
+
+  t.test('Flagged as ordered if in the order', (t) => {
+    const state = {
+      order: {
+        items: [
+          { previews: '340/0078' },
+          { previews: '340/0082' },
+          { previews: '340/0056' }
+        ]
+      }
+    };
+
+    const props = mapStateToProps(state, { previewsCode: '340/0082' });
+
+    t.ok(props.ordered, 'Should be ordered');
     t.end();
   });
 });
