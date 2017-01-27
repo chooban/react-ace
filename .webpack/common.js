@@ -11,6 +11,7 @@ const config = function (paths) {
         'babel-polyfill'
       ],
       vendor: [
+        'auth0-lock',
         'react',
         'react-dom',
         'react-redux',

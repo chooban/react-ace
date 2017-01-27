@@ -135,6 +135,10 @@ function ui(state = initialState.ui, action) {
       return Object.assign({}, state, {
         showItemPreview: false
       });
+    case 'SHOW_LOGIN':
+      return Object.assign({}, state, {
+        showLogin: true
+      });
     default: return state;
   }
 }
