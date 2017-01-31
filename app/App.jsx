@@ -7,8 +7,9 @@ import OrderView from './containers/ShoppingCartContainer';
 import SearchContainer from './containers/SearchContainer';
 import HelpIconContainer from './containers/HelpIcon';
 import HelpPopupContainer from './containers/HelpPopup';
-import LoginIconContainer from './containers/LoginIcon';
-import LockContainer from './containers/LockContainer';
+import AccountIconContainer from './containers/AccountIconContainer';
+
+import { AuthServiceFactory } from './utils/AuthService';
 
 const App = () => (
   <div className="previewsApp">
@@ -17,7 +18,7 @@ const App = () => (
         <SearchContainer />
         <OrderView />
         <HelpIconContainer />
-        <LoginIconContainer />
+        <AccountIconContainer authService={AuthServiceFactory()} />
       </div>
     </nav>
     <main className="content">
@@ -26,7 +27,6 @@ const App = () => (
     <OrderPopup />
     <ItemPreview />
     <HelpPopupContainer />
-    <LockContainer />
   </div>
 );
 

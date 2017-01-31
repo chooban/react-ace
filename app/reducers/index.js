@@ -18,6 +18,9 @@ const initialState = {
     showItemPreview: false,
     showHelp: false,
     itemPreview: undefined
+  },
+  user: {
+    profile: null
   }
 };
 
@@ -135,9 +138,15 @@ function ui(state = initialState.ui, action) {
       return Object.assign({}, state, {
         showItemPreview: false
       });
-    case 'SHOW_LOGIN':
+    default: return state;
+  }
+}
+
+function user(state = initialState.user, action) {
+  switch (action.type) {
+    case 'SET_USER_PROFILE':
       return Object.assign({}, state, {
-        showLogin: true
+        profile: action.payload
       });
     default: return state;
   }
@@ -148,6 +157,7 @@ export default function app(state = initialState, action) {
     issues: issues(state.issues, action),
     order: order(state.order, action),
     gridConfig: gridConfig(state.gridConfig, action),
-    ui: ui(state.ui, action)
+    ui: ui(state.ui, action),
+    user: user(state.user, action)
   };
 }

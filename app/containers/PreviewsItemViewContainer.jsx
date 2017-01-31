@@ -36,11 +36,12 @@ const PreviewsItemViewComponent = ({ display, previewsCode, close }) => (
 PreviewsItemViewComponent.propTypes = {
   display: React.PropTypes.bool,
   close: React.PropTypes.func.isRequired,
-  previewsCode: React.PropTypes.string.isRequired
+  previewsCode: React.PropTypes.string
 };
 
 PreviewsItemViewComponent.defaultProps = {
-  display: false
+  display: false,
+  previewsCode: ''
 };
 
 const mapStateToProps = (state) => ({

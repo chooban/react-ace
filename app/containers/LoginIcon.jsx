@@ -1,30 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { showLogin } from '../actions/';
-
-const LoginIconComponent = ({ display }) => (
-  <div className="showlogin">
+const LoginIconComponent = ({ authService }) => (
+  <div className="accounticon">
     <i
       className="material-icons"
-      onClick={display}
+      onClick={() => authService.login()}
     >
-      person
+      person_outline
     </i>
   </div>
 );
 
 LoginIconComponent.propTypes = {
-  display: React.PropTypes.func
+  authService: React.PropTypes.object
 };
 
-export const mapDispatchToProps = (dispatch) => ({
-  display: () => dispatch(showLogin())
-});
-
-const LoginIconContainer = connect(
-  null,
-  mapDispatchToProps
-)(LoginIconComponent);
+const LoginIconContainer = connect()(LoginIconComponent);
 
 export default LoginIconContainer;

@@ -1,4 +1,11 @@
-import { requestIssue } from '../actions';
+import {
+  requestIssue,
+  setUserProfile
+} from '../actions';
+
+import { AuthServiceFactory } from '../utils/AuthService';
+
+const authService = AuthServiceFactory();
 
 function fetchInitialGridData(state, dispatch) {
   if (state.issues.issuesList.length && !state.issues.data.length) {
@@ -6,9 +13,21 @@ function fetchInitialGridData(state, dispatch) {
   }
 }
 
+function setUserInfo(state, dispatch) {
+  if (authService.loggedIn() && !state.user.profile) {
+    authService.getProfile((err, profile) => {
+      if (err) console.error(err); //eslint-disable-line
+
+      dispatch(setUserProfile(profile));
+    });
+  }
+}
+
 const actors = [
-  fetchInitialGridData
+  fetchInitialGridData,
+  setUserInfo
 ];
+
 let acting = false;
 
 export default (store) => {
