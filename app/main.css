@@ -4,6 +4,7 @@ body {
 
 nav {
   background: lightblue;
+  z-index: -10;
 }
 
 nav .nav-wrapper {
@@ -31,6 +32,22 @@ nav .showhelp {
 
 nav .accounticon {
   margin-right: 24px;
+}
+
+nav .accounticon .submenu {
+  background-color: white;
+  color: black;
+  width: 150px;
+  position: absolute;
+  top: 45px;
+  z-index: 1;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 0 #BEBEBE;
+  /*display: none;*/
+}
+
+nav .accounticon:hover .submenu {
+  display: block;
 }
 
 .previewsgrid {

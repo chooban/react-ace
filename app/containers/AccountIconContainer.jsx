@@ -6,7 +6,7 @@ import LoginIconContainer from './LoginIcon';
 
 const AccountIconComponent = ({ isLoggedIn, authService }) => {
   if (isLoggedIn) {
-    return <ProfileIconContainer />;
+    return <ProfileIconContainer authService={authService} />;
   }
   return <LoginIconContainer authService={authService} />;
 };

@@ -148,6 +148,10 @@ function user(state = initialState.user, action) {
       return Object.assign({}, state, {
         profile: action.payload
       });
+    case 'LOGOUT':
+      return Object.assign({}, state, {
+        profile: null
+      });
     default: return state;
   }
 }

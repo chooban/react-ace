@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import OrderPopup from './containers/OrderPopupContainer';
 import ItemPreview from './containers/PreviewsItemViewContainer';
@@ -10,15 +11,20 @@ import HelpPopupContainer from './containers/HelpPopup';
 import AccountIconContainer from './containers/AccountIconContainer';
 
 import { AuthServiceFactory } from './utils/AuthService';
+import {
+  setUserProfile
+} from './actions';
 
-const App = () => (
+const service = AuthServiceFactory();
+
+const AppComponent = ({ authService }) => (
   <div className="previewsApp">
     <nav>
       <div className="nav-wrapper">
         <SearchContainer />
         <OrderView />
         <HelpIconContainer />
-        <AccountIconContainer authService={AuthServiceFactory()} />
+        <AccountIconContainer authService={authService} />
       </div>
     </nav>
     <main className="content">
@@ -29,5 +35,28 @@ const App = () => (
     <HelpPopupContainer />
   </div>
 );
+
+AppComponent.propTypes = {
+  authService: React.PropTypes.object
+};
+
+const mapDispatchToProps = (dispatch) => {
+  service.onAuth((auth) => {
+    auth.getProfile((err, profile) => {
+      if (err) console.error(err); //eslint-disable-line
+
+      dispatch(setUserProfile(profile));
+    });
+  });
+
+  return {
+    authService: service
+  };
+};
+
+const App = connect(
+  null,
+  mapDispatchToProps
+)(AppComponent);
 
 export default App;

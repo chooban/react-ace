@@ -23,6 +23,10 @@ class AuthService {
     this.setToken(authResult.idToken);
   }
 
+  onAuth(callback) {
+    this.lock.on('authenticated', callback.bind(this, this));
+  }
+
   getProfile(done) {
     this.lock.getProfile(this.getToken(), done);
   }
@@ -48,5 +52,5 @@ export function AuthServiceFactory() {
   return new AuthService(
     '3ZRxcpSCqh6CnKU1zFZuWbKY0uIrfK7D',
     'acemyorder.eu.auth0.com'
-    );
+  );
 }

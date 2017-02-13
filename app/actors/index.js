@@ -6,6 +6,7 @@ import {
 import { AuthServiceFactory } from '../utils/AuthService';
 
 const authService = AuthServiceFactory();
+let profileFetchInFlight = false;
 
 function fetchInitialGridData(state, dispatch) {
   if (state.issues.issuesList.length && !state.issues.data.length) {
@@ -14,11 +15,15 @@ function fetchInitialGridData(state, dispatch) {
 }
 
 function setUserInfo(state, dispatch) {
-  if (authService.loggedIn() && !state.user.profile) {
+  if (authService.loggedIn() && !state.user.profile && !profileFetchInFlight) {
+    profileFetchInFlight = true;
     authService.getProfile((err, profile) => {
-      if (err) console.error(err); //eslint-disable-line
-
-      dispatch(setUserProfile(profile));
+      profileFetchInFlight = false;
+      if (err) {
+        console.error(err); //eslint-disable-line
+      } else {
+        dispatch(setUserProfile(profile));
+      }
     });
   }
 }
