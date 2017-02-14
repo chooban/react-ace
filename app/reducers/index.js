@@ -17,7 +17,8 @@ const initialState = {
     showOrder: false,
     showItemPreview: false,
     showHelp: false,
-    itemPreview: undefined
+    itemPreview: undefined,
+    showSavedSearches: false
   },
   user: {
     profile: null
@@ -138,16 +139,33 @@ function ui(state = initialState.ui, action) {
       return Object.assign({}, state, {
         showItemPreview: false
       });
+    case 'SHOW_SAVED_SEARCHES':
+      return Object.assign({}, state, {
+        showSavedSearches: true
+      });
+    case 'CLOSE_SAVED_SEARCHES':
+      return Object.assign({}, state, {
+        showSavedSearches: false
+      });
     default: return state;
   }
 }
 
 function user(state = initialState.user, action) {
   switch (action.type) {
-    case 'SET_USER_PROFILE':
+    case 'SET_USER_PROFILE': {
+      const profile = Object.assign({}, action.payload,
+        {
+          savedsearches: [
+            'rick',
+            'bad machinery'
+          ]
+        }
+      );
       return Object.assign({}, state, {
-        profile: action.payload
+        profile
       });
+    }
     case 'LOGOUT':
       return Object.assign({}, state, {
         profile: null

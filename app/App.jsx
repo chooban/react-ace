@@ -9,6 +9,7 @@ import SearchContainer from './containers/SearchContainer';
 import HelpIconContainer from './containers/HelpIcon';
 import HelpPopupContainer from './containers/HelpPopup';
 import AccountIconContainer from './containers/AccountIconContainer';
+import SavedSearchesContainer from './containers/SavedSearchesContainer';
 
 import { AuthServiceFactory } from './utils/AuthService';
 import {
@@ -33,6 +34,7 @@ const AppComponent = ({ authService }) => (
     <OrderPopup />
     <ItemPreview />
     <HelpPopupContainer />
+    <SavedSearchesContainer />
   </div>
 );
 

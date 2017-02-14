@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  logout as logoutAction
+  logout as logoutAction,
+  showSavedSearches
 } from '../actions/';
 
-const ProfileIconComponent = ({ authService, doLogout }) => (
+const ProfileIconComponent = ({ authService, doLogout, displaySavedSearches }) => (
   <div className="accounticon">
     <i
       className="material-icons"
@@ -15,6 +16,7 @@ const ProfileIconComponent = ({ authService, doLogout }) => (
       <a
         href="#!"
         className="collection-item"
+        onClick={displaySavedSearches}
       >
         Saved Searches
       </a>
@@ -31,10 +33,12 @@ const ProfileIconComponent = ({ authService, doLogout }) => (
 
 ProfileIconComponent.propTypes = {
   authService: React.PropTypes.object,
-  doLogout: React.PropTypes.func
+  doLogout: React.PropTypes.func,
+  displaySavedSearches: React.PropTypes.func
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  displaySavedSearches: () => dispatch(showSavedSearches()),
   doLogout: (authService) => {
     authService.logout();
     dispatch(logoutAction());

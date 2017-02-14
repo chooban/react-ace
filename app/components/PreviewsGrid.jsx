@@ -2,6 +2,9 @@ import React from 'react';
 
 import PreviewsLink from './PreviewsLink';
 import ToggleOrder from '../containers/ToggleOrderContainer';
+import {
+  matchesSavedSearches
+} from '../utils/CatalogueSearch';
 
 const firstLowerCaseLetter = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 const capitalize = (s) => s.toLowerCase().replace(firstLowerCaseLetter, (m) => m.toUpperCase());
@@ -50,7 +53,8 @@ const PreviewsGrid = ({
     hasNext,
     previousPage,
     nextPage,
-    showPreview
+    showPreview,
+    savedSearches
 }) => {
   const cols = columns.map((c) => <th key={c.property}>{c.header}</th>);
   const rows = gridData.map((row) => {
@@ -69,7 +73,10 @@ const PreviewsGrid = ({
         />
       </td>
       );
-    return <tr key={row.previewsCode}>{cells}</tr>;
+
+    const className = matchesSavedSearches(savedSearches, row) ? 'saved' : '';
+
+    return <tr className={className} key={row.previewsCode}>{cells}</tr>;
   });
 
   return (
@@ -110,7 +117,8 @@ PreviewsGrid.propTypes = {
   hasNext: React.PropTypes.bool,
   previousPage: React.PropTypes.func.isRequired,
   nextPage: React.PropTypes.func.isRequired,
-  showPreview: React.PropTypes.func.isRequired
+  showPreview: React.PropTypes.func.isRequired,
+  savedSearches: React.PropTypes.array
 };
 
 PreviewsGrid.defaultProps = {

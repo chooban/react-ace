@@ -7,13 +7,9 @@ import {
 
 import {
   searchCatalogue
-} from './CatalogueSearch';
+} from '../utils/CatalogueSearch';
 
 import PreviewsGrid from '../components/PreviewsGrid';
-
-const props = {
-  gridData: []
-};
 
 const getRecords = (gridConfig, catalogue) => (
   (gridConfig.searchTerm)
@@ -38,8 +34,13 @@ const mapStateToProps = (state) => {
         );
   });
 
-  return Object.assign({}, props, {
+  const savedSearches = (state.user.profile)
+    ? state.user.profile.savedsearches
+    : [];
+
+  return Object.assign({}, {
     gridData,
+    savedSearches,
     hasPrevious: gridConfig.page > 1,
     hasNext: recordsStart + gridConfig.pageSize <= records.length
   });

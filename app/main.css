@@ -83,6 +83,10 @@ nav .accounticon:hover .submenu {
   margin-left: auto;
 }
 
+.previewsgrid tr.saved {
+  background-color: #ffe57f;
+}
+
 .toggle-order {
   margin-left: 5px;
 }

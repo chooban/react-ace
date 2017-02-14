@@ -1,12 +1,12 @@
-import Auth0Lock from 'auth0-lock';
+import * as Auth0Lock from 'auth0-lock';
 
 class AuthService {
   constructor(clientId, domain) {
-    this.lock = new Auth0Lock(
+    this.lock = new Auth0Lock.default(//eslint-disable-line
         clientId,
         domain,
       {
-        redirectUrl: window.location.href,
+        redirectUrl: (global.window) ? global.window.location.href : '',
         responseType: 'token'
       });
 

@@ -1,7 +1,10 @@
 /* eslint no-shadow: 0 */
 import test from 'tape';
 
-import { searchCatalogue } from '../CatalogueSearch';
+import {
+  matchesSavedSearches,
+  searchCatalogue
+} from '../CatalogueSearch';
 
 test('Search function', (t) => {
   const catalogue = [
@@ -32,6 +35,26 @@ test('Search function', (t) => {
     const results = searchCatalogue('Ber', catalogue);
     t.equal(results.length, 1);
     t.equal(results[0].previewsCode, 'ABC/125');
+    t.end();
+  });
+
+  t.test('Saved searches match', (t) => {
+    const savedSearches = [
+      'spider',
+      'berlin'
+    ];
+
+    t.equal(matchesSavedSearches(savedSearches, catalogue[0]), true);
+    t.end();
+  });
+
+  t.test('Saved searches do not match', (t) => {
+    const savedSearches = [
+      'spider',
+      'berlin'
+    ];
+
+    t.equal(matchesSavedSearches(savedSearches, catalogue[1]), false);
     t.end();
   });
 });
