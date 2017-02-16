@@ -13,6 +13,7 @@ const nextPage = createAction('NEXT_PAGE');
 const previousPage = createAction('PREVIOUS_PAGE');
 const updateSearch = createAction('UPDATE_SEARCH');
 const addToOrderCreator = createAction('ADD_TO_ORDER');
+const deleteSavedSearch = createAction('DELETE_SAVED_SEARCH');
 
 const showOrder = createAction('SHOW_ORDER');
 const closeOrder = createAction('CLOSE_ORDER');
@@ -25,6 +26,7 @@ const closeSavedSearches = createAction('CLOSE_SAVED_SEARCHES');
 
 const setUserProfile = createAction('SET_USER_PROFILE');
 const logout = createAction('LOGOUT');
+
 
 const requestLatestIssue = () => (dispatch) => {
   dispatch(requestedIssue());
@@ -68,5 +70,6 @@ export {
     setUserProfile,
     logout,
     showSavedSearches,
-    closeSavedSearches
+    closeSavedSearches,
+    deleteSavedSearch
 };

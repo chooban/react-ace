@@ -35,4 +35,19 @@ test('User profile reducer functions', (t) => {
     });
     t.end();
   });
+
+  t.test('Removing a saved search', (t) => {
+    let state = reducer(undefined, {});
+    state = reducer(state, {
+      type: 'SET_USER_PROFILE',
+      payload: profile
+    });
+    state = reducer(state, {
+      type: 'DELETE_SAVED_SEARCH',
+      payload: 'bad machinery'
+    });
+
+    t.deepEqual(state.user.profile.savedsearches, ['rick']);
+    t.end();
+  });
 });

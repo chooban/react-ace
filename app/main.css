@@ -95,6 +95,10 @@ nav .accounticon:hover .submenu {
   cursor: pointer;
 }
 
+.ordereditor .remove i:hover {
+  cursor: pointer;
+}
+
 .ordersummary {
   display: inline-block;
 }

@@ -170,6 +170,19 @@ function user(state = initialState.user, action) {
       return Object.assign({}, state, {
         profile: null
       });
+    case 'DELETE_SAVED_SEARCH': {
+      const searches = state.profile.savedsearches.slice(0);
+      const idx = searches.indexOf(action.payload);
+      if (idx > -1) {
+        searches.splice(idx, 1);
+      }
+      const profile = Object.assign({}, state.profile, {
+        savedsearches: searches
+      });
+      return Object.assign({}, state, {
+        profile
+      });
+    }
     default: return state;
   }
 }

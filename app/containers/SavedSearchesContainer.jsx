@@ -2,25 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Modal from '../components/Modal';
+import SavedSearchesList from '../components/SavedSearchesList';
 
-import { closeSavedSearches } from '../actions';
+import {
+  deleteSavedSearch,
+  closeSavedSearches
+} from '../actions';
 
-const SavedSearchesComponent = ({ display, close, savedSearches }) => (
+const SavedSearchesComponent = ({ display, close, savedSearches, onDelete }) => (
   <Modal isOpen={display}>
     <div className="header">
       Saved Searches
     </div>
     <div className="contents">
-      <ul className="collection">
-        {savedSearches.map((key, idx) => (
-          <li
-            className="collection-item"
-            key={idx}
-          >
-            {key}
-          </li>
-          ))}
-      </ul>
+      {savedSearches.length === 0
+        ? <p>No saved searches found</p>
+        :
+        <SavedSearchesList
+          savedSearches={savedSearches}
+          onDelete={onDelete}
+        />
+      }
     </div>
     <div className="footer">
       <a
@@ -37,7 +39,8 @@ const SavedSearchesComponent = ({ display, close, savedSearches }) => (
 SavedSearchesComponent.propTypes = {
   display: React.PropTypes.bool,
   close: React.PropTypes.func,
-  savedSearches: React.PropTypes.array
+  savedSearches: React.PropTypes.array,
+  onDelete: React.PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -48,7 +51,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  close: () => dispatch(closeSavedSearches())
+  close: () => dispatch(closeSavedSearches()),
+  onDelete: (e) => {
+    dispatch(deleteSavedSearch(e));
+  }
 });
 
 const SavedSearchesContainer = connect(

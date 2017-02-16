@@ -52,7 +52,7 @@ const OrderEditor = ({ items, onRemoveItem }) => {
       cells.push(<td key={c.property}>{content.value}</td>);
     });
 
-    cells.push(<td key="remove">
+    cells.push(<td key="remove" className="remove">
       <i
         className="material-icons"
         onClick={() => onRemoveItem(item.previews)}
@@ -76,7 +76,7 @@ const OrderEditor = ({ items, onRemoveItem }) => {
 
   const headers = columns.map((c) => <th key={c.property}>{c.header}</th>);
 
-  return (<table>
+  return (<table className="ordereditor">
     <thead>
       <tr>{ headers }</tr>
     </thead>
