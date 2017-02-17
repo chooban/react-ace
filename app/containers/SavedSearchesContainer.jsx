@@ -2,26 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Modal from '../components/Modal';
-import SavedSearchesList from '../components/SavedSearchesList';
+import SavedSearchesList from '../containers/SavedSearchesListContainer';
 
 import {
-  deleteSavedSearch,
   closeSavedSearches
 } from '../actions';
 
-const SavedSearchesComponent = ({ display, close, savedSearches, onDelete }) => (
-  <Modal isOpen={display}>
+const SavedSearchesComponent = ({ display, close, hasSearches }) => (
+  <Modal isOpen={display} width="400px" height="50%">
     <div className="header">
       Saved Searches
     </div>
     <div className="contents">
-      {savedSearches.length === 0
-        ? <p>No saved searches found</p>
-        :
-        <SavedSearchesList
-          savedSearches={savedSearches}
-          onDelete={onDelete}
-        />
+      {hasSearches
+        ? <SavedSearchesList />
+        : <p>No saved searches found</p>
       }
     </div>
     <div className="footer">
@@ -39,22 +34,16 @@ const SavedSearchesComponent = ({ display, close, savedSearches, onDelete }) => 
 SavedSearchesComponent.propTypes = {
   display: React.PropTypes.bool,
   close: React.PropTypes.func,
-  savedSearches: React.PropTypes.array,
-  onDelete: React.PropTypes.func
+  hasSearches: React.PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
   display: state.ui.showSavedSearches,
-  savedSearches: (state.user.profile)
-    ? state.user.profile.savedsearches
-    : []
+  hasSearches: !!(state.user.profile && state.user.profile.savedsearches.length > 0)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  close: () => dispatch(closeSavedSearches()),
-  onDelete: (e) => {
-    dispatch(deleteSavedSearch(e));
-  }
+  close: () => dispatch(closeSavedSearches())
 });
 
 const SavedSearchesContainer = connect(

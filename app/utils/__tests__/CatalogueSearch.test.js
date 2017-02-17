@@ -20,6 +20,10 @@ test('Search function', (t) => {
       previewsCode: 'ABC/125',
       publisher: 'Drawn & Quarterly',
       title: 'Berlin'
+    }, {
+      previewsCode: 'ABC/126',
+      publisher: 'Dark Horse',
+      title: 'Harrow County TP 01 Countless Haints'
     }
   ];
 
@@ -45,6 +49,15 @@ test('Search function', (t) => {
     ];
 
     t.equal(matchesSavedSearches(savedSearches, catalogue[0]), true);
+    t.end();
+  });
+
+  t.test('Order does not matter in search', (t) => {
+    const search = 'tp harrow county';
+    const results = searchCatalogue(search, catalogue);
+
+    t.equal(results.length, 1);
+    t.equals(results[0].previewsCode, 'ABC/126');
     t.end();
   });
 

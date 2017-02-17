@@ -1,21 +1,18 @@
-import React from 'react';
 import { connect } from 'react-redux';
 
-const LoginIconComponent = ({ authService }) => (
-  <div className="accounticon">
-    <i
-      className="material-icons"
-      onClick={() => authService.login()}
-    >
-      person_outline
-    </i>
-  </div>
-);
+import ClickableIcon from '../components/ClickableIcon';
+import { AuthServiceFactory } from '../utils/AuthService';
 
-LoginIconComponent.propTypes = {
-  authService: React.PropTypes.object
-};
+const authService = AuthServiceFactory();
 
-const LoginIconContainer = connect()(LoginIconComponent);
+const mapStateToProps = () => ({
+  className: 'accounticon',
+  iconName: 'person_outline',
+  onClick: authService.login
+});
+
+const LoginIconContainer = connect(
+  mapStateToProps
+)(ClickableIcon);
 
 export default LoginIconContainer;

@@ -83,6 +83,7 @@ function gridConfig(state = initialState.gridConfig, action) {
         page: Math.max(1, state.page - 1),
         pageSize: state.pageSize
       });
+    case 'PERFORM_SAVED_SEARCH':
     case 'UPDATE_SEARCH': {
       let page = state.page;
       let searchTerm = action.payload || '';
@@ -132,9 +133,6 @@ function ui(state = initialState.ui, action) {
         showHelp: false
       });
     case 'ADD_TO_ORDER':
-      return Object.assign({}, state, {
-        showItemPreview: false
-      });
     case 'REMOVE_FROM_ORDER':
       return Object.assign({}, state, {
         showItemPreview: false
@@ -143,6 +141,7 @@ function ui(state = initialState.ui, action) {
       return Object.assign({}, state, {
         showSavedSearches: true
       });
+    case 'PERFORM_SAVED_SEARCH':
     case 'CLOSE_SAVED_SEARCHES':
       return Object.assign({}, state, {
         showSavedSearches: false
@@ -158,7 +157,14 @@ function user(state = initialState.user, action) {
         {
           savedsearches: [
             'rick',
-            'bad machinery'
+            'bad machinery',
+            'tmnt',
+            'conan',
+            'ms marvel',
+            'hulk',
+            'harrow county tp',
+            'spiderman',
+            'clean room'
           ]
         }
       );

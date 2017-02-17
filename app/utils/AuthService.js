@@ -48,9 +48,14 @@ class AuthService {
   }
 }
 
+let instance;
+
 export function AuthServiceFactory() {
-  return new AuthService(
-    '3ZRxcpSCqh6CnKU1zFZuWbKY0uIrfK7D',
-    'acemyorder.eu.auth0.com'
-  );
+  if (!instance) {
+    instance = new AuthService(
+      '3ZRxcpSCqh6CnKU1zFZuWbKY0uIrfK7D',
+      'acemyorder.eu.auth0.com'
+    );
+  }
+  return instance;
 }

@@ -14,6 +14,7 @@ const previousPage = createAction('PREVIOUS_PAGE');
 const updateSearch = createAction('UPDATE_SEARCH');
 const addToOrderCreator = createAction('ADD_TO_ORDER');
 const deleteSavedSearch = createAction('DELETE_SAVED_SEARCH');
+const performSavedSearch = createAction('PERFORM_SAVED_SEARCH');
 
 const showOrder = createAction('SHOW_ORDER');
 const closeOrder = createAction('CLOSE_ORDER');
@@ -71,5 +72,6 @@ export {
     logout,
     showSavedSearches,
     closeSavedSearches,
-    deleteSavedSearch
+    deleteSavedSearch,
+    performSavedSearch
 };

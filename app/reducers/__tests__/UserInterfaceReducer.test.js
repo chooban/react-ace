@@ -20,7 +20,13 @@ test('User interface reducer functions', (t) => {
       key: 'showItemPreview',
       trueAction: Actions.showPreview(),
       falseAction: Actions.closePreview()
+    },
+    {
+      key: 'showSavedSearches',
+      trueAction: Actions.showSavedSearches(),
+      falseAction: Actions.closeSavedSearches()
     }
+
   ];
 
   actionsToTest.forEach((a) => {

@@ -30,11 +30,11 @@ const AppComponent = ({ authService }) => (
     </nav>
     <main className="content">
       <PreviewsGrid />
+      <OrderPopup />
+      <ItemPreview />
+      <HelpPopupContainer />
+      <SavedSearchesContainer />
     </main>
-    <OrderPopup />
-    <ItemPreview />
-    <HelpPopupContainer />
-    <SavedSearchesContainer />
   </div>
 );
 

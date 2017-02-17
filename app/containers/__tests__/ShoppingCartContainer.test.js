@@ -10,13 +10,13 @@ import {
 } from '../ShoppingCartContainer';
 
 test('Shopping Cart container', (t) => {
-  t.test('Dispatches show order actions', (t) => {
+  t.test('onClick dispatches show order actions', (t) => {
     const dispatchSpy = sinon.spy();
     const actionSpy = sinon.spy(actions, 'showOrder');
 
     const props = mapDispatchToProps(dispatchSpy);
 
-    props.showCurrentOrder();
+    props.onClick();
 
     t.ok(dispatchSpy.calledOnce);
     t.ok(actionSpy.calledOnce);
@@ -24,17 +24,29 @@ test('Shopping Cart container', (t) => {
     t.end();
   });
 
-  t.test('Extracts order from the state', (t) => {
-    const items = [1, 2, 3];
+  t.test('Classname with no order items', (t) => {
     const state = {
       order: {
-        items
+        items: []
       }
     };
-
     const props = mapStateToProps(state);
 
-    t.equal(props.items, items);
+    t.equal(props.iconName, 'shopping_cart');
+    t.equal(props.className, 'ordersummary');
+    t.end();
+  });
+
+  t.test('Classname with order items', (t) => {
+    const state = {
+      order: {
+        items: ['a']
+      }
+    };
+    const props = mapStateToProps(state);
+
+    t.equal(props.iconName, 'shopping_cart');
+    t.equal(props.className, 'ordersummary hasitems');
     t.end();
   });
 });

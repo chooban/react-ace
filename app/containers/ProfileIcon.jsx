@@ -4,6 +4,7 @@ import {
   logout as logoutAction,
   showSavedSearches
 } from '../actions/';
+import { AuthServiceFactory } from '../utils/AuthService';
 
 const ProfileIconComponent = ({ authService, doLogout, displaySavedSearches }) => (
   <div className="accounticon">
@@ -37,6 +38,10 @@ ProfileIconComponent.propTypes = {
   displaySavedSearches: React.PropTypes.func
 };
 
+const mapStateToProps = () => ({
+  authService: AuthServiceFactory()
+});
+
 const mapDispatchToProps = (dispatch) => ({
   displaySavedSearches: () => dispatch(showSavedSearches()),
   doLogout: (authService) => {
@@ -46,7 +51,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const ProfileIconContainer = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ProfileIconComponent);
 

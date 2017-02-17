@@ -1,30 +1,20 @@
-import React from 'react';
 import { connect } from 'react-redux';
 
+import ClickableIcon from '../components/ClickableIcon';
 import { showHelp } from '../actions/';
 
-const HelpIconComponent = ({ display }) => (
-  <div className="showhelp">
-    <i
-      className="material-icons"
-      onClick={display}
-    >
-      help
-    </i>
-  </div>
-);
-
-HelpIconComponent.propTypes = {
-  display: React.PropTypes.func
-};
+export const mapStateToProps = () => ({
+  className: 'showhelp',
+  iconName: 'help'
+});
 
 export const mapDispatchToProps = (dispatch) => ({
-  display: () => dispatch(showHelp())
+  onClick: () => dispatch(showHelp())
 });
 
 const HelpIconContainer = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
-)(HelpIconComponent);
+)(ClickableIcon);
 
 export default HelpIconContainer;

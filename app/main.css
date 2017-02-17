@@ -22,10 +22,6 @@ nav .ordersummary {
   margin-left: 12px;
 }
 
-nav i:hover {
-  cursor: pointer;
-}
-
 nav .showhelp {
   margin-right: 12px;
 }
@@ -44,6 +40,10 @@ nav .accounticon .submenu {
   border: 1px solid #ccc;
   box-shadow: 2px 2px 0 #BEBEBE;
   /*display: none;*/
+}
+
+.material-icons.click:hover {
+  cursor: pointer;
 }
 
 nav .accounticon:hover .submenu {
@@ -91,20 +91,8 @@ nav .accounticon:hover .submenu {
   margin-left: 5px;
 }
 
-.toggle-order i:hover {
-  cursor: pointer;
-}
-
-.ordereditor .remove i:hover {
-  cursor: pointer;
-}
-
 .ordersummary {
   display: inline-block;
-}
-
-.ordersummary i:hover {
-  cursor: pointer;
 }
 
 .ordersummary i::after {
@@ -122,7 +110,7 @@ nav .accounticon:hover .submenu {
   visibility: hidden;
 }
 
-.ordersummary i.hasitems::after {
+.ordersummary.hasitems i::after {
   visibility: visible;
 }
 
@@ -142,9 +130,15 @@ nav .accounticon:hover .submenu {
   justify-content: space-between;
 }
 
-.modal {
-  width: 600px;
-  height: auto;
+.modalcontainer .modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 9999;
+  background: #fff;
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
@@ -160,6 +154,7 @@ nav .accounticon:hover .submenu {
 .modal .contents {
   margin: 3px;
   overflow-y: auto;
+  flex-grow: 1;
 }
 
 .modal .contents table {
@@ -180,6 +175,7 @@ nav .accounticon:hover .submenu {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  min-height: 38px;
 }
 
 .item_display {
@@ -199,8 +195,30 @@ nav .accounticon:hover .submenu {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  padding: 10px;
 }
 
-.tablecontrols a {
+.tablecontrols a:first-of-type {
   margin-right: 4px;
+}
+
+.modal .savedsearches .collection-item {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.modal .savedsearches .collection-item:hover {
+  cursor: pointer;
+}
+
+.modal .collection-item .material-icons:first-of-type {
+  margin: 0 5px 0 5px;
+}
+
+.modal .collection-item .primary-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
 }

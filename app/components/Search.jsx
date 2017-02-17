@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchComponent = ({ onSearchUpdate }) => (
+const SearchComponent = ({ onSearchUpdate, searchValue }) => (
   <div className="input-field">
     <form>
       <input
@@ -8,6 +8,7 @@ const SearchComponent = ({ onSearchUpdate }) => (
         className="searchinput"
         name="search"
         size="25"
+        value={searchValue}
         onInput={(e) => requestAnimationFrame(onSearchUpdate.bind(this, e.target.value))}
       />
       <label htmlFor="search">
@@ -26,7 +27,8 @@ const SearchComponent = ({ onSearchUpdate }) => (
 );
 
 SearchComponent.propTypes = {
-  onSearchUpdate: React.PropTypes.func.isRequired
+  onSearchUpdate: React.PropTypes.func.isRequired,
+  searchValue: React.PropTypes.string
 };
 
 export default SearchComponent;

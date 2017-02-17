@@ -4,12 +4,24 @@ import reducer from '../';
 
 test('User profile reducer functions', (t) => {
   const profile = {
-    username: 'chooban',
-    savedsearches: [
-      'rick',
-      'bad machinery'
-    ]
+    username: 'chooban'
   };
+
+  const hardcodedSearches = [
+    'rick',
+    'bad machinery',
+    'tmnt',
+    'conan',
+    'ms marvel',
+    'hulk',
+    'harrow county tp',
+    'spiderman',
+    'clean room'
+  ];
+
+  const profileWithSearches = Object.assign({}, profile, {
+    savedsearches: hardcodedSearches
+  });
 
   t.test('Setting the user profile', (t) => {
     let state = reducer(undefined, {});
@@ -18,7 +30,7 @@ test('User profile reducer functions', (t) => {
       payload: profile
     });
 
-    t.deepEqual(state.user.profile, profile);
+    t.deepEqual(state.user.profile, profileWithSearches);
     t.end();
   });
 
@@ -28,11 +40,11 @@ test('User profile reducer functions', (t) => {
       type: 'SET_USER_PROFILE',
       payload: profile
     });
-
-    t.deepEqual(state.user.profile, profile);
     state = reducer(state, {
       type: 'LOGOUT'
     });
+
+    t.notOk(state.user.profile);
     t.end();
   });
 
@@ -42,12 +54,18 @@ test('User profile reducer functions', (t) => {
       type: 'SET_USER_PROFILE',
       payload: profile
     });
+
+    const numberOfSearches = state.user.profile.savedsearches.length;
+
+    t.equal(state.user.profile.savedsearches.includes('bad machinery'), true);
+
     state = reducer(state, {
       type: 'DELETE_SAVED_SEARCH',
       payload: 'bad machinery'
     });
 
-    t.deepEqual(state.user.profile.savedsearches, ['rick']);
+    t.equal(state.user.profile.savedsearches.includes('bad machinery'), false);
+    t.equal(state.user.profile.savedsearches.length, numberOfSearches - 1);
     t.end();
   });
 });

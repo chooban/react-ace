@@ -4,16 +4,15 @@ import { connect } from 'react-redux';
 import ProfileIconContainer from './ProfileIcon';
 import LoginIconContainer from './LoginIcon';
 
-const AccountIconComponent = ({ isLoggedIn, authService }) => {
+const AccountIconComponent = ({ isLoggedIn }) => {
   if (isLoggedIn) {
-    return <ProfileIconContainer authService={authService} />;
+    return <ProfileIconContainer />;
   }
-  return <LoginIconContainer authService={authService} />;
+  return <LoginIconContainer />;
 };
 
 AccountIconComponent.propTypes = {
-  isLoggedIn: React.PropTypes.bool.isRequired,
-  authService: React.PropTypes.object.isRequired
+  isLoggedIn: React.PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({

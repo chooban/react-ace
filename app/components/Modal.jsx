@@ -1,17 +1,13 @@
 import React from 'react';
 
-const Modal = ({ isOpen, children }) => {
+const Modal = ({ isOpen, children, height, width }) => {
   if (!isOpen) {
     return null;
   }
 
   const modalStyle = {
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    zIndex: '9999',
-    background: '#fff'
+    width,
+    height
   };
 
   const backdropStyle = {
@@ -25,7 +21,7 @@ const Modal = ({ isOpen, children }) => {
   };
 
   return (
-    <div>
+    <div className="modalcontainer">
       <div className="modal" style={modalStyle}>
         {children}
       </div>
@@ -36,11 +32,15 @@ const Modal = ({ isOpen, children }) => {
 
 Modal.propTypes = {
   isOpen: React.PropTypes.bool,
-  children: React.PropTypes.instanceOf(Object).isRequired
+  children: React.PropTypes.instanceOf(Object).isRequired,
+  width: React.PropTypes.string,
+  height: React.PropTypes.string
 };
 
 Modal.defaultProps = {
-  isOpen: false
+  isOpen: false,
+  height: 'auto',
+  width: '600px'
 };
 
 export default Modal;

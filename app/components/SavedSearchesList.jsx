@@ -1,27 +1,35 @@
 import React from 'react';
 
-const SavedSearchesList = ({ savedSearches, onDelete }) => (
-  <ul className="collection">
+const SavedSearchesList = ({ savedSearches, onDelete, onSelect }) => (
+  <ul className="collection savedsearches">
     {savedSearches.map((key, idx) => (
       <li
         className="collection-item"
         key={idx}
       >
-        {key}
+        <span
+          className="primary-content"
+          onClick={() => onSelect(key)}
+        >
+          <i
+            className="material-icons"
+          >
+            search
+          </i>
+          <span className="title">
+            {key}
+          </span>
+        </span>
         <span
           className="secondary-content"
         >
-          <a
-            href="#!"
+          <i
+            style={{ color: 'black' }}
+            className="material-icons"
             onClick={() => onDelete(key)}
           >
-            <i
-              style={{ color: 'black' }}
-              className="material-icons"
-            >
-              delete
-            </i>
-          </a>
+            delete
+          </i>
         </span>
       </li>
     ))}
@@ -29,8 +37,9 @@ const SavedSearchesList = ({ savedSearches, onDelete }) => (
 );
 
 SavedSearchesList.propTypes = {
-  savedSearches: React.PropTypes.array,
-  onDelete: React.PropTypes.func
+  savedSearches: React.PropTypes.array.isRequired,
+  onDelete: React.PropTypes.func,
+  onSelect: React.PropTypes.func
 };
 
 export default SavedSearchesList;
