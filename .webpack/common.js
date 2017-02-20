@@ -11,7 +11,6 @@ const config = function (paths) {
         'babel-polyfill'
       ],
       vendor: [
-        'auth0-lock',
         'react',
         'react-dom',
         'react-redux',
@@ -20,6 +19,9 @@ const config = function (paths) {
         'redux-logger',
         'redux-thunk',
         'sprintf'
+      ],
+      auth: [
+        'auth0-lock'
       ]
     },
     resolve: {

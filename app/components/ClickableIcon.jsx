@@ -1,7 +1,9 @@
 import React from 'react';
 
 const ClickableIcon = ({ className, onClick, iconName }) => (
-  <div className={className}>
+  <div
+    className={className}
+  >
     <i
       className="material-icons click"
       onClick={onClick}

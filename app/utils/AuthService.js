@@ -50,12 +50,17 @@ class AuthService {
 
 let instance;
 
-export function AuthServiceFactory() {
+const authUrl = 'acemyorder.eu.auth0.com';
+const AuthServiceFactory = () => {
   if (!instance) {
     instance = new AuthService(
       '3ZRxcpSCqh6CnKU1zFZuWbKY0uIrfK7D',
-      'acemyorder.eu.auth0.com'
+      authUrl
     );
   }
   return instance;
-}
+};
+
+AuthServiceFactory.url = authUrl;
+
+export AuthServiceFactory;

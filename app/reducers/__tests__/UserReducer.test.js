@@ -56,7 +56,6 @@ test('User profile reducer functions', (t) => {
     });
 
     const numberOfSearches = state.user.profile.savedsearches.length;
-
     t.equal(state.user.profile.savedsearches.includes('bad machinery'), true);
 
     state = reducer(state, {
@@ -66,6 +65,26 @@ test('User profile reducer functions', (t) => {
 
     t.equal(state.user.profile.savedsearches.includes('bad machinery'), false);
     t.equal(state.user.profile.savedsearches.length, numberOfSearches - 1);
+    t.end();
+  });
+
+  t.test('Adding a saved search', (t) => {
+    let state = reducer(undefined, {});
+    state = reducer(state, {
+      type: 'SET_USER_PROFILE',
+      payload: profile
+    });
+
+    const numberOfSearches = state.user.profile.savedsearches.length;
+    t.equal(state.user.profile.savedsearches.includes('northlanders'), false);
+
+    state = reducer(state, {
+      type: 'ADD_SAVED_SEARCH',
+      payload: 'northlanders'
+    });
+
+    t.equal(state.user.profile.savedsearches.includes('northlanders'), true);
+    t.equal(state.user.profile.savedsearches.length, numberOfSearches + 1);
     t.end();
   });
 });

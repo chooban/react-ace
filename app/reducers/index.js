@@ -191,6 +191,16 @@ function user(state = initialState.user, action) {
         profile
       });
     }
+    case 'ADD_SAVED_SEARCH': {
+      const searches = state.profile.savedsearches.concat(action.payload);
+      const profile = Object.assign({}, state.profile, {
+        savedsearches: searches
+      });
+      return Object.assign({},
+        state, {
+          profile
+        });
+    }
     default: return state;
   }
 }

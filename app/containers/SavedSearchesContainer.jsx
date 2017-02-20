@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Modal from '../components/Modal';
 import SavedSearchesList from '../containers/SavedSearchesListContainer';
+import AddNewSavedSearch from './AddNewSavedSearchContainer';
 
 import {
   closeSavedSearches
@@ -18,6 +19,7 @@ const SavedSearchesComponent = ({ display, close, hasSearches }) => (
         ? <SavedSearchesList />
         : <p>No saved searches found</p>
       }
+      <AddNewSavedSearch />
     </div>
     <div className="footer">
       <a
