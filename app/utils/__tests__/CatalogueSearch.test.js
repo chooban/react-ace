@@ -3,6 +3,7 @@ import test from 'tape';
 
 import {
   matchesSavedSearches,
+  hitCountForSearch,
   searchCatalogue
 } from '../CatalogueSearch';
 
@@ -24,6 +25,14 @@ test('Search function', (t) => {
       previewsCode: 'ABC/126',
       publisher: 'Dark Horse',
       title: 'Harrow County TP 01 Countless Haints'
+    }, {
+      previewsCode: 'ABC/127',
+      publisher: 'Dark Horse',
+      title: 'Lone Wolf and Cub 7'
+    }, {
+      previewsCode: 'ABC/128',
+      publisher: 'Dark Horse',
+      title: 'Lone Wolf and Cub 8'
     }
   ];
 
@@ -68,6 +77,13 @@ test('Search function', (t) => {
     ];
 
     t.equal(matchesSavedSearches(savedSearches, catalogue[1]), false);
+    t.end();
+  });
+
+  t.test('Hit count for search', (t) => {
+    const result = hitCountForSearch('lone wolf', catalogue);
+
+    t.equal(result, 2);
     t.end();
   });
 });

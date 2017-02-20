@@ -1,4 +1,4 @@
-export function searchCatalogue(searchTerm, catalogue) {
+function searchCatalogue(searchTerm, catalogue) {
   const publisherOrTitleMatches = (regex) =>
     (d) => regex.test(`${d.title} ${d.publisher}`);
 
@@ -12,7 +12,11 @@ export function searchCatalogue(searchTerm, catalogue) {
   return catalogue.filter(publisherOrTitleMatches(re));
 }
 
-export function matchesSavedSearches(searchTerms, item) {
+function hitCountForSearch(searchTerm, catalogue) {
+  return searchCatalogue(searchTerm, catalogue).length;
+}
+
+function matchesSavedSearches(searchTerms, item) {
   const publisherOrTitleMatches = (regex) =>
     (d) => regex.test(d.title) || regex.test(d.publisher);
 
@@ -21,3 +25,9 @@ export function matchesSavedSearches(searchTerms, item) {
     return publisherOrTitleMatches(regex)(item);
   });
 }
+
+export {
+  searchCatalogue,
+  hitCountForSearch,
+  matchesSavedSearches
+};

@@ -89,11 +89,12 @@ function gridConfig(state = initialState.gridConfig, action) {
       let searchTerm = action.payload || '';
       searchTerm = searchTerm.trim();
 
-      if (searchTerm.length === 0) searchTerm = undefined;
+      if (searchTerm.length === 0) {
+        searchTerm = undefined;
+        page = 1;
+      }
 
       if (searchTerm && !state.searchTerm) {
-        page = 1;
-      } else if (!searchTerm) {
         page = 1;
       }
       return Object.assign({}, state, {
@@ -101,7 +102,8 @@ function gridConfig(state = initialState.gridConfig, action) {
         page
       });
     }
-    default: return state;
+    default:
+      return state;
   }
 }
 

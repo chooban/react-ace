@@ -7,7 +7,7 @@
     "style": "eslint app --ext jsx,js",
     "stylefix": "eslint --fix app --ext jsx,js",
     "test": "tape -r babel-register -r ignore-styles 'app/**/__tests__/*.test.js*' | faucet",
-    "coverage": "NODE_ENV=test nyc --reporter=lcov --reporter=text npm test",
+    "coverage": "NODE_ENV=test nyc --reporter=lcov --reporter=html npm test",
     "build": "webpack -p",
     "devbuild": "webpack-dev-server --watch --progress",
     "start": "webpack-dev-server --port 8091 --content-base build/"

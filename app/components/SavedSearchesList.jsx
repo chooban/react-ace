@@ -2,14 +2,14 @@ import React from 'react';
 
 const SavedSearchesList = ({ savedSearches, onDelete, onSelect }) => (
   <ul className="collection savedsearches">
-    {savedSearches.map((key, idx) => (
+    {savedSearches.map((searchData, idx) => (
       <li
         className="collection-item"
         key={idx}
       >
         <span
           className="primary-content"
-          onClick={() => onSelect(key)}
+          onClick={() => onSelect(searchData.searchTerm)}
         >
           <i
             className="material-icons"
@@ -17,7 +17,7 @@ const SavedSearchesList = ({ savedSearches, onDelete, onSelect }) => (
             search
           </i>
           <span className="title">
-            {key}
+            {searchData.searchTerm} ({searchData.hits})
           </span>
         </span>
         <span
@@ -26,7 +26,7 @@ const SavedSearchesList = ({ savedSearches, onDelete, onSelect }) => (
           <i
             style={{ color: 'black' }}
             className="material-icons"
-            onClick={() => onDelete(key)}
+            onClick={() => onDelete(searchData.searchTerm)}
           >
             delete
           </i>

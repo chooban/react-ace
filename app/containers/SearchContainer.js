@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SearchComponent from '../components/Search';
 import { updateSearch } from '../actions';
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   searchValue: state.gridConfig.searchTerm
 });
 

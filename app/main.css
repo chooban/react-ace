@@ -27,7 +27,7 @@ nav .showhelp {
 }
 
 nav .accounticon {
-  margin-right: 24px;
+  padding-right: 24px;
 }
 
 nav .accounticon .submenu {
@@ -39,7 +39,11 @@ nav .accounticon .submenu {
   z-index: 1;
   border: 1px solid #ccc;
   box-shadow: 2px 2px 0 #BEBEBE;
-  /*display: none;*/
+  display: none;
+}
+
+nav .accounticon:hover .submenu {
+  display: inline-block;
 }
 
 .material-icons.click:hover {
@@ -100,7 +104,7 @@ nav .accounticon:hover .submenu {
   display: inline-block;
   position: relative;
   top: -15px;
-  right: 5px;
+  right: 10px;
   width: 12px;
   height: 12px;
   -moz-border-radius: 12px;
@@ -132,11 +136,13 @@ nav .accounticon:hover .submenu {
 
 .modalcontainer .modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  /*transform: translate(-50%, -50%);*/
   margin-left: auto;
   margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
   z-index: 9999;
   background: #fff;
   display: flex;

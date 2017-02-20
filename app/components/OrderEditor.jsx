@@ -1,5 +1,7 @@
 import React from 'react';
+
 import PreviewsLink from './PreviewsLink';
+import ClickableIcon from './ClickableIcon';
 
 const firstLowerCaseLetter = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 const capitalize = (s) => s.toLowerCase().replace(firstLowerCaseLetter, (m) => m.toUpperCase());
@@ -52,13 +54,14 @@ const OrderEditor = ({ items, onRemoveItem }) => {
       cells.push(<td key={c.property}>{content.value}</td>);
     });
 
+    const removeItem = () => onRemoveItem(item.previews);
+
     cells.push(<td key="remove" className="remove">
-      <i
-        className="material-icons"
-        onClick={() => onRemoveItem(item.previews)}
-      >
-      remove_shopping_cart
-      </i>
+      <ClickableIcon
+        className="remove"
+        iconName="remove_shopping_cart"
+        onClick={removeItem}
+      />
     </td>
     );
 

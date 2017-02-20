@@ -29,77 +29,100 @@ test('Grid config reducer functions', (t) => {
     t.end();
   });
 
-  t.test('First search term resets page number', (t) => {
-    let state = reducer(undefined, {});
-    state.gridConfig.page = 5;
+  ['UPDATE_SEARCH', 'PERFORM_SAVED_SEARCH'].forEach((actionType) => {
+    t.test(`First search term resets page number: ${actionType}`, (t) => {
+      let state = reducer({
+        gridConfig: {
+          page: 5,
+          searchTerm: undefined,
+          pageSize: 25
+        }
+      }, {});
 
-    state = reducer(state, {
-      type: 'UPDATE_SEARCH',
-      payload: 'marvel'
+      state = reducer(state, {
+        type: actionType,
+        payload: 'marvel'
+      });
+
+      t.equal(state.gridConfig.searchTerm, 'marvel');
+      t.equal(state.gridConfig.page, 1);
+      t.end();
     });
 
-    t.equal(state.gridConfig.searchTerm, 'marvel');
-    t.equal(state.gridConfig.page, 1);
-    t.end();
-  });
+    t.test('Removing search term resets page number', (t) => {
+      let state = reducer({
+        gridConfig: {
+          page: 5,
+          searchTerm: 'marvel',
+          pageSize: 25
+        }
+      }, {});
 
-  t.test('Removing search term resets page number', (t) => {
-    let state = reducer(undefined, {});
-    state.gridConfig.page = 5;
-    state.gridConfig.searchTerm = 'marvel';
+      state = reducer(state, {
+        type: actionType,
+        payload: undefined
+      });
 
-    state = reducer(state, {
-      type: 'UPDATE_SEARCH',
-      payload: undefined
+      t.equal(state.gridConfig.searchTerm, undefined);
+      t.equal(state.gridConfig.page, 1);
+      t.end();
     });
 
-    t.equal(state.gridConfig.searchTerm, undefined);
-    t.equal(state.gridConfig.page, 1);
-    t.end();
-  });
+    t.test('Trailing spaces are removed', (t) => {
+      let state = reducer({
+        gridConfig: {
+          page: 5,
+          searchTerm: 'marvel',
+          pageSize: 25
+        }
+      }, {});
 
-  t.test('Trailing spaces are removed', (t) => {
-    let state = reducer(undefined, {});
-    state.gridConfig.page = 5;
-    state.gridConfig.searchTerm = 'marvel';
+      state = reducer(state, {
+        type: actionType,
+        payload: 'marvel  '
+      });
 
-    state = reducer(state, {
-      type: 'UPDATE_SEARCH',
-      payload: 'marvel  '
+      t.equal(state.gridConfig.searchTerm, 'marvel');
+      t.equal(state.gridConfig.page, 5);
+      t.end();
     });
 
-    t.equal(state.gridConfig.searchTerm, 'marvel');
-    t.equal(state.gridConfig.page, 5);
-    t.end();
-  });
+    t.test('Leading spaces are removed', (t) => {
+      let state = reducer({
+        gridConfig: {
+          page: 5,
+          searchTerm: 'marvel',
+          pageSize: 25
+        }
+      }, {});
 
-  t.test('Leading spaces are removed', (t) => {
-    let state = reducer(undefined, {});
-    state.gridConfig.page = 5;
-    state.gridConfig.searchTerm = 'marvel';
+      state = reducer(state, {
+        type: actionType,
+        payload: '  marvel'
+      });
 
-    state = reducer(state, {
-      type: 'UPDATE_SEARCH',
-      payload: '  marvel'
+      t.equal(state.gridConfig.searchTerm, 'marvel');
+      t.equal(state.gridConfig.page, 5);
+      t.end();
     });
 
-    t.equal(state.gridConfig.searchTerm, 'marvel');
-    t.equal(state.gridConfig.page, 5);
-    t.end();
-  });
+    t.test('Empty string is a reset', (t) => {
+      let state = reducer({
+        gridConfig: {
+          page: 5,
+          searchTerm: 'marvel',
+          pageSize: 25
+        }
+      }, {});
 
-  t.test('Empty string is a reset', (t) => {
-    let state = reducer(undefined, {});
-    state.gridConfig.page = 5;
-    state.gridConfig.searchTerm = 'marvel';
+      state = reducer(state, {
+        type: actionType,
+        payload: ''
+      });
 
-    state = reducer(state, {
-      type: 'UPDATE_SEARCH',
-      payload: ''
+      t.equal(state.gridConfig.searchTerm, undefined);
+      t.equal(state.gridConfig.page, 1);
+      t.end();
     });
-
-    t.equal(state.gridConfig.searchTerm, undefined);
-    t.equal(state.gridConfig.page, 1);
-    t.end();
   });
 });

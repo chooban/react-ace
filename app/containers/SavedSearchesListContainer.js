@@ -7,13 +7,27 @@ import {
   performSavedSearch
 } from '../actions';
 
-const mapStateToProps = (state) => ({
+import {
+  hitCountForSearch
+} from '../utils/CatalogueSearch';
+
+const getHitCounts = (searchTerms, catalogue) => (
+  searchTerms.map((term) => ({
+    searchTerm: term,
+    hits: hitCountForSearch(term, catalogue)
+  })
+));
+
+export const mapStateToProps = (state) => ({
   savedSearches: (state.user.profile)
-    ? state.user.profile.savedsearches.sort()
+    ? getHitCounts(
+        state.user.profile.savedsearches.sort(),
+        state.issues.data
+      )
     : []
 });
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   onDelete: (key) => {
     dispatch(deleteSavedSearch(key));
   },

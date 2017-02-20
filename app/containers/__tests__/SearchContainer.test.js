@@ -5,7 +5,8 @@ import sinon from 'sinon';
 import * as actions from '../../actions';
 
 import {
-  mapDispatchToProps
+  mapDispatchToProps,
+  mapStateToProps
 } from '../SearchContainer';
 
 test('Dispatching searches', (t) => {
@@ -19,6 +20,17 @@ test('Dispatching searches', (t) => {
 
     t.ok(dispatchSpy.calledOnce);
     t.ok(actionSpy.calledOnce);
+    t.end();
+  });
+
+  t.test('Extract search term from store', (t) => {
+    t.deepEqual(mapStateToProps({
+      gridConfig: {
+        searchTerm: 'marvel'
+      }
+    }), {
+      searchValue: 'marvel'
+    });
     t.end();
   });
 });

@@ -5,7 +5,7 @@ services:
     volumes:
       - './acedata/:/data:ro'
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
       - LOG_LEVEL=debug
   ordersapi:
     image: chooban/ace-orders-api:latest
