@@ -51,7 +51,7 @@ class AuthService {
 let instance;
 
 const authUrl = 'acemyorder.eu.auth0.com';
-const AuthServiceFactory = () => {
+export function AuthServiceFactory() {
   if (!instance) {
     instance = new AuthService(
       '3ZRxcpSCqh6CnKU1zFZuWbKY0uIrfK7D',
@@ -59,8 +59,4 @@ const AuthServiceFactory = () => {
     );
   }
   return instance;
-};
-
-AuthServiceFactory.url = authUrl;
-
-export AuthServiceFactory;
+}

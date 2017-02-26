@@ -8,7 +8,7 @@ import {
 
 import {
   updateProfile
-} from '../api/Auth0Api';
+} from '../api/ProfilesWebApi';
 
 const receivedIssue = createAction('RECEIVED_ISSUE_DATA');
 const requestedIssue = createAction('REQUESTED_ISSUE_DATA');

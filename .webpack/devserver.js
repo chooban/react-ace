@@ -20,6 +20,10 @@ module.exports = function (paths) {
         '/api/orders': {
           target: 'http://ordersapi:8101',
           pathRewrite: { '^/api/orders' : '/orders' }
+        },
+        '/api/profiles': {
+          target: 'http://profilesapi:8101',
+          pathRewrite: { '^/api/profiles' : '/profiles' }
         }
       }
     },

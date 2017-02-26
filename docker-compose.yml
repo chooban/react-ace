@@ -12,6 +12,11 @@ services:
     environment:
       - NODE_ENV=production
       - LOG_LEVEL=debug
+  profilesapi:
+    image: chooban/ace-profiles-api:latest
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=debug
   site:
     build: .
     command: npm run devbuild
