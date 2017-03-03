@@ -50,12 +50,11 @@ class AuthService {
 
 let instance;
 
-const authUrl = 'acemyorder.eu.auth0.com';
 export function AuthServiceFactory() {
   if (!instance) {
     instance = new AuthService(
-      '3ZRxcpSCqh6CnKU1zFZuWbKY0uIrfK7D',
-      authUrl
+      process.env.AUTH0_ID,
+      process.env.AUTH0_DOMAIN
     );
   }
   return instance;

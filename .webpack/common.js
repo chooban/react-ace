@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const InlineEnviromentVariablesPlugin = require('inline-environment-variables-webpack-plugin');
+
 
 const config = function (paths) {
   return {
@@ -75,7 +77,8 @@ const config = function (paths) {
       }),
       new CopyPlugin([
         { from: 'assets' }
-      ])
+      ]),
+      new InlineEnviromentVariablesPlugin()
     ]
   };
 };
