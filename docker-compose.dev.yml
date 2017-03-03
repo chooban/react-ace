@@ -20,7 +20,7 @@ services:
       - AUTH0_ID=3ZRxcpSCqh6CnKU1zFZuWbKY0uIrfK7D
       - AUTH0_DOMAIN=acemyorder.eu.auth0.com
     ports:
-      - 80:3000
+      - 443:3000
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules

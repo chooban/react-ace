@@ -5,5 +5,6 @@ services:
     environment:
       - AUTH0_ID=3ZRxcpSCqh6CnKU1zFZuWbKY0uIrfK7D
       - AUTH0_DOMAIN=acemyorder.eu.auth0.com
+      - LOCAL_USER_ID=1000
     volumes:
       - ./build:/var/www/acereact
