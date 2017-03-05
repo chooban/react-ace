@@ -2,23 +2,22 @@
 import test from 'tape';
 import sinon from 'sinon';
 
-import * as actions from '../../actions';
-
 import {
   mapStateToProps,
   mapDispatchToProps
 } from '../HelpIcon';
 
+import { showHelp } from '../../actions';
+
 test('Help Icon Container', (t) => {
   t.test('Call for help when clicked', (t) => {
     const dispatchSpy = sinon.spy();
-    const actionSpy = sinon.spy(actions, 'showHelp');
     const props = mapDispatchToProps(dispatchSpy);
 
     props.onClick();
 
     t.equal(dispatchSpy.calledOnce, true);
-    t.equal(actionSpy.calledOnce, true);
+    t.ok(dispatchSpy.calledWith(showHelp()));
     t.end();
   });
 

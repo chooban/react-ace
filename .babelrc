@@ -13,7 +13,8 @@
     },
     "test": {
       "plugins": [
-        "istanbul"
+        "istanbul",
+        "rewire"
       ],
       "sourceMaps": "inline"
     }

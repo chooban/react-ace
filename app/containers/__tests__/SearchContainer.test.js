@@ -2,7 +2,7 @@
 import test from 'tape';
 import sinon from 'sinon';
 
-import * as actions from '../../actions';
+import { updateSearch } from '../../actions';
 
 import {
   mapDispatchToProps,
@@ -12,14 +12,14 @@ import {
 test('Dispatching searches', (t) => {
   t.test('Dispatches searches', (t) => {
     const dispatchSpy = sinon.spy();
-    const actionSpy = sinon.spy(actions, 'updateSearch');
+    const action = updateSearch('foo');
 
     const props = mapDispatchToProps(dispatchSpy);
 
     props.onSearchUpdate('foo');
 
     t.ok(dispatchSpy.calledOnce);
-    t.ok(actionSpy.calledOnce);
+    t.ok(dispatchSpy.calledWith(action));
     t.end();
   });
 

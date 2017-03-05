@@ -6,7 +6,7 @@
   "scripts": {
     "style": "eslint app --ext jsx,js",
     "stylefix": "eslint --fix app --ext jsx,js",
-    "test": "tape -r babel-register -r ignore-styles 'app/**/__tests__/*.test.js*' | faucet",
+    "test": "NODE_ENV=test babel-tape-runner 'app/**/__tests__/*.test.js*' | faucet",
     "coverage": "NODE_ENV=test nyc --reporter=lcov --reporter=html npm test",
     "build": "webpack -p",
     "devbuild": "webpack-dev-server --https --watch --progress"
@@ -19,6 +19,7 @@
     "babel-loader": "6.2.10",
     "babel-plugin-__coverage__": "11.0.0",
     "babel-plugin-istanbul": "3.0.0",
+    "babel-plugin-rewire": "^1.0.0",
     "babel-polyfill": "6.20.0",
     "babel-preset-es2015": "6.18.0",
     "babel-preset-es2015-native-modules": "6.9.4",

@@ -2,7 +2,7 @@
 import test from 'tape';
 import sinon from 'sinon';
 
-import * as actions from '../../actions';
+import { showOrder } from '../../actions';
 
 import {
   mapStateToProps,
@@ -12,15 +12,13 @@ import {
 test('Shopping Cart container', (t) => {
   t.test('onClick dispatches show order actions', (t) => {
     const dispatchSpy = sinon.spy();
-    const actionSpy = sinon.spy(actions, 'showOrder');
 
     const props = mapDispatchToProps(dispatchSpy);
 
     props.onClick();
 
     t.ok(dispatchSpy.calledOnce);
-    t.ok(actionSpy.calledOnce);
-
+    t.ok(dispatchSpy.calledWith(showOrder()));
     t.end();
   });
 

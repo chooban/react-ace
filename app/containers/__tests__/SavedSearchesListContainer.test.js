@@ -79,7 +79,7 @@ test('Saved searches list container', (t) => {
 
   t.test('Searches can be deleted', (t) => {
     const dispatchSpy = sinon.spy();
-    const actionSpy = sinon.spy(actions, 'deleteSavedSearch');
+    const action = actions.deleteSavedSearch('lone wolf');
     const props = mapDispatchToProps(dispatchSpy);
 
     t.ok(props.onDelete);
@@ -87,14 +87,13 @@ test('Saved searches list container', (t) => {
     props.onDelete('lone wolf');
 
     t.ok(dispatchSpy.calledOnce);
-    t.ok(actionSpy.calledOnce, true);
-    t.ok(actionSpy.calledWith('lone wolf'));
+    t.ok(dispatchSpy.calledWith(action));
     t.end();
   });
 
   t.test('Searches can be selected', (t) => {
     const dispatchSpy = sinon.spy();
-    const actionSpy = sinon.spy(actions, 'performSavedSearch');
+    const action = actions.performSavedSearch('lone wolf');
     const props = mapDispatchToProps(dispatchSpy);
 
     t.ok(props.onSelect);
@@ -102,8 +101,7 @@ test('Saved searches list container', (t) => {
     props.onSelect('lone wolf');
 
     t.ok(dispatchSpy.calledOnce);
-    t.ok(actionSpy.calledOnce, true);
-    t.ok(actionSpy.calledWith('lone wolf'));
+    t.ok(dispatchSpy.calledWith(action));
     t.end();
   });
 });
