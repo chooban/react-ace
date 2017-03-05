@@ -1,7 +1,5 @@
 import { AuthServiceFactory } from '../utils/AuthService';
 
-const AuthService = AuthServiceFactory();
-
 const parseData = (resp) => JSON.parse(resp);
 
 const checkStatus = (resp) => {
@@ -11,6 +9,7 @@ const checkStatus = (resp) => {
 };
 
 export function updateProfile() {
+  const AuthService = AuthServiceFactory();
   const acceptJsonHeaders = {
     headers: {
       Accept: 'application/json',
