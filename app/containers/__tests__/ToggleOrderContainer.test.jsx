@@ -7,7 +7,6 @@ import {
 } from '../../actions';
 
 import {
-  mapStateToProps,
   mapDispatchToProps
 } from '../ToggleOrderContainer';
 
@@ -31,23 +30,6 @@ test('Toggle Order Container', (t) => {
     props.onItemSelected(previewsCode, true);
     t.equal(dispatchSpy.calledOnce, true);
     t.ok(dispatchSpy.calledWith(removeFromOrder(previewsCode)));
-    t.end();
-  });
-
-  t.test('Flagged as ordered if in the order', (t) => {
-    const state = {
-      order: {
-        items: [
-          { previews: '340/0078' },
-          { previews: '340/0082' },
-          { previews: '340/0056' }
-        ]
-      }
-    };
-
-    const props = mapStateToProps(state, { previewsCode: '340/0082' });
-
-    t.ok(props.ordered, 'Should be ordered');
     t.end();
   });
 });

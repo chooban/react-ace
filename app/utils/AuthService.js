@@ -1,15 +1,8 @@
 import * as Auth0Lock from 'auth0-lock';
 
-class AuthService {
-  constructor(clientId, domain) {
-    this.lock = new Auth0Lock.default(//eslint-disable-line
-        clientId,
-        domain,
-      {
-        redirectUrl: (global.window) ? global.window.location.href : '',
-        responseType: 'token'
-      });
-
+export class AuthService {
+  constructor(lock) {
+    this.lock = lock;
     this.lock.on('authenticated', this.doAuth.bind(this));
     this.login = this.login.bind(this);
     this.getProfile = this.getProfile.bind(this);
@@ -52,10 +45,16 @@ let instance;
 
 export function AuthServiceFactory() {
   if (!instance) {
-    instance = new AuthService(
-      process.env.AUTH0_ID,
-      process.env.AUTH0_DOMAIN
+    const lock = new Auth0Lock.default(//eslint-disable-line
+        process.env.AUTH0_ID,
+        process.env.AUTH0_DOMAIN,
+      {
+        redirectUrl: (global.window) ? global.window.location.href : '',
+        responseType: 'token'
+      }
     );
+
+    instance = new AuthService(lock);
   }
   return instance;
 }

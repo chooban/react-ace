@@ -65,12 +65,8 @@ const PreviewsGrid = ({
     });
 
     cells.push(
-      <td
-        key="ordertoggle"
-      >
-        <ToggleOrder
-          previewsCode={row.previewsCode}
-        />
+      <td key="ordertoggle" >
+        <ToggleOrder previewsCode={row.previewsCode} ordered={row.ordered} />
       </td>
       );
 

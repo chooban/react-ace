@@ -30,7 +30,7 @@ const mapStateToProps = (state) => {
     return Object.assign(
         {},
         lineItem,
-        { onorder: orderIndex > -1 }
+        { ordered: orderIndex > -1 }
         );
   });
 

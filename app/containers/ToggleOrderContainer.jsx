@@ -7,10 +7,6 @@ import {
 
 import ToggleOrderComponent from '../components/ToggleOrder';
 
-export const mapStateToProps = (state, props) => ({
-  ordered: !!state.order.items.find((e) => e.previews === props.previewsCode)
-});
-
 export const mapDispatchToProps = (dispatch) => ({
   onItemSelected: (previewsCode, onOrder) => {
     if (!onOrder) dispatch(addToOrder(previewsCode));
@@ -19,7 +15,7 @@ export const mapDispatchToProps = (dispatch) => ({
 });
 
 const ToggleOrderContainer = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(ToggleOrderComponent);
 
