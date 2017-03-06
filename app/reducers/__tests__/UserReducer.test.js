@@ -3,10 +3,6 @@ import test from 'tape';
 import reducer from '../';
 
 test('User profile reducer functions', (t) => {
-  const profile = {
-    username: 'chooban'
-  };
-
   const hardcodedSearches = [
     'rick',
     'bad machinery',
@@ -19,18 +15,43 @@ test('User profile reducer functions', (t) => {
     'clean room'
   ];
 
-  const profileWithSearches = Object.assign({}, profile, {
-    savedsearches: hardcodedSearches
+  const auth0ProfileNoSearches = {
+    clientID: 'Cqh6CnKuIrfK7D3ZRxcpS',
+    nickname: 'chooban',
+    created_at: '2017-01-30T14:55:59.681Z'
+  };
+
+  const auth0ProfileWithSearches = Object.assign({}, auth0ProfileNoSearches, {
+    user_metadata: {
+      saved_searches: hardcodedSearches
+    }
   });
 
-  t.test('Setting the user profile', (t) => {
+  t.test('Setting the user profile without searches', (t) => {
     let state = reducer(undefined, {});
     state = reducer(state, {
       type: 'SET_USER_PROFILE',
-      payload: profile
+      payload: auth0ProfileNoSearches
     });
 
-    t.deepEqual(state.user.profile, profileWithSearches);
+    t.deepEqual(state.user.profile, {
+      nickname: 'chooban',
+      savedsearches: []
+    });
+    t.end();
+  });
+
+  t.test('Profile with searches', (t) => {
+    let state = reducer(undefined, {});
+    state = reducer(state, {
+      type: 'SET_USER_PROFILE',
+      payload: auth0ProfileWithSearches
+    });
+
+    t.deepEqual(state.user.profile, {
+      nickname: 'chooban',
+      savedsearches: hardcodedSearches
+    });
     t.end();
   });
 
@@ -38,7 +59,7 @@ test('User profile reducer functions', (t) => {
     let state = reducer(undefined, {});
     state = reducer(state, {
       type: 'SET_USER_PROFILE',
-      payload: profile
+      payload: auth0ProfileNoSearches
     });
     state = reducer(state, {
       type: 'LOGOUT'
@@ -52,7 +73,7 @@ test('User profile reducer functions', (t) => {
     let state = reducer(undefined, {});
     state = reducer(state, {
       type: 'SET_USER_PROFILE',
-      payload: profile
+      payload: auth0ProfileWithSearches
     });
 
     const numberOfSearches = state.user.profile.savedsearches.length;
@@ -72,7 +93,7 @@ test('User profile reducer functions', (t) => {
     let state = reducer(undefined, {});
     state = reducer(state, {
       type: 'SET_USER_PROFILE',
-      payload: profile
+      payload: auth0ProfileNoSearches
     });
 
     const numberOfSearches = state.user.profile.savedsearches.length;

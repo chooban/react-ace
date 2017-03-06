@@ -155,21 +155,12 @@ function ui(state = initialState.ui, action) {
 function user(state = initialState.user, action) {
   switch (action.type) {
     case 'SET_USER_PROFILE': {
-      const profile = Object.assign({}, action.payload,
-        {
-          savedsearches: [
-            'rick',
-            'bad machinery',
-            'tmnt',
-            'conan',
-            'ms marvel',
-            'hulk',
-            'harrow county tp',
-            'spiderman',
-            'clean room'
-          ]
-        }
-      );
+      const profile = {
+        nickname: action.payload.nickname,
+        savedsearches: action.payload.user_metadata ?
+          action.payload.user_metadata.saved_searches :
+          []
+      };
       return Object.assign({}, state, {
         profile
       });
