@@ -24,6 +24,7 @@ const AddNewSavedSearchComponent = ({ onAdd }) => (
           onClick={() => {
             const input = document.querySelector('input.addnewsearch');
             onAdd(input.value);
+            input.value = '';
           }}
           iconName="add_circle"
         />

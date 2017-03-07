@@ -89,6 +89,24 @@ test('User profile reducer functions', (t) => {
     t.end();
   });
 
+  t.test('Removing a non-existent saved search', (t) => {
+    let state = reducer(undefined, {});
+    state = reducer(state, {
+      type: 'SET_USER_PROFILE',
+      payload: auth0ProfileWithSearches
+    });
+
+    const numberOfSearches = state.user.profile.savedsearches.length;
+
+    state = reducer(state, {
+      type: 'DELETE_SAVED_SEARCH',
+      payload: 'flubber'
+    });
+
+    t.equal(state.user.profile.savedsearches.length, numberOfSearches);
+    t.end();
+  });
+
   t.test('Adding a saved search', (t) => {
     let state = reducer(undefined, {});
     state = reducer(state, {

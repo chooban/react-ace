@@ -6,10 +6,6 @@ import {
     getLatestIssue
 } from '../api/PreviewsWebApi';
 
-import {
-  updateProfile
-} from '../api/ProfilesWebApi';
-
 const receivedIssue = createAction('RECEIVED_ISSUE_DATA');
 const requestedIssue = createAction('REQUESTED_ISSUE_DATA');
 const removeFromOrder = createAction('REMOVE_FROM_ORDER');
@@ -33,25 +29,6 @@ const closeSavedSearches = createAction('CLOSE_SAVED_SEARCHES');
 const setUserProfile = createAction('SET_USER_PROFILE');
 const logout = createAction('LOGOUT');
 
-const addNewSavedSearch = (searchTerm) => (dispatch, getStore) => {
-  dispatch(addSavedSearch(searchTerm));
-
-  const profile = getStore().user.profile;
-  const metadata = profile.user_metadata || {};
-  const savedSearches = metadata.saved_searches || [];
-  savedSearches.push(searchTerm);
-
-  const updatedProfile = Object.assign({}, profile, {
-    user_metadata: {
-      saved_searches: savedSearches
-    }
-  });
-
-  return updateProfile(updatedProfile)
-    .then(setUserProfile)
-    .then(dispatch);
-};
-
 const requestLatestIssue = () => (dispatch) => {
   dispatch(requestedIssue());
 
@@ -60,10 +37,10 @@ const requestLatestIssue = () => (dispatch) => {
     .then(dispatch);
 };
 
-const addToOrder = (orderItem) => (
+const addToOrder = (previewsCode) => (
   (dispatch, getStore) => {
     const catalogue = getStore().issues.data;
-    const item = catalogue.find((d) => d.previewsCode === orderItem);
+    const item = catalogue.find((d) => d.previewsCode === previewsCode);
 
     dispatch(addToOrderCreator({
       previews: item.previewsCode,
@@ -96,6 +73,6 @@ export {
     showSavedSearches,
     closeSavedSearches,
     deleteSavedSearch,
-    addNewSavedSearch,
+    addSavedSearch,
     performSavedSearch
 };
