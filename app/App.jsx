@@ -16,7 +16,6 @@ import {
   setUserProfile
 } from './actions';
 
-const service = AuthServiceFactory();
 
 const AppComponent = ({ authService }) => (
   <div className="previewsApp">
@@ -43,6 +42,7 @@ AppComponent.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => {
+  const service = AuthServiceFactory();
   service.onAuth((auth) => {
     auth.getProfile((err, profile) => {
       if (err) {
