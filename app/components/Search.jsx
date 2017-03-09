@@ -31,4 +31,8 @@ SearchComponent.propTypes = {
   searchValue: React.PropTypes.string
 };
 
+SearchComponent.defaultProps = {
+  searchValue: ''
+};
+
 export default SearchComponent;

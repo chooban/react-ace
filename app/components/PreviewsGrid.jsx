@@ -120,7 +120,8 @@ PreviewsGrid.propTypes = {
 PreviewsGrid.defaultProps = {
   gridData: [],
   hasPrevious: false,
-  hasNext: false
+  hasNext: false,
+  savedSearches: []
 };
 
 export default PreviewsGrid;

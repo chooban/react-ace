@@ -19,4 +19,10 @@ ClickableIcon.propTypes = {
   iconName: React.PropTypes.string
 };
 
+ClickableIcon.defaultProps = {
+  onClick: () => ({}),
+  className: '',
+  iconName: ''
+};
+
 export default ClickableIcon;

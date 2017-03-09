@@ -2,10 +2,10 @@ import React from 'react';
 
 const SavedSearchesList = ({ savedSearches, onDelete, onSelect }) => (
   <ul className="collection savedsearches">
-    {savedSearches.map((searchData, idx) => (
+    {savedSearches.map((searchData) => (
       <li
         className="collection-item"
-        key={idx}
+        key={searchData.searchTerm}
       >
         <span
           className="primary-content"
@@ -38,8 +38,8 @@ const SavedSearchesList = ({ savedSearches, onDelete, onSelect }) => (
 
 SavedSearchesList.propTypes = {
   savedSearches: React.PropTypes.array.isRequired,
-  onDelete: React.PropTypes.func,
-  onSelect: React.PropTypes.func
+  onDelete: React.PropTypes.func.isRequired,
+  onSelect: React.PropTypes.func.isRequired
 };
 
 export default SavedSearchesList;

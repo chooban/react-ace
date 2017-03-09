@@ -39,7 +39,7 @@ const AppComponent = ({ authService }) => (
 );
 
 AppComponent.propTypes = {
-  authService: React.PropTypes.object
+  authService: React.PropTypes.object.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => {

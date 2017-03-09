@@ -41,7 +41,7 @@ const AddNewSavedSearchComponent = ({ onAdd }) => (
 );
 
 AddNewSavedSearchComponent.propTypes = {
-  onAdd: React.PropTypes.func
+  onAdd: React.PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({

@@ -35,8 +35,13 @@ const SavedSearchesComponent = ({ display, close, hasSearches }) => (
 
 SavedSearchesComponent.propTypes = {
   display: React.PropTypes.bool,
-  close: React.PropTypes.func,
+  close: React.PropTypes.func.isRequired,
   hasSearches: React.PropTypes.bool
+};
+
+SavedSearchesComponent.defaultProps = {
+  display: false,
+  hasSearches: false
 };
 
 const mapStateToProps = (state) => ({

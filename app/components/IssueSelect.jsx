@@ -20,7 +20,11 @@ const IssueSelect = ({ issues, onSelectIssue = devNull }) => (
 
 IssueSelect.propTypes = {
   issues: React.PropTypes.array,
-  onSelectIssue: React.PropTypes.func
+  onSelectIssue: React.PropTypes.func.isRequired
+};
+
+IssueSelect.defaultProps = {
+  issues: []
 };
 
 IssueSelect.displayName = 'Issue Dropdown';

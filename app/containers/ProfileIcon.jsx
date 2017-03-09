@@ -33,9 +33,9 @@ const ProfileIconComponent = ({ authService, doLogout, displaySavedSearches }) =
 );
 
 ProfileIconComponent.propTypes = {
-  authService: React.PropTypes.object,
-  doLogout: React.PropTypes.func,
-  displaySavedSearches: React.PropTypes.func
+  authService: React.PropTypes.object.isRequired,
+  doLogout: React.PropTypes.func.isRequired,
+  displaySavedSearches: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = () => ({
