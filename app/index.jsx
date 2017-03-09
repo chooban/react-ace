@@ -3,9 +3,11 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+
 import app from './reducers';
 import { requestLatestIssue } from './actions';
 import actors from './actors';
+import savedSearchMiddleware from './middlewares/SavedSearchObserver';
 import './main.css';
 
 import RootApp from './App';
@@ -20,6 +22,8 @@ function run() {
     };
     middlewares.push(createLogger(loggerConfig));
   }
+
+  middlewares.push(savedSearchMiddleware);
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(app, composeEnhancers(applyMiddleware(...middlewares)));

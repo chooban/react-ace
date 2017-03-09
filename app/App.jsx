@@ -25,7 +25,7 @@ const AppComponent = ({ authService }) => (
         <SearchContainer />
         <OrderView />
         <HelpIconContainer />
-        <AccountIconContainer authService={authService} />
+        <AccountIconContainer isLoggedIn={authService.loggedIn()} />
       </div>
     </nav>
     <main className="content">
@@ -45,7 +45,13 @@ AppComponent.propTypes = {
 const mapDispatchToProps = (dispatch) => {
   service.onAuth((auth) => {
     auth.getProfile((err, profile) => {
-      if (err) console.error(err); //eslint-disable-line
+      if (err) {
+        //eslint-disable-next-line
+        console.error('Error fetching profile');
+
+        //eslint-disable-next-line
+        console.error(err);
+      }
 
       dispatch(setUserProfile(profile));
     });

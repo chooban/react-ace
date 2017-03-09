@@ -11,7 +11,7 @@ services:
   profilesapi:
     image: chooban/ace-profiles-api:latest
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
       - LOG_LEVEL=debug
   web:
     build: .

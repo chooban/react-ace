@@ -10,16 +10,19 @@ const checkStatus = (resp) => {
   return Promise.reject(new Error(resp.statusText));
 };
 
-export function updateProfile() {
+export function updateProfile(searches) {
   const AuthService = AuthServiceFactory();
   const acceptJsonHeaders = {
     headers: {
       Accept: 'application/json',
-      Authorization: `Bearer ${AuthService.getToken()}`
+      Authorization: `Bearer ${AuthService.getToken()}`,
+      'Content-Type': 'application/json'
     },
     method: 'POST',
-    cache: false
+    cache: false,
+    body: JSON.stringify(searches)
   };
+
   return fetch('/api/profiles/savedsearches', acceptJsonHeaders)
     .then(checkStatus)
     .then(parseData)

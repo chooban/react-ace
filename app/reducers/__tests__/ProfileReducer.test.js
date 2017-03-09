@@ -38,6 +38,7 @@ test('User profile reducer functions', (t) => {
       nickname: 'chooban',
       savedsearches: []
     });
+    t.ok(state.user.profileFetched);
     t.end();
   });
 
@@ -52,6 +53,7 @@ test('User profile reducer functions', (t) => {
       nickname: 'chooban',
       savedsearches: hardcodedSearches
     });
+    t.ok(state.user.profileFetched);
     t.end();
   });
 
@@ -61,11 +63,13 @@ test('User profile reducer functions', (t) => {
       type: 'SET_USER_PROFILE',
       payload: auth0ProfileNoSearches
     });
+
     state = reducer(state, {
       type: 'LOGOUT'
     });
 
     t.notOk(state.user.profile);
+    t.notOk(state.user.profileFetched);
     t.end();
   });
 
@@ -123,6 +127,33 @@ test('User profile reducer functions', (t) => {
     });
 
     t.equal(state.user.profile.savedsearches.includes('northlanders'), true);
+    t.equal(state.user.profile.savedsearches.length, numberOfSearches + 1);
+    t.end();
+  });
+
+  t.test('Adding a duplicate saved search', (t) => {
+    let state = reducer(undefined, {});
+    state = reducer(state, {
+      type: 'SET_USER_PROFILE',
+      payload: auth0ProfileNoSearches
+    });
+
+    const numberOfSearches = state.user.profile.savedsearches.length;
+    t.equal(state.user.profile.savedsearches.includes('northlanders'), false);
+
+    state = reducer(state, {
+      type: 'ADD_SAVED_SEARCH',
+      payload: 'northlanders'
+    });
+
+    t.equal(state.user.profile.savedsearches.includes('northlanders'), true);
+    t.equal(state.user.profile.savedsearches.length, numberOfSearches + 1);
+
+    state = reducer(state, {
+      type: 'ADD_SAVED_SEARCH',
+      payload: 'northlanders'
+    });
+
     t.equal(state.user.profile.savedsearches.length, numberOfSearches + 1);
     t.end();
   });

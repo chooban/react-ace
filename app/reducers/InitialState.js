@@ -21,7 +21,11 @@ export default {
     showSavedSearches: false
   },
   user: {
-    profile: null
+    profileFetched: false,
+    profile: {
+      nickname: null,
+      savedsearches: []
+    }
   }
 };
 

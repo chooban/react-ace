@@ -10,12 +10,14 @@ export default function profileReducer(state = initialState.user, action) {
           []
       };
       return Object.assign({}, state, {
-        profile
+        profile,
+        profileFetched: true
       });
     }
     case 'LOGOUT':
       return Object.assign({}, state, {
-        profile: null
+        profile: null,
+        profileFetched: false
       });
     case 'DELETE_SAVED_SEARCH': {
       const searches = state.profile.savedsearches.slice(0);
@@ -31,9 +33,14 @@ export default function profileReducer(state = initialState.user, action) {
       });
     }
     case 'ADD_SAVED_SEARCH': {
-      const searches = state.profile.savedsearches.concat(action.payload);
+      const currentSearches = state.profile.savedsearches;
+
+      if (currentSearches.includes(action.payload)) {
+        return state;
+      }
+
       const profile = Object.assign({}, state.profile, {
-        savedsearches: searches
+        savedsearches: currentSearches.concat(action.payload)
       });
       return Object.assign({},
         state, {

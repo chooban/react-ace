@@ -15,7 +15,7 @@ function fetchInitialGridData(state, dispatch) {
 }
 
 function setUserInfo(state, dispatch) {
-  if (authService.loggedIn() && !state.user.profile && !profileFetchInFlight) {
+  if (authService.loggedIn() && !state.user.profileFetched && !profileFetchInFlight) {
     profileFetchInFlight = true;
     authService.getProfile((err, profile) => {
       profileFetchInFlight = false;

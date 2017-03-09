@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addNewSavedSearch } from '../actions';
+import { addSavedSearch } from '../actions';
 import ClickableIcon from '../components/ClickableIcon';
 
 const AddNewSavedSearchComponent = ({ onAdd }) => (
@@ -14,6 +14,13 @@ const AddNewSavedSearchComponent = ({ onAdd }) => (
           type="text"
           placeholder="Add new search term"
           className="addnewsearch"
+          onKeyUp={(e) => {
+            if (e.keyCode === 13) {
+              const input = document.querySelector('input.addnewsearch');
+              onAdd(input.value);
+              input.value = '';
+            }
+          }}
         />
       </span>
       <span
@@ -38,7 +45,7 @@ AddNewSavedSearchComponent.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onAdd: (newSearch) => dispatch(addNewSavedSearch(newSearch))
+  onAdd: (newSearch) => dispatch(addSavedSearch(newSearch))
 });
 
 const AddNewSavedSearch = connect(
