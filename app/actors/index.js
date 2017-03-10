@@ -1,5 +1,4 @@
 import {
-  requestIssue,
   setUserProfile
 } from '../actions';
 
@@ -7,12 +6,6 @@ import { AuthServiceFactory } from '../utils/AuthService';
 
 const authService = AuthServiceFactory();
 let profileFetchInFlight = false;
-
-function fetchInitialGridData(state, dispatch) {
-  if (state.issues.issuesList.length && !state.issues.data.length) {
-    dispatch(requestIssue(state.issues.issuesList[0]));
-  }
-}
 
 function setUserInfo(state, dispatch) {
   if (authService.loggedIn() && !state.user.profileFetched && !profileFetchInFlight) {
@@ -29,7 +22,6 @@ function setUserInfo(state, dispatch) {
 }
 
 const actors = [
-  fetchInitialGridData,
   setUserInfo
 ];
 
