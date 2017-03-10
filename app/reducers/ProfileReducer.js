@@ -1,6 +1,7 @@
 import initialState from './InitialState';
+import { AuthServiceFactory } from '../utils/AuthService';
 
-export default function profileReducer(state = initialState.user, action) {
+export default function (state = initialState.user, action) {
   switch (action.type) {
     case 'SET_USER_PROFILE': {
       const profile = {
@@ -14,11 +15,14 @@ export default function profileReducer(state = initialState.user, action) {
         profileFetched: true
       });
     }
-    case 'LOGOUT':
+    case 'LOGOUT': {
+      const authService = AuthServiceFactory();
+      authService.logout();
       return Object.assign({}, state, {
         profile: null,
         profileFetched: false
       });
+    }
     case 'DELETE_SAVED_SEARCH': {
       const searches = state.profile.savedsearches.slice(0);
       const idx = searches.indexOf(action.payload);

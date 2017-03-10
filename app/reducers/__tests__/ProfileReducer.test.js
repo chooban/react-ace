@@ -1,6 +1,9 @@
 /* eslint no-shadow: 0 */
 import test from 'tape';
-import reducer from '../';
+import sinon from 'sinon';
+
+import initialState from '../InitialState';
+import reducer, { __RewireAPI__ as ReducerRewireAPI } from '../ProfileReducer';
 
 test('User profile reducer functions', (t) => {
   const hardcodedSearches = [
@@ -28,17 +31,17 @@ test('User profile reducer functions', (t) => {
   });
 
   t.test('Setting the user profile without searches', (t) => {
-    let state = reducer(undefined, {});
+    let state = reducer(initialState.user, {});
     state = reducer(state, {
       type: 'SET_USER_PROFILE',
       payload: auth0ProfileNoSearches
     });
 
-    t.deepEqual(state.user.profile, {
+    t.deepEqual(state.profile, {
       nickname: 'chooban',
       savedsearches: []
     });
-    t.ok(state.user.profileFetched);
+    t.ok(state.profileFetched);
     t.end();
   });
 
@@ -49,15 +52,19 @@ test('User profile reducer functions', (t) => {
       payload: auth0ProfileWithSearches
     });
 
-    t.deepEqual(state.user.profile, {
+    t.deepEqual(state.profile, {
       nickname: 'chooban',
       savedsearches: hardcodedSearches
     });
-    t.ok(state.user.profileFetched);
+    t.ok(state.profileFetched);
     t.end();
   });
 
   t.test('Logging out', (t) => {
+    const AuthService = {
+      logout: sinon.spy()
+    };
+    ReducerRewireAPI.__Rewire__('AuthServiceFactory', () => AuthService);
     let state = reducer(undefined, {});
     state = reducer(state, {
       type: 'SET_USER_PROFILE',
@@ -67,9 +74,10 @@ test('User profile reducer functions', (t) => {
     state = reducer(state, {
       type: 'LOGOUT'
     });
-
-    t.notOk(state.user.profile);
-    t.notOk(state.user.profileFetched);
+    ReducerRewireAPI.__ResetDependency__('AuthServiceFactory');
+    t.ok(AuthService.logout.calledOnce);
+    t.notOk(state.profile);
+    t.notOk(state.profileFetched);
     t.end();
   });
 
@@ -80,16 +88,16 @@ test('User profile reducer functions', (t) => {
       payload: auth0ProfileWithSearches
     });
 
-    const numberOfSearches = state.user.profile.savedsearches.length;
-    t.equal(state.user.profile.savedsearches.includes('bad machinery'), true);
+    const numberOfSearches = state.profile.savedsearches.length;
+    t.equal(state.profile.savedsearches.includes('bad machinery'), true);
 
     state = reducer(state, {
       type: 'DELETE_SAVED_SEARCH',
       payload: 'bad machinery'
     });
 
-    t.equal(state.user.profile.savedsearches.includes('bad machinery'), false);
-    t.equal(state.user.profile.savedsearches.length, numberOfSearches - 1);
+    t.equal(state.profile.savedsearches.includes('bad machinery'), false);
+    t.equal(state.profile.savedsearches.length, numberOfSearches - 1);
     t.end();
   });
 
@@ -100,14 +108,14 @@ test('User profile reducer functions', (t) => {
       payload: auth0ProfileWithSearches
     });
 
-    const numberOfSearches = state.user.profile.savedsearches.length;
+    const numberOfSearches = state.profile.savedsearches.length;
 
     state = reducer(state, {
       type: 'DELETE_SAVED_SEARCH',
       payload: 'flubber'
     });
 
-    t.equal(state.user.profile.savedsearches.length, numberOfSearches);
+    t.equal(state.profile.savedsearches.length, numberOfSearches);
     t.end();
   });
 
@@ -118,16 +126,16 @@ test('User profile reducer functions', (t) => {
       payload: auth0ProfileNoSearches
     });
 
-    const numberOfSearches = state.user.profile.savedsearches.length;
-    t.equal(state.user.profile.savedsearches.includes('northlanders'), false);
+    const numberOfSearches = state.profile.savedsearches.length;
+    t.equal(state.profile.savedsearches.includes('northlanders'), false);
 
     state = reducer(state, {
       type: 'ADD_SAVED_SEARCH',
       payload: 'northlanders'
     });
 
-    t.equal(state.user.profile.savedsearches.includes('northlanders'), true);
-    t.equal(state.user.profile.savedsearches.length, numberOfSearches + 1);
+    t.equal(state.profile.savedsearches.includes('northlanders'), true);
+    t.equal(state.profile.savedsearches.length, numberOfSearches + 1);
     t.end();
   });
 
@@ -138,23 +146,23 @@ test('User profile reducer functions', (t) => {
       payload: auth0ProfileNoSearches
     });
 
-    const numberOfSearches = state.user.profile.savedsearches.length;
-    t.equal(state.user.profile.savedsearches.includes('northlanders'), false);
+    const numberOfSearches = state.profile.savedsearches.length;
+    t.equal(state.profile.savedsearches.includes('northlanders'), false);
 
     state = reducer(state, {
       type: 'ADD_SAVED_SEARCH',
       payload: 'northlanders'
     });
 
-    t.equal(state.user.profile.savedsearches.includes('northlanders'), true);
-    t.equal(state.user.profile.savedsearches.length, numberOfSearches + 1);
+    t.equal(state.profile.savedsearches.includes('northlanders'), true);
+    t.equal(state.profile.savedsearches.length, numberOfSearches + 1);
 
     state = reducer(state, {
       type: 'ADD_SAVED_SEARCH',
       payload: 'northlanders'
     });
 
-    t.equal(state.user.profile.savedsearches.length, numberOfSearches + 1);
+    t.equal(state.profile.savedsearches.length, numberOfSearches + 1);
     t.end();
   });
 });

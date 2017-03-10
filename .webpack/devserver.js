@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = function (paths) {
@@ -29,9 +28,6 @@ module.exports = function (paths) {
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new NpmInstallPlugin({
-        save: true,
-      }),
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('development'),

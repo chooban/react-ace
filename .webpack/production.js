@@ -5,6 +5,7 @@ module.exports = function() {
     devtool: 'source-map',
     plugins: [
       new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true,
         compress: {
           warnings: false,
         },

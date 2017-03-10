@@ -1,5 +1,6 @@
 import {
-  setUserProfile
+  setUserProfile,
+  logout
 } from '../actions';
 
 import { AuthServiceFactory } from '../utils/AuthService';
@@ -13,7 +14,8 @@ function setUserInfo(state, dispatch) {
     authService.getProfile((err, profile) => {
       profileFetchInFlight = false;
       if (err) {
-        console.error(err); //eslint-disable-line
+        console.error(err);//eslint-disable-line
+        dispatch(logout());
       } else {
         dispatch(setUserProfile(profile));
       }

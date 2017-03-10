@@ -13,18 +13,19 @@ import SavedSearchesContainer from './containers/SavedSearchesContainer';
 
 import { AuthServiceFactory } from './utils/AuthService';
 import {
+  logout,
   setUserProfile
 } from './actions';
 
 
-const AppComponent = ({ authService }) => (
+const AppComponent = ({ loggedIn }) => (
   <div className="previewsApp">
     <nav>
       <div className="nav-wrapper">
         <SearchContainer />
         <OrderView />
         <HelpIconContainer />
-        <AccountIconContainer isLoggedIn={authService.loggedIn()} />
+        <AccountIconContainer isLoggedIn={loggedIn} />
       </div>
     </nav>
     <main className="content">
@@ -38,7 +39,14 @@ const AppComponent = ({ authService }) => (
 );
 
 AppComponent.propTypes = {
-  authService: React.PropTypes.object.isRequired
+  loggedIn: React.PropTypes.bool.isRequired
+};
+
+const mapStateToProps = () => {
+  const service = AuthServiceFactory();
+  return {
+    loggedIn: service.loggedIn()
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -47,23 +55,19 @@ const mapDispatchToProps = (dispatch) => {
     auth.getProfile((err, profile) => {
       if (err) {
         //eslint-disable-next-line
-        console.error('Error fetching profile');
-
-        //eslint-disable-next-line
         console.error(err);
+        dispatch(logout());
       }
 
       dispatch(setUserProfile(profile));
     });
   });
 
-  return {
-    authService: service
-  };
+  return {};
 };
 
 const App = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AppComponent);
 

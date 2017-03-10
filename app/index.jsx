@@ -37,9 +37,9 @@ function run() {
 // Just make an assumption base on one missing function.
 if (!Object.assign) {
   require.ensure([], () => {
-    let polyfill = require('babel-polyfill'); //eslint-disable-line
+    require('babel-polyfill'); //eslint-disable-line
     run();
-  });
+  }, 'polyfill');
 } else {
   run();
 }
