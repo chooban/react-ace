@@ -1,12 +1,7 @@
-export default (function (root, factory) { //eslint-disable-line
-  module.exports = factory();
-}(this, () => function (callback, delay) { //eslint-disable-line
+export default function (fn, wait) {
   let timeout;
-  return function (...args) { //eslint-disable-line
-    const context = this;
+  return function debounce(...args) {
     clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      callback.apply(context, args);
-    }, delay);
+    timeout = setTimeout(() => fn.apply(this, args), (wait || 1));
   };
-}));
+}
