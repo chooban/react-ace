@@ -44,12 +44,12 @@ SavedSearchesComponent.defaultProps = {
   hasSearches: false
 };
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   display: state.ui.showSavedSearches,
   hasSearches: !!(state.user.profile && state.user.profile.savedsearches.length > 0)
 });
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   close: () => dispatch(closeSavedSearches())
 });
 

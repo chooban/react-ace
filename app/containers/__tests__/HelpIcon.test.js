@@ -16,7 +16,7 @@ test('Help Icon Container', (t) => {
 
     props.onClick();
 
-    t.equal(dispatchSpy.calledOnce, true);
+    t.ok(dispatchSpy.calledOnce, true);
     t.ok(dispatchSpy.calledWith(showHelp()));
     t.end();
   });

@@ -42,15 +42,17 @@ HelpComponent.propTypes = {
   close: React.PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   display: state.ui.showHelp
+});
+
+export const mapDispatchToProps = (dispatch) => ({
+  close: () => dispatch(closeHelp())
 });
 
 const HelpPopupContainer = connect(
   mapStateToProps,
-  {
-    close: () => (dispatch) => dispatch(closeHelp())
-  }
+  mapDispatchToProps
 )(HelpComponent);
 
 export default HelpPopupContainer;
