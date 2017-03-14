@@ -3,7 +3,6 @@ import { updateProfile } from '../api/ProfilesWebApi';
 import { setUserProfile } from '../actions';
 import debounce from '../utils/debounce';
 
-const authService = AuthServiceFactory();
 let cb;
 
 export default (store) => (next) => (action) => {
@@ -12,6 +11,7 @@ export default (store) => (next) => (action) => {
 
     updateProfile(searches)
       .then(() => {
+        const authService = AuthServiceFactory();
         authService.getProfile((err, profile) => {
           if (err) {
             //eslint-disable-next-line

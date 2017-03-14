@@ -34,4 +34,40 @@ test('Saved searches props', (t) => {
     });
     t.end();
   });
+
+  t.test('No searches to show', (t) => {
+    const state = {
+      ui: {
+        showSavedSearches: true
+      },
+      user: {
+        profile: {
+          nickname: 'chooban',
+          savedsearches: []
+        }
+      }
+    };
+
+    const props = mapStateToProps(state);
+    t.notOk(props.hasSearches);
+    t.end();
+  });
+
+  t.test('Searches to show', (t) => {
+    const state = {
+      ui: {
+        showSavedSearches: true
+      },
+      user: {
+        profile: {
+          nickname: 'chooban',
+          savedsearches: ['dredd']
+        }
+      }
+    };
+
+    const props = mapStateToProps(state);
+    t.ok(props.hasSearches);
+    t.end();
+  });
 });

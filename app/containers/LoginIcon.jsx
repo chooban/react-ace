@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ClickableIcon from '../components/ClickableIcon';
 import { AuthServiceFactory } from '../utils/AuthService';
 
-const mapStateToProps = () => {
+export const mapStateToProps = () => {
   const authService = AuthServiceFactory();
   return {
     className: 'accounticon',

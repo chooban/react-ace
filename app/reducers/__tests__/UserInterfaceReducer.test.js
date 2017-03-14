@@ -26,7 +26,6 @@ test('User interface reducer functions', (t) => {
       trueAction: Actions.showSavedSearches(),
       falseAction: Actions.closeSavedSearches()
     }
-
   ];
 
   actionsToTest.forEach((a) => {
@@ -59,6 +58,15 @@ test('User interface reducer functions', (t) => {
 
     state = reducer(state, Actions.removeFromOrder());
     t.equal(state.ui.showItemPreview, false);
+    t.end();
+  });
+
+  t.test('Exporting order closes order popup', (t) => {
+    let state = reducer(undefined, {});
+    state.ui.showOrder = true;
+
+    state = reducer(state, Actions.exportOrder());
+    t.notOk(state.ui.showOrder);
     t.end();
   });
 });

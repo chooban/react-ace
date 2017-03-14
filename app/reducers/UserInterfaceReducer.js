@@ -6,6 +6,7 @@ export default function ui(state = initialState.ui, action) {
       return Object.assign({}, state, {
         showOrder: true
       });
+    case 'EXPORT_ORDER':
     case 'CLOSE_ORDER':
       return Object.assign({}, state, {
         showOrder: false

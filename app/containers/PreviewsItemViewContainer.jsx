@@ -44,12 +44,12 @@ PreviewsItemViewComponent.defaultProps = {
   previewsCode: ''
 };
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   display: state.ui.showItemPreview,
   previewsCode: state.ui.itemPreview
 });
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   close: () => dispatch(closePreview())
 });
 

@@ -63,7 +63,8 @@ const config = function (paths) {
         template: 'public/index.html'
       }),
       new webpack.ProvidePlugin({
-        Promise: 'es6-promise', // Thanks Aaron (https://gist.github.com/Couto/b29676dd1ab8714a818f#gistcomment-1584602)
+        Promise: 'es6-promise', // Thanks Aaron (https://gist.github.com/Couto/b29676dd1ab8714a818f#gistcomment-1584602),
+        'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
       }),
       new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en-gb|uk)$/),
       new webpack.optimize.CommonsChunkPlugin({

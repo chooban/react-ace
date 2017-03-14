@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
+import { AuthServiceFactory } from '../utils/AuthService';
 import {
   logout as logoutAction,
   showSavedSearches
 } from '../actions/';
-import { AuthServiceFactory } from '../utils/AuthService';
 
-const ProfileIconComponent = ({ authService, doLogout, displaySavedSearches }) => (
+const ProfileIconComponent = ({ onLogout, displaySavedSearches }) => (
   <div className="accounticon">
     <i
       className="material-icons"
@@ -24,7 +25,7 @@ const ProfileIconComponent = ({ authService, doLogout, displaySavedSearches }) =
       <a
         href="#!"
         className="collection-item"
-        onClick={() => doLogout(authService)}
+        onClick={() => onLogout()}
       >
         Logout
       </a>
@@ -33,25 +34,23 @@ const ProfileIconComponent = ({ authService, doLogout, displaySavedSearches }) =
 );
 
 ProfileIconComponent.propTypes = {
-  authService: React.PropTypes.object.isRequired,
-  doLogout: React.PropTypes.func.isRequired,
+  onLogout: React.PropTypes.func.isRequired,
   displaySavedSearches: React.PropTypes.func.isRequired
 };
 
-const mapStateToProps = () => ({
-  authService: AuthServiceFactory()
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  displaySavedSearches: () => dispatch(showSavedSearches()),
-  doLogout: (authService) => {
-    authService.logout();
-    dispatch(logoutAction());
-  }
-});
+export const mapDispatchToProps = (dispatch) => {
+  const authService = AuthServiceFactory();
+  return {
+    displaySavedSearches: () => dispatch(showSavedSearches()),
+    doLogout: () => {
+      authService.logout();
+      dispatch(logoutAction());
+    }
+  };
+};
 
 const ProfileIconContainer = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(ProfileIconComponent);
 
