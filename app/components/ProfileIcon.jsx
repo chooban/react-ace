@@ -1,11 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-
-import { AuthServiceFactory } from '../utils/AuthService';
-import {
-  logout as logoutAction,
-  showSavedSearches
-} from '../actions/';
 
 const ProfileIconComponent = ({ onLogout, displaySavedSearches }) => (
   <div className="accounticon">
@@ -38,21 +31,4 @@ ProfileIconComponent.propTypes = {
   displaySavedSearches: React.PropTypes.func.isRequired
 };
 
-export const mapDispatchToProps = (dispatch) => {
-  const authService = AuthServiceFactory();
-  return {
-    displaySavedSearches: () => dispatch(showSavedSearches()),
-    doLogout: () => {
-      authService.logout();
-      dispatch(logoutAction());
-    }
-  };
-};
-
-const ProfileIconContainer = connect(
-  null,
-  mapDispatchToProps
-)(ProfileIconComponent);
-
-export default ProfileIconContainer;
-
+export default ProfileIconComponent;

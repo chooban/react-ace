@@ -1,13 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import Modal from '../components/Modal';
+import Modal from './Modal';
 import SavedSearchesList from '../containers/SavedSearchesListContainer';
-import AddNewSavedSearch from './AddNewSavedSearchContainer';
-
-import {
-  closeSavedSearches
-} from '../actions';
+import AddNewSavedSearch from '../containers/AddNewSavedSearchContainer';
 
 const SavedSearchesComponent = ({ display, close, hasSearches }) => (
   <Modal isOpen={display} width="400px" height="50%">
@@ -44,18 +39,4 @@ SavedSearchesComponent.defaultProps = {
   hasSearches: false
 };
 
-export const mapStateToProps = (state) => ({
-  display: state.ui.showSavedSearches,
-  hasSearches: !!(state.user.profile && state.user.profile.savedsearches.length > 0)
-});
-
-export const mapDispatchToProps = (dispatch) => ({
-  close: () => dispatch(closeSavedSearches())
-});
-
-const SavedSearchesContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SavedSearchesComponent);
-
-export default SavedSearchesContainer;
+export default SavedSearchesComponent;

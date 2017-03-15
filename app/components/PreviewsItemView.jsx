@@ -1,13 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import {
-  closePreview
-} from '../actions';
-
-import Modal from '../components/Modal';
-import ItemPreview from '../components/PreviewsItemPreview';
-import ToggleOrder from './ToggleOrderContainer';
+import Modal from './Modal';
+import ItemPreview from './PreviewsItemPreview';
+import ToggleOrder from '../containers/ToggleOrderContainer';
 
 const PreviewsItemViewComponent = ({ display, previewsCode, close }) => (
   <Modal isOpen={display}>
@@ -44,18 +39,4 @@ PreviewsItemViewComponent.defaultProps = {
   previewsCode: ''
 };
 
-export const mapStateToProps = (state) => ({
-  display: state.ui.showItemPreview,
-  previewsCode: state.ui.itemPreview
-});
-
-export const mapDispatchToProps = (dispatch) => ({
-  close: () => dispatch(closePreview())
-});
-
-const PreviewsItemViewContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PreviewsItemViewComponent);
-
-export default PreviewsItemViewContainer;
+export default PreviewsItemViewComponent;

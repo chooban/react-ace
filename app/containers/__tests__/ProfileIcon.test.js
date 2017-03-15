@@ -37,7 +37,7 @@ test('Profile icon', (t) => {
     __RewireAPI__.__Rewire__('AuthServiceFactory', () => MockAuthService);
 
     const props = mapDispatchToProps(dispatchSpy);
-    props.doLogout();
+    props.onLogout();
 
     t.ok(MockAuthService.logout.calledOnce);
     t.ok(dispatchSpy.calledOnce);

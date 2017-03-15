@@ -8,7 +8,7 @@ import OrderView from './containers/ShoppingCartContainer';
 import SearchContainer from './containers/SearchContainer';
 import HelpIconContainer from './containers/HelpIcon';
 import HelpPopupContainer from './containers/HelpPopup';
-import AccountIconContainer from './containers/AccountIconContainer';
+import AccountIconComponent from './components/AccountIconComponent';
 import SavedSearchesContainer from './containers/SavedSearchesContainer';
 
 import { AuthServiceFactory } from './utils/AuthService';
@@ -25,7 +25,7 @@ const AppComponent = ({ loggedIn }) => (
         <SearchContainer />
         <OrderView />
         <HelpIconContainer />
-        <AccountIconContainer isLoggedIn={loggedIn} />
+        <AccountIconComponent isLoggedIn={loggedIn} />
       </div>
     </nav>
     <main className="content">

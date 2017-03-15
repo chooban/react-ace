@@ -1,11 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import OrderEditor from '../containers/OrderEditorContainer';
-import { closeOrder, exportOrder } from '../actions/';
-import Modal from '../components/Modal';
+import Modal from './Modal';
 
-const OrderPopupComponent = ({ display, onExport, onClose, hasOrder }) => (
+const OrderPopup = ({ display, onExport, onClose, hasOrder }) => (
   <Modal isOpen={display}>
     <div className="header">
       Order Contents
@@ -36,26 +34,11 @@ const OrderPopupComponent = ({ display, onExport, onClose, hasOrder }) => (
   </Modal>
 );
 
-OrderPopupComponent.propTypes = {
+OrderPopup.propTypes = {
   display: React.PropTypes.bool.isRequired,
   onExport: React.PropTypes.func.isRequired,
   onClose: React.PropTypes.func.isRequired,
   hasOrder: React.PropTypes.bool.isRequired
 };
 
-export const mapDispatchToProps = (dispatch) => ({
-  onClose: () => dispatch(closeOrder()),
-  onExport: () => dispatch(exportOrder())
-});
-
-export const mapStateToProps = (state) => ({
-  hasOrder: !!state.order.items.length,
-  display: state.ui.showOrder
-});
-
-const OrderPopupContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OrderPopupComponent);
-
-export default OrderPopupContainer;
+export default OrderPopup;

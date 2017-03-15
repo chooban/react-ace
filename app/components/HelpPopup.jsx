@@ -1,10 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import { closeHelp } from '../actions';
-import Modal from '../components/Modal';
+import Modal from './Modal';
 
-const HelpComponent = ({ display, close }) => (
+const HelpPopup = ({ display, close }) => (
   <Modal isOpen={display}>
     <div className="header">
       Help
@@ -37,22 +35,9 @@ const HelpComponent = ({ display, close }) => (
   </Modal>
 );
 
-HelpComponent.propTypes = {
+HelpPopup.propTypes = {
   display: React.PropTypes.bool.isRequired,
   close: React.PropTypes.func.isRequired
 };
 
-export const mapStateToProps = (state) => ({
-  display: state.ui.showHelp
-});
-
-export const mapDispatchToProps = (dispatch) => ({
-  close: () => dispatch(closeHelp())
-});
-
-const HelpPopupContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HelpComponent);
-
-export default HelpPopupContainer;
+export default HelpPopup;
