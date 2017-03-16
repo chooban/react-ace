@@ -3,11 +3,12 @@ import * as Auth0Lock from 'auth0-lock';
 import config from './config';
 
 export class AuthService {
-  constructor(lock) {
+  constructor(lock, storage = localStorage) {
     this.lock = lock;
     this.lock.on('authenticated', this.doAuth.bind(this));
     this.login = this.login.bind(this);
     this.getProfile = this.getProfile.bind(this);
+    this.storage = storage;
   }
 
   login() {
@@ -31,15 +32,15 @@ export class AuthService {
   }
 
   setToken(idToken) {
-    localStorage.setItem('id_token', idToken);
+    this.storage.setItem('id_token', idToken);
   }
 
   getToken() {
-    return localStorage.getItem('id_token');
+    return this.storage.getItem('id_token');
   }
 
   logout() {
-    localStorage.removeItem('id_token');
+    this.storage.removeItem('id_token');
   }
 }
 
