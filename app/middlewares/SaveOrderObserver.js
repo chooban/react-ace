@@ -1,6 +1,7 @@
 const triggers = [
   'ADD_TO_ORDER',
-  'REMOVE_FROM_ORDER'
+  'REMOVE_FROM_ORDER',
+  'CLEAR_ORDER'
 ];
 
 export default (store) => (next) => (action) => {

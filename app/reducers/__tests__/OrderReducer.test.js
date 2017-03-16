@@ -72,4 +72,18 @@ test('Order reducer functions', (t) => {
     t.equal(state.order.issue, 'ecmail332');
     t.end();
   });
+
+  t.test('Clearing an order', (t) => {
+    let state = reducer(undefined, {});
+    state.order = {
+      issue: 'ecmail331',
+      items: ['abc']
+    };
+
+    state = reducer(state, Actions.clearOrder());
+
+    t.notOk(state.order.issue);
+    t.equal(state.order.items.length, 0);
+    t.end();
+  });
 });

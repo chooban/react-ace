@@ -25,6 +25,8 @@ export default function orderReducer(state = initialState.order, action) {
       return Object.assign({}, state, {
         issue: action.payload.file
       });
+    case 'CLEAR_ORDER':
+      return Object.assign({}, state, initialState.order);
     default:
       return state;
   }
