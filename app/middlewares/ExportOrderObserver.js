@@ -1,10 +1,12 @@
 import fileDownload from '../utils/FileDownload';
 import orderToCsv from '../utils/OrderToCsv';
 
+const triggers = ['EXPORT_ORDER'];
+
 export default (store) => (next) => (action) => {
-  if (action.type === 'EXPORT_ORDER') {
+  if (triggers.includes(action.type)) {
     const state = store.getState();
     fileDownload(orderToCsv(state.order.items), `order${state.order.issue}.csv`);
   }
-  next(action);
+  return next(action);
 };

@@ -8,12 +8,17 @@ import middlewares from './middlewares/';
 import { requestLatestIssue } from './actions';
 import actors from './actors';
 import './main.css';
+import initialStateFactory from './reducers/InitialStateFactory';
 
 import RootApp from './App';
 
 function run() {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  const store = createStore(app, composeEnhancers(applyMiddleware(...middlewares)));
+  const store = createStore(
+    app,
+    initialStateFactory(),
+    composeEnhancers(applyMiddleware(...middlewares))
+  );
 
   actors(store);
   store.dispatch(requestLatestIssue());
