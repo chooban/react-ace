@@ -6,25 +6,30 @@ import debounce from '../utils/debounce';
 let cb;
 
 export default (store) => (next) => (action) => {
+  const getAndSetProfile = () => {
+    const authService = AuthServiceFactory();
+    authService.getProfile((err, profile) => {
+      if (err) {
+        //eslint-disable-next-line
+        console.error('Error fetching profile');
+
+        //eslint-disable-next-line
+        console.error(err);
+      }
+      store.dispatch(setUserProfile(profile));
+    });
+  };
+
   const uploadSavedSearches = () => {
     const searches = store.getState().user.profile.savedsearches;
 
     updateProfile(searches)
-      .then(() => {
-        const authService = AuthServiceFactory();
-        authService.getProfile((err, profile) => {
-          if (err) {
-            //eslint-disable-next-line
-            console.error('Error fetching profile');
-
-            //eslint-disable-next-line
-            console.error(err);
-          }
-          store.dispatch(setUserProfile(profile));
-        });
-      })
+      .then(getAndSetProfile)
       .then(() => { cb = null; })
-      .catch(() => { cb = null; });
+      .catch(() => {
+        cb = null;
+        getAndSetProfile();
+      });
   };
   if (!cb) cb = debounce(uploadSavedSearches, 2000);
 

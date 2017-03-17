@@ -5,27 +5,53 @@ services:
     volumes:
       - './acedata/:/data:ro'
     environment:
-      - NODE_ENV=production
-      - LOG_LEVEL=info
+      - NODE_ENV=${NODE_ENV:-production}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
     deploy:
       restart_policy:
         condition: on-failure
+        max_attempts: 3
   ordersapi:
     image: chooban/ace-orders-api:latest
     environment:
-      - NODE_ENV=production
-      - LOG_LEVEL=info
+      - NODE_ENV=${NODE_ENV:-production}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
     deploy:
       restart_policy:
         condition: on-failure
+        max_attempts: 3
   profilesapi:
     image: chooban/ace-profiles-api:latest
     environment:
-      - NODE_ENV=production
-      - LOG_LEVEL=info
+      - NODE_ENV=${NODE_ENV:-production}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
     deploy:
       restart_policy:
         condition: on-failure
+        max_attempts: 3
     secrets:
       - auth0_client_id
       - auth0_client_secret
+      - auth0_management_token
+  web:
+    image: nginx:alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./build/:/var/www/acereact/public_html/
+      - ./nginx/ssl/certs/selfsigned.crt:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.crt
+      - ./nginx/ssl/private/selfsigned.key:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.key
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+secrets:
+  auth0_client_id:
+    file: ./auth0_client_id.txt
+  auth0_client_secret:
+    file: ./auth0_client_secret.txt
+  auth0_management_token:
+    file: ./auth0_management_token.txt
