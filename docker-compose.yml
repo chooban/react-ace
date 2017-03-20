@@ -33,6 +33,17 @@ services:
       - auth0_client_id
       - auth0_client_secret
       - auth0_management_token
+  bootstrapapi:
+    image: chooban/ace-bootstrap-api:latest
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    secrets:
+      - auth0_client_id
   web:
     image: nginx:alpine
     ports:
@@ -50,8 +61,8 @@ services:
         max_attempts: 3
 secrets:
   auth0_client_id:
-    file: ./auth0_client_id.txt
+    external: true
   auth0_client_secret:
-    file: ./auth0_client_secret.txt
+    external: true
   auth0_management_token:
-    file: ./auth0_management_token.txt
+    external: true

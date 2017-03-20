@@ -43,12 +43,13 @@ test('User interface reducer functions', (t) => {
     });
   });
 
+  // Skipped as the action is an async thunk. Needs more work.
   t.skip('Adding to order closes preview', (t) => {
     let state = reducer(undefined, {});
     state.ui.showItemPreview = true;
 
     state = reducer(state, Actions.addToOrder());
-    t.equal(state.ui.showItemPreview, false);
+    t.notOk(state.ui.showItemPreview);
     t.end();
   });
 
@@ -66,6 +67,15 @@ test('User interface reducer functions', (t) => {
     state.ui.showOrder = true;
 
     state = reducer(state, Actions.exportOrder());
+    t.notOk(state.ui.showOrder);
+    t.end();
+  });
+
+  t.test('Closing the order...closes it', (t) => {
+    let state = reducer(undefined, {});
+    state.ui.showOrder = true;
+
+    state = reducer(state, Actions.closeOrder());
     t.notOk(state.ui.showOrder);
     t.end();
   });

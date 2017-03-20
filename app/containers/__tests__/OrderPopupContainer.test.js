@@ -50,25 +50,4 @@ test('Order popup', (t) => {
     t.ok(dispatchSpy.calledWith(exportOrder()));
     t.end();
   });
-
-  t.skip('Exporting the current order', (t) => {
-    const orderToCsvSpy = sinon.stub().returns('A.N. Order');
-    const fileDownloadSpy = sinon.spy();
-    const dispatchSpy = sinon.spy();
-    const getState = () => state;
-
-    __RewireAPI__.__Rewire__('fileDownload', fileDownloadSpy);
-    __RewireAPI__.__Rewire__('orderToCsv', orderToCsvSpy);
-    const props = mapDispatchToProps(dispatchSpy);
-
-    props.exportOrder()(dispatchSpy, getState);
-
-    t.ok(orderToCsvSpy.calledOnce);
-    t.ok(fileDownloadSpy.calledOnce);
-    t.ok(fileDownloadSpy.calledWith('A.N. Order', 'order333.csv'));
-    t.end();
-
-    __RewireAPI__.__ResetDependency__('fileDownload');
-    __RewireAPI__.__ResetDependency__('orderToCsv');
-  });
 });

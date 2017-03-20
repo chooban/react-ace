@@ -4,12 +4,12 @@ const triggers = [
   'CLEAR_ORDER'
 ];
 
-export default (store) => (next) => (action) => {
+export default (storage = localStorage) => (store) => (next) => (action) => {
   const result = next(action);
 
   if (triggers.includes(action.type)) {
     const state = store.getState();
-    localStorage.setItem('saved_order', JSON.stringify(state.order));
+    storage.setItem('saved_order', JSON.stringify(state.order));
   }
 
   return result;
