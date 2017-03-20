@@ -1,7 +1,5 @@
 import * as Auth0Lock from 'auth0-lock';
 
-import config from './config';
-
 export class AuthService {
   constructor(lock, storage = localStorage) {
     this.lock = lock;
@@ -49,8 +47,8 @@ let instance;
 export function AuthServiceFactory() {
   if (!instance) {
     const lock = new Auth0Lock.default(//eslint-disable-line
-      config.auth0Id,
-      config.auth0Domain,
+      localStorage.getItem('auth0_id'),
+      localStorage.getItem('auth0_domain'),
       {
         redirectUrl: (global.window) ? global.window.location.href : '',
         responseType: 'token'

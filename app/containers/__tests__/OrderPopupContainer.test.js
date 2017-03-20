@@ -4,8 +4,7 @@ import sinon from 'sinon';
 
 import {
   mapDispatchToProps,
-  mapStateToProps,
-  __RewireAPI__
+  mapStateToProps
 } from '../OrderPopupContainer';
 
 import { closeOrder, exportOrder } from '../../actions';

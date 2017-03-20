@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 
-module.exports = function (paths) {
+module.exports = function devconfig(paths) {
   return {
     devServer: {
       contentBase: paths.build,
@@ -14,15 +14,15 @@ module.exports = function (paths) {
       proxy: {
         '/api/previews': {
           target: 'http://previewsapi:8100',
-          pathRewrite: { '^/api/previews' : '/previews' }
+          pathRewrite: { '^/api/previews': '/previews' }
         },
         '/api/orders': {
           target: 'http://ordersapi:8101',
-          pathRewrite: { '^/api/orders' : '/orders' }
+          pathRewrite: { '^/api/orders': '/orders' }
         },
         '/api/profiles': {
           target: 'http://profilesapi:8101',
-          pathRewrite: { '^/api/profiles' : '/profiles' }
+          pathRewrite: { '^/api/profiles': '/profiles' }
         }
       }
     },
@@ -30,10 +30,10 @@ module.exports = function (paths) {
       new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
-          NODE_ENV: JSON.stringify('development'),
-        },
+          NODE_ENV: JSON.stringify('development')
+        }
       }),
       new DashboardPlugin()
-    ],
+    ]
   };
 };

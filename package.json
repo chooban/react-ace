@@ -46,7 +46,6 @@
     "ignore-styles": "5.0.1",
     "immutable": "3.8.1",
     "imports-loader": "0.7.1",
-    "inline-environment-variables-webpack-plugin": "1.1.0",
     "jsdom": "9.11.0",
     "nyc": "10.1.2",
     "object-assign": "4.1.1",

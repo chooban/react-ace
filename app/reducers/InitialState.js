@@ -1,7 +1,6 @@
 export default {
   issues: {
     isFetching: false,
-    issuesList: [],
     data: []
   },
   order: {

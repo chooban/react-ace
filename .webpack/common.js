@@ -1,9 +1,8 @@
 const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const InlineEnviromentVariablesPlugin = require('inline-environment-variables-webpack-plugin');
 
-const config = function (paths) {
+const config = function configFactory(paths) {
   return {
     devtool: 'cheap-module-source-map',
     entry: {
@@ -31,7 +30,6 @@ const config = function (paths) {
     },
     output: {
       path: paths.build,
-      //chunkFilename: '[name].js',
       filename: '[name].js'
     },
     module: {
@@ -64,16 +62,14 @@ const config = function (paths) {
       }),
       new webpack.ProvidePlugin({
         Promise: 'es6-promise', // Thanks Aaron (https://gist.github.com/Couto/b29676dd1ab8714a818f#gistcomment-1584602),
-        'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
+        fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
       }),
-      new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en-gb|uk)$/),
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor'
       }),
       new CopyPlugin([
         { from: 'assets' }
-      ]),
-      new InlineEnviromentVariablesPlugin()
+      ])
     ]
   };
 };
