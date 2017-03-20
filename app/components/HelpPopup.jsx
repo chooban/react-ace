@@ -15,12 +15,14 @@ const HelpPopup = ({ display, close }) => (
 
       <p>
         If for some reason it&apos;s not working,
-        you can <a href="/api/previews/latest.csv">download the CSV file</a> instead.
+        you can <a href="/api/previews/latest.csv">download the CSV file</a>
+        instead.
       </p>
 
       <p>
         Bug reports are always welcome,
-        just <a href="mailto:rhendry@googlemail.com">drop me an email</a>.
+        just <a href="mailto:rhendry@googlemail.com">drop me an email</a>
+        .
       </p>
     </div>
     <div className="footer">

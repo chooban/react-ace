@@ -17,8 +17,11 @@ const SavedSearchesList = ({ savedSearches, onDelete, onSelect }) => (
             search
           </i>
           <span className="title">
-            {searchData.searchTerm} ({searchData.hits})
+            {searchData.searchTerm}
           </span>
+          (
+          {searchData.hits}
+          )
         </span>
         <span
           className="secondary-content"

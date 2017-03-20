@@ -18,7 +18,7 @@ const PreviewsItemViewComponent = ({ display, previewsCode, close }) => (
         className="btn-flat"
         onClick={close}
       >
-      Close
+        Close
       </a>
       <ToggleOrder
         previewsCode={previewsCode}

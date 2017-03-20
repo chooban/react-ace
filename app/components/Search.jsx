@@ -21,7 +21,9 @@ const SearchComponent = ({ onSearchUpdate, searchValue }) => (
           node.value = '';
           onSearchUpdate(node.value);
         }}
-      >cancel</i>
+      >
+        cancel
+      </i>
     </form>
   </div>
 );
