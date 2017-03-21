@@ -1,5 +1,4 @@
 import getBootstrapInfo from './utils/BootstrapService';
-import startApp from './StartApp';
 
 const run = () => {
   // eslint-disable-next-line
@@ -7,6 +6,8 @@ const run = () => {
   getBootstrapInfo().then(() => {
     // eslint-disable-next-line
     console.log('Starting app...');
+    // eslint-disable-next-line
+    const startApp = require('./StartApp').default;
     startApp();
   });
 };

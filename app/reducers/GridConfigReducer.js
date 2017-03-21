@@ -16,7 +16,6 @@ export default function gridConfig(state = initialState.gridConfig, action) {
     case 'UPDATE_SEARCH': {
       let page = state.page;
       let searchTerm = action.payload || '';
-      searchTerm = searchTerm.trim();
 
       if (searchTerm.length === 0) {
         searchTerm = undefined;
