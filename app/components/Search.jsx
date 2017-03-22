@@ -7,6 +7,7 @@ const SearchComponent = ({ onSearchUpdate, searchValue }) => (
         type="search"
         className="searchinput"
         name="search"
+        id="search"
         size="25"
         value={searchValue}
         onInput={(e) => requestAnimationFrame(onSearchUpdate.bind(this, e.target.value))}
