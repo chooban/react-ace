@@ -10,7 +10,9 @@ const HelpPopup = ({ display, close }) => (
     <div className="contents">
       <p>
         Add the items you want to the cart, export your order,
-        and then email to Ace. Simple!
+        and then email to Ace. Simple! If you want to be able to save searches
+        so that you can run them every month and stop missing books (or is that
+        just me) then create an account.
       </p>
 
       <p>

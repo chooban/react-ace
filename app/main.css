@@ -238,3 +238,9 @@ nav .accounticon:hover .submenu {
 .modal .addnewsearch input {
   width: 310px;
 }
+
+.footer {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
