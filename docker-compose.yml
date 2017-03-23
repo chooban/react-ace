@@ -59,6 +59,8 @@ services:
       #- ./sites/acemyorder/:/var/www/acemyorder/public_html/
       - ./nginx/ssl/certs/selfsigned.crt:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.crt
       - ./nginx/ssl/private/selfsigned.key:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.key
+    #links:
+    #  - loggly:loggly
     deploy:
       restart_policy:
         condition: on-failure
@@ -67,6 +69,13 @@ services:
     image: chooban/ace-volume-updater:latest
     volumes:
       - ./acedata:/data
+  #loggly:
+  #  image: sendgridlabs/loggly-docker
+  #  ports:
+  #    - "514/udp"
+  #  environment:
+  #    - TAG=Docker
+  #    - TOKEN=FOO
 secrets:
   auth0_client_id:
     external: true
