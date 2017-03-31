@@ -24,7 +24,7 @@ const formatAsGBP = (v) => ({
 const columns = [
   {
     property: 'previews',
-    header: 'Previews Code',
+    header: 'Previews',
     cell: (v) => ({ value: <PreviewsLink previewsCode={v} /> })
   },
   {

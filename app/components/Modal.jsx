@@ -40,7 +40,7 @@ Modal.propTypes = {
 Modal.defaultProps = {
   isOpen: false,
   height: 'auto',
-  width: '600px'
+  width: '700px'
 };
 
 export default Modal;

@@ -19,7 +19,7 @@ const SavedSearchesComponent = ({ display, close, hasSearches }) => (
     <div className="footer">
       <a
         tabIndex="-2"
-        className="btn-flat"
+        className="btn"
         onClick={close}
       >
         Close

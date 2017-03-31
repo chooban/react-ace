@@ -57,6 +57,7 @@ const PreviewsGrid = ({
     savedSearches
 }) => {
   const cols = columns.map((c) => <th key={c.property}>{c.header}</th>);
+  cols.push(<th>&nbsp;</th>);
   const rows = gridData.map((row) => {
     const cells = [];
     columns.forEach((col, i) => {

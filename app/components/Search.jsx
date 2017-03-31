@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SearchComponent = ({ onSearchUpdate, searchValue }) => (
-  <div className="input-field">
+  <div className="input-field searchbox">
     <form>
       <input
         type="search"
@@ -9,6 +9,7 @@ const SearchComponent = ({ onSearchUpdate, searchValue }) => (
         name="search"
         id="search"
         size="25"
+        placeholder="Enter title..."
         value={searchValue}
         onInput={(e) => requestAnimationFrame(onSearchUpdate.bind(this, e.target.value))}
       />
@@ -16,7 +17,7 @@ const SearchComponent = ({ onSearchUpdate, searchValue }) => (
         <i className="material-icons">search</i>
       </label>
       <i
-        className="material-icons"
+        className="material-icons cancelsearch"
         onClick={() => {
           const node = document.querySelector('.searchinput');
           node.value = '';

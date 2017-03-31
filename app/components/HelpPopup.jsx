@@ -18,7 +18,7 @@ const HelpPopup = ({ display, close }) => (
       <p>
         If for some reason it&apos;s not working,
         you can <a href="/api/previews/latest.csv">download the CSV file</a>
-        instead.
+        .
       </p>
 
       <p>
@@ -30,7 +30,7 @@ const HelpPopup = ({ display, close }) => (
     <div className="footer">
       <a
         tabIndex="-1"
-        className="btn-flat"
+        className="btn blue-grey lighten-3"
         onClick={close}
       >
         Close

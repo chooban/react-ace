@@ -59,8 +59,8 @@ class PreviewsItemPreview extends React.Component {
           />
         </div>
         <div className="item_details">
-          <div className="creators">{this.state.creators}</div>
-          <div
+          <p className="creators">{this.state.creators}</p>
+          <p
             className="description"
             dangerouslySetInnerHTML={{ __html: this.state.description}} //eslint-disable-line
           />

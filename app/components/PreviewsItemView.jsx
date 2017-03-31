@@ -15,7 +15,7 @@ const PreviewsItemViewComponent = ({ display, previewsCode, close }) => (
     <div className="footer">
       <a
         tabIndex="-2"
-        className="btn-flat"
+        className="btn blue-grey lighten-3"
         onClick={close}
       >
         Close

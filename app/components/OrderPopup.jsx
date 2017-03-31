@@ -17,14 +17,14 @@ const OrderPopup = ({ display, onExport, onClose, hasOrder }) => (
     <div className="footer">
       <a
         tabIndex="-2"
-        className="btn-flat"
+        className="btn blue-grey lighten-3"
         onClick={onClose}
       >
         Cancel
       </a>
       <a
         tabIndex="-1"
-        className="btn-flat"
+        className="btn"
         onClick={onExport}
         disabled={!hasOrder}
       >
