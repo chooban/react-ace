@@ -47,18 +47,8 @@ const columns = [
   }
 ];
 
-const PreviewsGrid = ({
-    gridData,
-    hasPrevious,
-    hasNext,
-    previousPage,
-    nextPage,
-    showPreview,
-    savedSearches
-}) => {
-  const cols = columns.map((c) => <th key={c.property}>{c.header}</th>);
-  cols.push(<th>&nbsp;</th>);
-  const rows = gridData.map((row) => {
+const gridDataToRows = (gridData, savedSearches, showPreview) => (
+  gridData.map((row) => {
     const cells = [];
     columns.forEach((col, i) => {
       const cellContent = col.cell(row[col.property], i === 0 ? showPreview : null);
@@ -74,7 +64,36 @@ const PreviewsGrid = ({
     const className = matchesSavedSearches(savedSearches, row) ? 'saved' : '';
 
     return <tr className={className} key={row.previewsCode}>{cells}</tr>;
-  });
+  })
+);
+
+const emptyRow = () => (
+  <tr>
+    <td
+      colSpan="5"
+      style={{
+        'text-align': 'center'
+      }}
+    >
+      No results found
+    </td>
+  </tr>
+);
+
+const PreviewsGrid = ({
+    gridData,
+    hasPrevious,
+    hasNext,
+    previousPage,
+    nextPage,
+    showPreview,
+    savedSearches
+}) => {
+  const cols = columns.map((c) => <th key={c.property}>{c.header}</th>);
+  cols.push(<th>&nbsp;</th>);
+  const rows = (gridData.length)
+      ? gridDataToRows(gridData, savedSearches, showPreview)
+      : emptyRow();
 
   return (
     <div>

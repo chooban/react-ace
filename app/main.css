@@ -9,7 +9,10 @@ nav {
 
 nav .nav-wrapper {
 	width: 800px;
-	margin-left: auto; margin-right: auto;
+	margin-left: auto;
+  margin-right: auto;
+  padding-left: 13px;
+  padding-right: 13px;
 	display: flex;
 	justify-content: flex-end;
 }
@@ -18,12 +21,46 @@ nav i {
   color: black;
 }
 
-nav .searchbox {
-	margin-right: auto;
+nav div:first-of-type {
+  margin-right: auto;
+}
+
+nav .searchbox label {
+  width: 24px;
+  height: 64px;
 }
 
 nav .searchbox i {
   color: white;
+  opacity: 0.7;
+  width: 24px;
+  height: 64px;
+  display: inline-block;
+}
+
+nav .searchbox .searchinput {
+  width: 300px;
+  height: 22px;
+  margin-left: 5px;
+  margin-bottom: 0px;
+  padding-left: 5px;
+  border: none;
+  line-height: 64px;
+  position: relative;
+  top: -8px;
+}
+
+nav .searchbox .searchinput:focus {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #ffffff;
+  box-shadow: 0 1px 0 0 #ffffff;
+}
+
+nav .searchbox .cancelsearch {
+  color: white;
+  position: relative;
+  cursor: pointer;
 }
 
 nav .ordersummary {
@@ -32,10 +69,6 @@ nav .ordersummary {
 
 nav .showhelp {
 	margin-right: 12px;
-}
-
-nav .accounticon {
-	padding-right: 24px;
 }
 
 nav .accounticon .submenu {
@@ -62,10 +95,6 @@ nav .accounticon:hover .submenu {
 	cursor: pointer;
 }
 
-.searchbox .cancelsearch {
-  color: white;
-}
-
 .content {
 	width: 800px;
 	margin-left: auto;
@@ -78,11 +107,8 @@ nav .accounticon:hover .submenu {
 	table-layout: fixed;
 }
 
-.previewsgrid td:nth-of-type(2),
-.previewsgrid td:nth-of-type(4) {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+.previewsgrid tbody {
+  min-height: 1px;
 }
 
 .previewsgrid th:nth-of-type(1),
@@ -106,6 +132,13 @@ nav .accounticon:hover .submenu {
 .previewsgrid th:nth-of-type(4),
 .previewsgrid td:nth-of-type(4) {
 	width: 15%;
+}
+
+.previewsgrid td:nth-of-type(2),
+.previewsgrid td:nth-of-type(4) {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .previewsgrid td:nth-of-type(5) {

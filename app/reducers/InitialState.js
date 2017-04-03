@@ -8,7 +8,7 @@ export default {
     items: []
   },
   gridConfig: {
-    pageSize: 5,
+    pageSize: 20,
     page: 1,
     searchTerm: undefined
   },
