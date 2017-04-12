@@ -1,6 +1,6 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
 import test from 'tape';
+import { createRenderer } from 'react-test-renderer/shallow';
 
 import PreviewsLink from '../PreviewsLink';
 
@@ -9,7 +9,7 @@ function previewsUrl(pc) {
 }
 
 function shallowRender(previewsCode) {
-  const renderer = TestUtils.createRenderer();
+  const renderer = createRenderer();
   renderer.render(<PreviewsLink previewsCode={previewsCode} />);
 
   return renderer.getRenderOutput();
