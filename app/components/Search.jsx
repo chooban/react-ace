@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SearchComponent = ({ onSearchUpdate, searchValue }) => (
   <div className="searchbox">
@@ -34,8 +35,8 @@ const SearchComponent = ({ onSearchUpdate, searchValue }) => (
 );
 
 SearchComponent.propTypes = {
-  onSearchUpdate: React.PropTypes.func.isRequired,
-  searchValue: React.PropTypes.string
+  onSearchUpdate: PropTypes.func.isRequired,
+  searchValue: PropTypes.string
 };
 
 SearchComponent.defaultProps = {

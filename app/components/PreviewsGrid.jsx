@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import PreviewsLink from './PreviewsLink';
 import ToggleOrder from '../containers/ToggleOrderContainer';
@@ -72,7 +73,7 @@ const emptyRow = () => (
     <td
       colSpan="5"
       style={{
-        'text-align': 'center'
+        textAlign: 'center'
       }}
     >
       No results found
@@ -90,7 +91,7 @@ const PreviewsGrid = ({
     savedSearches
 }) => {
   const cols = columns.map((c) => <th key={c.property}>{c.header}</th>);
-  cols.push(<th>&nbsp;</th>);
+  cols.push(<th key="cart">&nbsp;</th>);
   const rows = (gridData.length)
       ? gridDataToRows(gridData, savedSearches, showPreview)
       : emptyRow();
@@ -128,13 +129,13 @@ const PreviewsGrid = ({
 };
 
 PreviewsGrid.propTypes = {
-  gridData: React.PropTypes.array,
-  hasPrevious: React.PropTypes.bool,
-  hasNext: React.PropTypes.bool,
-  previousPage: React.PropTypes.func.isRequired,
-  nextPage: React.PropTypes.func.isRequired,
-  showPreview: React.PropTypes.func.isRequired,
-  savedSearches: React.PropTypes.array
+  gridData: PropTypes.array,
+  hasPrevious: PropTypes.bool,
+  hasNext: PropTypes.bool,
+  previousPage: PropTypes.func.isRequired,
+  nextPage: PropTypes.func.isRequired,
+  showPreview: PropTypes.func.isRequired,
+  savedSearches: PropTypes.array
 };
 
 PreviewsGrid.defaultProps = {

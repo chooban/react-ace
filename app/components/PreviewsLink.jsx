@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const MonthNames = [
   'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'
@@ -29,8 +30,8 @@ const PreviewsLink = ({ previewsCode, showPreview }) => (
 );
 
 PreviewsLink.propTypes = {
-  previewsCode: React.PropTypes.string.isRequired,
-  showPreview: React.PropTypes.func
+  previewsCode: PropTypes.string.isRequired,
+  showPreview: PropTypes.func
 };
 
 PreviewsLink.defaultProps = {

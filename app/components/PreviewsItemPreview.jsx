@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const codeToUrl = (previewsCode) => {
   const components = previewsCode.split('/');
@@ -71,7 +72,7 @@ class PreviewsItemPreview extends React.Component {
 }
 
 PreviewsItemPreview.propTypes = {
-  previewsCode: React.PropTypes.string.isRequired
+  previewsCode: PropTypes.string.isRequired
 };
 
 export default PreviewsItemPreview;

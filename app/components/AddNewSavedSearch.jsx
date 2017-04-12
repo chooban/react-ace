@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ClickableIcon from './ClickableIcon';
 
@@ -39,7 +40,7 @@ const AddNewSavedSearchComponent = ({ onAdd }) => (
 );
 
 AddNewSavedSearchComponent.propTypes = {
-  onAdd: React.PropTypes.func.isRequired
+  onAdd: PropTypes.func.isRequired
 };
 
 export default AddNewSavedSearchComponent;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Modal from './Modal';
 import SavedSearchesList from '../containers/SavedSearchesListContainer';
@@ -29,9 +30,9 @@ const SavedSearchesComponent = ({ display, close, hasSearches }) => (
 );
 
 SavedSearchesComponent.propTypes = {
-  display: React.PropTypes.bool,
-  close: React.PropTypes.func.isRequired,
-  hasSearches: React.PropTypes.bool
+  display: PropTypes.bool,
+  close: PropTypes.func.isRequired,
+  hasSearches: PropTypes.bool
 };
 
 SavedSearchesComponent.defaultProps = {

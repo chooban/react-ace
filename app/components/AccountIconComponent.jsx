@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ProfileIconContainer from '../containers/ProfileIcon';
 import LoginIconContainer from '../containers/LoginIcon';
@@ -11,7 +12,7 @@ const AccountIconComponent = ({ isLoggedIn }) => {
 };
 
 AccountIconComponent.propTypes = {
-  isLoggedIn: React.PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired
 };
 
 export default AccountIconComponent;

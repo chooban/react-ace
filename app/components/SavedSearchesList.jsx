@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SavedSearchesList = ({ savedSearches, onDelete, onSelect }) => (
   <ul className="collection savedsearches">
@@ -43,9 +44,9 @@ const SavedSearchesList = ({ savedSearches, onDelete, onSelect }) => (
 );
 
 SavedSearchesList.propTypes = {
-  savedSearches: React.PropTypes.array.isRequired,
-  onDelete: React.PropTypes.func.isRequired,
-  onSelect: React.PropTypes.func.isRequired
+  savedSearches: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired
 };
 
 export default SavedSearchesList;

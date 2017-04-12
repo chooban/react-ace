@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import OrderEditor from '../containers/OrderEditorContainer';
 import Modal from './Modal';
@@ -35,10 +36,10 @@ const OrderPopup = ({ display, onExport, onClose, hasOrder }) => (
 );
 
 OrderPopup.propTypes = {
-  display: React.PropTypes.bool.isRequired,
-  onExport: React.PropTypes.func.isRequired,
-  onClose: React.PropTypes.func.isRequired,
-  hasOrder: React.PropTypes.bool.isRequired
+  display: PropTypes.bool.isRequired,
+  onExport: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  hasOrder: PropTypes.bool.isRequired
 };
 
 export default OrderPopup;

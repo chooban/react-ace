@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Modal from './Modal';
 import ItemPreview from './PreviewsItemPreview';
@@ -29,9 +30,9 @@ const PreviewsItemViewComponent = ({ display, previewsCode, close }) => (
 );
 
 PreviewsItemViewComponent.propTypes = {
-  display: React.PropTypes.bool,
-  close: React.PropTypes.func.isRequired,
-  previewsCode: React.PropTypes.string
+  display: PropTypes.bool,
+  close: PropTypes.func.isRequired,
+  previewsCode: PropTypes.string
 };
 
 PreviewsItemViewComponent.defaultProps = {

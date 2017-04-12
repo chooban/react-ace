@@ -7,7 +7,7 @@ import removeOldOrderMiddleware from './RemoveOldOrderObserver';
 
 const middlewares = [thunkMiddleware];
 if (process.env.NODE_ENV === 'development') {
-  const createLogger = require('redux-logger'); //eslint-disable-line
+  const createLogger = require('redux-logger').createLogger; //eslint-disable-line
   const loggerConfig = {
     level: 'error'
   };

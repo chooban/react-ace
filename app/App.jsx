@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import OrderPopup from './containers/OrderPopupContainer';
@@ -39,7 +40,7 @@ const AppComponent = ({ loggedIn }) => (
 );
 
 AppComponent.propTypes = {
-  loggedIn: React.PropTypes.bool.isRequired
+  loggedIn: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = () => {

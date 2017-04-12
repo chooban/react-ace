@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import PreviewsLink from './PreviewsLink';
 import ClickableIcon from './ClickableIcon';
@@ -90,8 +91,8 @@ const OrderEditor = ({ items, onRemoveItem }) => {
 };
 
 OrderEditor.propTypes = {
-  items: React.PropTypes.instanceOf(Array),
-  onRemoveItem: React.PropTypes.func.isRequired
+  items: PropTypes.instanceOf(Array),
+  onRemoveItem: PropTypes.func.isRequired
 };
 
 OrderEditor.defaultProps = {

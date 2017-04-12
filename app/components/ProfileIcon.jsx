@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ProfileIconComponent = ({ onLogout, displaySavedSearches }) => (
   <div className="accounticon">
@@ -27,8 +28,8 @@ const ProfileIconComponent = ({ onLogout, displaySavedSearches }) => (
 );
 
 ProfileIconComponent.propTypes = {
-  onLogout: React.PropTypes.func.isRequired,
-  displaySavedSearches: React.PropTypes.func.isRequired
+  onLogout: PropTypes.func.isRequired,
+  displaySavedSearches: PropTypes.func.isRequired
 };
 
 export default ProfileIconComponent;

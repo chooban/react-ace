@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ToggleOrderComponent = ({ previewsCode, ordered, onItemSelected, type }) => {
   if (type === 'checkbox') {
@@ -32,10 +33,10 @@ const ToggleOrderComponent = ({ previewsCode, ordered, onItemSelected, type }) =
 };
 
 ToggleOrderComponent.propTypes = {
-  previewsCode: React.PropTypes.string.isRequired,
-  ordered: React.PropTypes.bool,
-  onItemSelected: React.PropTypes.func.isRequired,
-  type: React.PropTypes.string
+  previewsCode: PropTypes.string.isRequired,
+  ordered: PropTypes.bool,
+  onItemSelected: PropTypes.func.isRequired,
+  type: PropTypes.string
 };
 
 ToggleOrderComponent.defaultProps = {

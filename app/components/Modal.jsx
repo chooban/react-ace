@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Modal = ({ isOpen, children, height, width }) => {
   if (!isOpen) {
@@ -31,10 +32,10 @@ const Modal = ({ isOpen, children, height, width }) => {
 };
 
 Modal.propTypes = {
-  isOpen: React.PropTypes.bool,
-  children: React.PropTypes.instanceOf(Object).isRequired,
-  width: React.PropTypes.string,
-  height: React.PropTypes.string
+  isOpen: PropTypes.bool,
+  children: PropTypes.instanceOf(Object).isRequired,
+  width: PropTypes.string,
+  height: PropTypes.string
 };
 
 Modal.defaultProps = {

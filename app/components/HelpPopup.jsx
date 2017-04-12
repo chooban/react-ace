@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Modal from './Modal';
 
@@ -40,8 +41,8 @@ const HelpPopup = ({ display, close }) => (
 );
 
 HelpPopup.propTypes = {
-  display: React.PropTypes.bool.isRequired,
-  close: React.PropTypes.func.isRequired
+  display: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired
 };
 
 export default HelpPopup;

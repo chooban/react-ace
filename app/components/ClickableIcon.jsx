@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ClickableIcon = ({ className, onClick, iconName }) => (
   <div
@@ -14,9 +15,9 @@ const ClickableIcon = ({ className, onClick, iconName }) => (
 );
 
 ClickableIcon.propTypes = {
-  onClick: React.PropTypes.func,
-  className: React.PropTypes.string,
-  iconName: React.PropTypes.string
+  onClick: PropTypes.func,
+  className: PropTypes.string,
+  iconName: PropTypes.string
 };
 
 ClickableIcon.defaultProps = {
