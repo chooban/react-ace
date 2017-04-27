@@ -11,6 +11,8 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 3
+    networks:
+      - back
   ordersapi:
     image: chooban/ace-orders-api:latest
     environment:
@@ -20,6 +22,8 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 3
+    networks:
+      - back
   profilesapi:
     image: chooban/ace-profiles-api:latest
     environment:
@@ -34,6 +38,8 @@ services:
       - auth0_client_secret
       - auth0_management_token
       - auth0_domain
+    networks:
+      - back
   bootstrapapi:
     image: chooban/ace-bootstrap-api:latest
     environment:
@@ -46,36 +52,63 @@ services:
     secrets:
       - auth0_client_id
       - auth0_domain
+    networks:
+      - back
   web:
-    image: nginx:alpine
+    image: nginx:1.13-alpine
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./deployment/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./deployment/nginx/conf.d/:/etc/nginx/conf.d/
       - ./build/:/var/www/acereact/public_html/
       #- ./sites/react/:/var/www/acereact/public_html/
       #- ./sites/acemyorder/:/var/www/acemyorder/public_html/
-      - ./nginx/ssl/certs/selfsigned.crt:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.crt
-      - ./nginx/ssl/private/selfsigned.key:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.key
-    #links:
-    #  - loggly:loggly
+      - ./deployment/nginx/ssl/certs/selfsigned.crt:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.crt
+      - ./deployment/nginx/ssl/private/selfsigned.key:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.key
+      - piwikroot:/var/www/html/
+    depends_on:
+      - previewsapi
+      - ordersapi
+      - bootstrapapi
+      - profilesapi
+      - webhooks
+      - piwikapp
     deploy:
       restart_policy:
         condition: on-failure
         max_attempts: 3
+    networks:
+      - front
+      - back
+      - hooks
+      - piwikback
   webhooks:
     image: chooban/ace-volume-updater:latest
     volumes:
       - ./acedata:/data
-  #loggly:
-  #  image: sendgridlabs/loggly-docker
-  #  ports:
-  #    - "514/udp"
-  #  environment:
-  #    - TAG=Docker
-  #    - TOKEN=FOO
+    networks:
+      - hooks
+  piwikdb:
+    image: mariadb:10.1
+    volumes:
+      - ./deployment/mysql/runtime/:/var/lib/mysql/
+      - ./deployment/mysql/conf.d/:/etc/mysql/conf.d/
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-verysecurepassword}
+    networks:
+      - piwikback
+  piwikapp:
+    image: piwik:fpm
+    depends_on:
+      - piwikdb
+    volumes:
+      - piwikroot:/var/www/html/
+    networks:
+      - piwikback
+volumes:
+  piwikroot:
 secrets:
   auth0_client_id:
     external: true
@@ -85,3 +118,12 @@ secrets:
     external: true
   auth0_domain:
     external: true
+networks:
+  front:
+    driver: overlay
+  back:
+    driver: overlay
+  hooks:
+    driver: overlay
+  piwikback:
+    driver: overlay
