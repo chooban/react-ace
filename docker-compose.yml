@@ -11,6 +11,8 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 3
+    networks:
+      - back
   ordersapi:
     image: chooban/ace-orders-api:latest
     environment:
@@ -20,6 +22,8 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 3
+    networks:
+      - back
   profilesapi:
     image: chooban/ace-profiles-api:latest
     environment:
@@ -34,6 +38,8 @@ services:
       - auth0_client_secret
       - auth0_management_token
       - auth0_domain
+    networks:
+      - back
   bootstrapapi:
     image: chooban/ace-bootstrap-api:latest
     environment:
@@ -46,36 +52,74 @@ services:
     secrets:
       - auth0_client_id
       - auth0_domain
+    networks:
+      - back
   web:
-    image: nginx:alpine
+    image: nginx:1.13-alpine
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./deployment/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./deployment/nginx/conf.d/:/etc/nginx/conf.d/
       - ./build/:/var/www/acereact/public_html/
+      - ./deployment/nginx/ssl/certs/selfsigned.crt:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.crt
+      - ./deployment/nginx/ssl/private/selfsigned.key:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.key
       #- ./sites/react/:/var/www/acereact/public_html/
-      #- ./sites/acemyorder/:/var/www/acemyorder/public_html/
-      - ./nginx/ssl/certs/selfsigned.crt:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.crt
-      - ./nginx/ssl/private/selfsigned.key:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.key
-    #links:
-    #  - loggly:loggly
+      #- ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      #- ./nginx/conf.d/:/etc/nginx/conf.d/
+      #- /etc/ssl/certs/dhparam.pem:/etc/ssl/certs/dhparam.pem
+      #- /etc/letsencrypt/:/etc/letsencrypt/
+      - ace_piwikroot:/var/www/html/
     deploy:
       restart_policy:
         condition: on-failure
         max_attempts: 3
+        delay: 10s
+    networks:
+      - front
+      - back
+      - hooks
+      - piwikback
   webhooks:
     image: chooban/ace-volume-updater:latest
     volumes:
       - ./acedata:/data
-  #loggly:
-  #  image: sendgridlabs/loggly-docker
-  #  ports:
-  #    - "514/udp"
-  #  environment:
-  #    - TAG=Docker
-  #    - TOKEN=FOO
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    networks:
+      - hooks
+  piwikdb:
+    image: mariadb:10.1
+    volumes:
+      - ace_mariadb:/var/lib/mysql/
+      #- ./deployment/mysql/conf.d/:/etc/mysql/conf.d/
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-verysecurepassword}
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    networks:
+      - piwikback
+  piwikapp:
+    image: piwik:fpm
+    volumes:
+      - ace_piwikroot:/var/www/html/
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        delay: 10s
+    networks:
+      - piwikback
+volumes:
+  ace_piwikroot:
+    external: true
+  ace_mariadb:
+    external: true
 secrets:
   auth0_client_id:
     external: true
@@ -85,3 +129,12 @@ secrets:
     external: true
   auth0_domain:
     external: true
+networks:
+  front:
+    driver: overlay
+  back:
+    driver: overlay
+  hooks:
+    driver: overlay
+  piwikback:
+    driver: overlay
