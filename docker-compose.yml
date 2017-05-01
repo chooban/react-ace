@@ -63,22 +63,19 @@ services:
       - ./deployment/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./deployment/nginx/conf.d/:/etc/nginx/conf.d/
       - ./build/:/var/www/acereact/public_html/
-      #- ./sites/react/:/var/www/acereact/public_html/
-      #- ./sites/acemyorder/:/var/www/acemyorder/public_html/
       - ./deployment/nginx/ssl/certs/selfsigned.crt:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.crt
       - ./deployment/nginx/ssl/private/selfsigned.key:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.key
-      - piwikroot:/var/www/html/
-    depends_on:
-      - previewsapi
-      - ordersapi
-      - bootstrapapi
-      - profilesapi
-      - webhooks
-      - piwikapp
+      #- ./sites/react/:/var/www/acereact/public_html/
+      #- ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      #- ./nginx/conf.d/:/etc/nginx/conf.d/
+      #- /etc/ssl/certs/dhparam.pem:/etc/ssl/certs/dhparam.pem
+      #- /etc/letsencrypt/:/etc/letsencrypt/
+      - ace_piwikroot:/var/www/html/
     deploy:
       restart_policy:
         condition: on-failure
         max_attempts: 3
+        delay: 10s
     networks:
       - front
       - back
@@ -97,8 +94,8 @@ services:
   piwikdb:
     image: mariadb:10.1
     volumes:
-      - ./deployment/mysql/runtime/:/var/lib/mysql/
-      - ./deployment/mysql/conf.d/:/etc/mysql/conf.d/
+      - ace_mariadb:/var/lib/mysql/
+      #- ./deployment/mysql/conf.d/:/etc/mysql/conf.d/
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-verysecurepassword}
     deploy:
@@ -109,18 +106,20 @@ services:
       - piwikback
   piwikapp:
     image: piwik:fpm
-    depends_on:
-      - piwikdb
     volumes:
-      - piwikroot:/var/www/html/
+      - ace_piwikroot:/var/www/html/
     deploy:
       restart_policy:
         condition: on-failure
         max_attempts: 3
+        delay: 10s
     networks:
       - piwikback
 volumes:
-  piwikroot:
+  ace_piwikroot:
+    external: true
+  ace_mariadb:
+    external: true
 secrets:
   auth0_client_id:
     external: true
