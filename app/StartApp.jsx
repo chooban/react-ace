@@ -7,7 +7,6 @@ import app from './reducers';
 import middlewares from './middlewares/';
 import { requestLatestIssue } from './actions';
 import actors from './actors';
-import './main.css';
 import initialStateFactory from './reducers/InitialStateFactory';
 
 import RootApp from './App';

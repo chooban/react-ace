@@ -21,15 +21,17 @@ import {
 
 const AppComponent = ({ loggedIn }) => (
   <div className="previewsApp">
-    <nav>
-      <div className="nav-wrapper">
-        <SearchContainer />
-        <OrderView />
-        <HelpIconContainer />
-        <AccountIconComponent isLoggedIn={loggedIn} />
-      </div>
-    </nav>
-    <main className="content">
+    <header>
+      <nav>
+        <div className="nav-wrapper container">
+          <SearchContainer />
+          <OrderView />
+          <HelpIconContainer />
+          <AccountIconComponent isLoggedIn={loggedIn} />
+        </div>
+      </nav>
+    </header>
+    <main className="content container">
       <PreviewsGrid />
       <OrderPopup />
       <ItemPreview />
