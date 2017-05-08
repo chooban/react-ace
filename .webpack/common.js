@@ -35,10 +35,6 @@ const config = function configFactory(paths) {
     module: {
       rules: [
         {
-          test: /\.css$/,
-          loader: 'style-loader!css-loader',
-          include: paths.app
-        }, {
           test: /\.jsx?$/,
           loader: 'babel-loader',
           include: paths.app
@@ -59,6 +55,24 @@ const config = function configFactory(paths) {
       new HtmlPlugin({
         title: 'Ace My Order',
         template: 'public/index.html'
+      }),
+      new HtmlPlugin({
+        filename: 'privacy.html',
+        template: 'public/privacy.html',
+        excludeChunks: [
+          'app',
+          'polyfill',
+          'vendor'
+        ]
+      }),
+      new HtmlPlugin({
+        filename: 'contact.html',
+        template: 'public/contact.html',
+        excludeChunks: [
+          'app',
+          'polyfill',
+          'vendor'
+        ]
       }),
       new webpack.ProvidePlugin({
         Promise: 'es6-promise', // Thanks Aaron (https://gist.github.com/Couto/b29676dd1ab8714a818f#gistcomment-1584602),
