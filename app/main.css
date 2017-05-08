@@ -228,6 +228,7 @@ nav .accounticon:hover .submenu {
 
 .modal .contents .ordereditor td:nth-of-type(3) {
 	font-weight: bold;
+  text-align: right;
 }
 
 .modal .contents .ordereditor tr.totals td:first-of-type {
