@@ -63,8 +63,7 @@ services:
       - ./deployment/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./deployment/nginx/conf.d/:/etc/nginx/conf.d/
       - ./build/:/var/www/acereact/public_html/
-      - ./deployment/nginx/ssl/certs/selfsigned.crt:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.crt
-      - ./deployment/nginx/ssl/private/selfsigned.key:/etc/letsencrypt/live/amusingmonkey.co.uk/selfsigned.key
+      - ./deployment/ssl/:/etc/letsencrypt/live/ace.rosshendry.com/
       #- ./sites/react/:/var/www/acereact/public_html/
       #- ./nginx/nginx.conf:/etc/nginx/nginx.conf
       #- ./nginx/conf.d/:/etc/nginx/conf.d/
