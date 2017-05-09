@@ -94,7 +94,7 @@ services:
     image: mariadb:10.1
     volumes:
       - ace_mariadb:/var/lib/mysql/
-      #- ./deployment/mysql/conf.d/:/etc/mysql/conf.d/
+      - ./deployment/mysql/conf.d/:/etc/mysql/conf.d/
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-verysecurepassword}
     deploy:

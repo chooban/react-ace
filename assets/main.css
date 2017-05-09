@@ -95,7 +95,7 @@ nav .accounticon:hover .submenu {
 }
 
 main {
-  min-height: calc(100vh - 98px - 42px);
+  min-height: calc(100vh - 98px - 68px);
 }
 
 .material-icons.click:hover {

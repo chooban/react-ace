@@ -48,31 +48,32 @@ const config = function configFactory(paths) {
             failOnWarning: false,
             failOnError: false
           }
+        },
+        {
+          test: /\.hbs$/,
+          loader: 'handlebars-loader'
         }
       ]
     },
     plugins: [
       new HtmlPlugin({
-        title: 'Ace My Order',
-        template: 'public/index.html'
+        filename: 'index.html',
+        template: 'public/index.hbs'
       }),
       new HtmlPlugin({
         filename: 'privacy.html',
-        template: 'public/privacy.html',
-        excludeChunks: [
-          'app',
-          'polyfill',
-          'vendor'
-        ]
+        template: 'public/privacy.hbs',
+        chunks: []
       }),
       new HtmlPlugin({
         filename: 'contact.html',
-        template: 'public/contact.html',
-        excludeChunks: [
-          'app',
-          'polyfill',
-          'vendor'
-        ]
+        template: 'public/contact.hbs',
+        chunks: []
+      }),
+      new HtmlPlugin({
+        filename: 'about.html',
+        template: 'public/about.hbs',
+        chunks: []
       }),
       new webpack.ProvidePlugin({
         Promise: 'es6-promise', // Thanks Aaron (https://gist.github.com/Couto/b29676dd1ab8714a818f#gistcomment-1584602),
