@@ -8,6 +8,7 @@
     "stylefix": "eslint --fix app --ext jsx,js",
     "test": "NODE_ENV=test babel-tape-runner 'app/**/__tests__/*.test.js*'",
     "coverage": "NODE_ENV=test nyc --reporter=lcov --reporter=html npm test",
+    "clean": "rm -rf build/",
     "build": "webpack -p",
     "watch": "webpack --watch --progress",
     "devbuild": "webpack-dev-server --https --watch --progress"
