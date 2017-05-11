@@ -10,7 +10,7 @@ provided.
 
 ### Prerequisites
 
-You'll need yarn and npm on your $PATH.
+You'll need yarn or npm on your $PATH.
 
 #### Secrets
 
@@ -30,5 +30,5 @@ All of the secrets are defined as external, so will need to be created before th
 
 ### Building
 
-`npm run build` will put everything into the `build/` directory and exit. `npm run watch` will watch for changes and
+`yarn run build` will put everything into the `build/` directory and exit. `yarn run watch` will watch for changes and
 recompile as required.
