@@ -4,6 +4,7 @@ import savedSearchMiddleware from './SavedSearchObserver';
 import exportOrderMiddleware from './ExportOrderObserver';
 import saveOrderMiddleware from './SaveOrderObserver';
 import removeOldOrderMiddleware from './RemoveOldOrderObserver';
+import piwikMiddlware from './PiwikReporter';
 
 const middlewares = [thunkMiddleware];
 if (process.env.NODE_ENV === 'development') {
@@ -18,5 +19,6 @@ middlewares.push(exportOrderMiddleware);
 middlewares.push(savedSearchMiddleware);
 middlewares.push(saveOrderMiddleware());
 middlewares.push(removeOldOrderMiddleware);
+middlewares.push(piwikMiddlware);
 
 export default middlewares;
