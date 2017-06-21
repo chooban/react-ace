@@ -11,7 +11,8 @@
     "clean": "rm -rf build/",
     "build": "webpack -p",
     "watch": "webpack --watch --progress",
-    "devbuild": "webpack-dev-server --https --watch --progress"
+    "devbuild": "webpack-dev-server --https --watch --progress",
+    "tar": "tar cfz react-ace.tar.gz --exclude='*.map' -C build ."
   },
   "keywords": [],
   "author": "",
