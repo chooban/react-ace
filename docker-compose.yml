@@ -11,6 +11,9 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 3
+    secrets:
+      - auth0_client_id
+      - auth0_domain
     networks:
       - back
   ordersapi:
@@ -37,20 +40,6 @@ services:
       - auth0_client_id
       - auth0_client_secret
       - auth0_management_token
-      - auth0_domain
-    networks:
-      - back
-  bootstrapapi:
-    image: chooban/ace-bootstrap-api:latest
-    environment:
-      - NODE_ENV=${NODE_ENV:-production}
-      - LOG_LEVEL=${LOG_LEVEL:-info}
-    deploy:
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
-    secrets:
-      - auth0_client_id
       - auth0_domain
     networks:
       - back
