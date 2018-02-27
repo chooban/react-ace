@@ -1,5 +1,7 @@
 # Ace My Order
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/chooban/react-ace.svg)](https://greenkeeper.io/)
+
 Webapp and related services to make ordering lots of comics from [Ace Comics](https://www.acecomics.co.uk) a little
 easier.
 
