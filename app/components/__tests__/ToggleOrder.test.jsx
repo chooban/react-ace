@@ -3,7 +3,7 @@ import React from 'react';
 import test from 'tape';
 import sinon from 'sinon';
 import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 
 import ToggleOrderComponent from '../ToggleOrder';
 

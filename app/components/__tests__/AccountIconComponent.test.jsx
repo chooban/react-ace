@@ -2,7 +2,7 @@
 import React from 'react';
 import test from 'tape';
 import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 
 import AccountIconComponent from '../AccountIconComponent';
 import ProfileIconContainer from '../../containers/ProfileIcon';
