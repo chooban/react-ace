@@ -1,8 +1,9 @@
 /* eslint no-shadow: 0 */
 import React from 'react';
 import test from 'tape';
-import { shallow } from 'enzyme';
 import sinon from 'sinon';
+import { configure, shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
 
 import ToggleOrderComponent from '../ToggleOrder';
 
@@ -13,6 +14,7 @@ function render(ordered, onItemSelected, previewsCode) {
     previewsCode={previewsCode}
   />);
 }
+configure({ adapter: new Adapter() });
 
 test('Toggle Order', (t) => {
   t.test('Clicking invokes callback (ordered)', (t) => {

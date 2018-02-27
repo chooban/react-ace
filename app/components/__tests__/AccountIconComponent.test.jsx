@@ -1,11 +1,14 @@
 /* eslint no-shadow: 0 */
 import React from 'react';
 import test from 'tape';
-import { shallow } from 'enzyme';
+import { configure, shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
 
 import AccountIconComponent from '../AccountIconComponent';
 import ProfileIconContainer from '../../containers/ProfileIcon';
 import LoginIconContainer from '../../containers/LoginIcon';
+
+configure({ adapter: new Adapter() });
 
 function render(isLoggedIn) {
   return shallow(<AccountIconComponent isLoggedIn={isLoggedIn} />);
