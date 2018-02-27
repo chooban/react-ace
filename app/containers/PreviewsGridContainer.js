@@ -5,9 +5,7 @@ import {
   showPreview
 } from '../actions';
 
-import {
-  searchCatalogue
-} from '../utils/CatalogueSearch';
+import { searchCatalogue } from '../utils/CatalogueSearch';
 
 import PreviewsGrid from '../components/PreviewsGrid';
 
@@ -18,7 +16,7 @@ const getRecords = (gridConfig, catalogue) => (
 );
 
 const mapStateToProps = (state) => {
-  const gridConfig = state.gridConfig;
+  const { gridConfig } = state;
   const records = getRecords(gridConfig, state.issues.data);
   const recordsStart = (gridConfig.page - 1) * gridConfig.pageSize;
   const recordsEnd = recordsStart + gridConfig.pageSize;
@@ -28,10 +26,10 @@ const mapStateToProps = (state) => {
     const orderIndex = state.order.items.findIndex((d) => d.previews === lineItem.previewsCode);
 
     return Object.assign(
-        {},
-        lineItem,
-        { ordered: orderIndex > -1 }
-        );
+      {},
+      lineItem,
+      { ordered: orderIndex > -1 }
+    );
   });
 
   const savedSearches = (state.user.profile)

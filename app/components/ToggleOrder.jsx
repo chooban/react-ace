@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ToggleOrderComponent = ({ previewsCode, ordered, onItemSelected, type }) => {
+const ToggleOrderComponent = ({
+  previewsCode, ordered, onItemSelected, type
+}) => {
   if (type === 'checkbox') {
     return (
       <i //eslint-disable-line

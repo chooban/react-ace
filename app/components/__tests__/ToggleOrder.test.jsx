@@ -7,13 +7,11 @@ import sinon from 'sinon';
 import ToggleOrderComponent from '../ToggleOrder';
 
 function render(ordered, onItemSelected, previewsCode) {
-  return shallow(
-    <ToggleOrderComponent
-      ordered={ordered}
-      onItemSelected={onItemSelected}
-      previewsCode={previewsCode}
-    />
-  );
+  return shallow(<ToggleOrderComponent
+    ordered={ordered}
+    onItemSelected={onItemSelected}
+    previewsCode={previewsCode}
+  />);
 }
 
 test('Toggle Order', (t) => {

@@ -2,10 +2,7 @@
 import test from 'tape';
 import sinon from 'sinon';
 
-import {
-  mapDispatchToProps
-} from '../AddNewSavedSearchContainer';
-
+import { mapDispatchToProps } from '../AddNewSavedSearchContainer';
 import { addSavedSearch } from '../../actions';
 
 test('Add new saved search container', (t) => {

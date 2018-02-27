@@ -1,10 +1,7 @@
 import { connect } from 'react-redux';
 
 import SavedSearchesComponent from '../components/SavedSearches';
-
-import {
-  closeSavedSearches
-} from '../actions';
+import { closeSavedSearches } from '../actions';
 
 export const mapStateToProps = (state) => ({
   display: state.ui.showSavedSearches,
@@ -16,8 +13,8 @@ export const mapDispatchToProps = (dispatch) => ({
 });
 
 const SavedSearchesContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(SavedSearchesComponent);
 
 export default SavedSearchesContainer;

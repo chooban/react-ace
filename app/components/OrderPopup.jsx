@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import OrderEditor from '../containers/OrderEditorContainer';
 import Modal from './Modal';
 
-const OrderPopup = ({ display, onExport, onClose, hasOrder }) => (
+const OrderPopup = ({
+  display, onExport, onClose, hasOrder
+}) => (
   <Modal isOpen={display}>
     <div className="header">
       Order Contents

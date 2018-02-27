@@ -14,7 +14,7 @@ export default function gridConfig(state = initialState.gridConfig, action) {
       });
     case 'PERFORM_SAVED_SEARCH':
     case 'UPDATE_SEARCH': {
-      let page = state.page;
+      let { page } = state;
       let searchTerm = action.payload || '';
 
       if (searchTerm.length === 0) {

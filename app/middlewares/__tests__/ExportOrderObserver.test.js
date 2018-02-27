@@ -2,9 +2,7 @@
 import test from 'tape';
 import sinon from 'sinon';
 
-import middleware, {
-  __RewireAPI__
-} from '../ExportOrderObserver';
+import middleware, { __RewireAPI__ } from '../ExportOrderObserver';
 
 test('Order exporting middleware', (t) => {
   t.test('should pass the intercepted action to next', (t) => {

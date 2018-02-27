@@ -26,7 +26,9 @@ const PreviewsLink = ({ previewsCode, showPreview }) => (
         showPreview(previewsCode);
       }
     }}
-  >{previewsCode}</a>
+  >
+    {previewsCode}
+  </a>
 );
 
 PreviewsLink.propTypes = {

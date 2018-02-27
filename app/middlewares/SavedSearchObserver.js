@@ -10,10 +10,10 @@ export default (store) => (next) => (action) => {
     const authService = AuthServiceFactory();
     authService.getProfile((err, profile) => {
       if (err) {
-        //eslint-disable-next-line
+        // eslint-disable-next-line
         console.error('Error fetching profile');
 
-        //eslint-disable-next-line
+        // eslint-disable-next-line
         console.error(err);
       }
       store.dispatch(setUserProfile(profile));

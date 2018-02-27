@@ -1,6 +1,4 @@
-import {
-  AuthServiceFactory
-} from '../utils/AuthService';
+import { AuthServiceFactory } from '../utils/AuthService';
 
 const parseData = (resp) => JSON.parse(resp);
 

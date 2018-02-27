@@ -5,7 +5,8 @@ import sinon from 'sinon';
 import {
   AuthServiceFactory,
   AuthService,
-  __RewireAPI__ } from '../AuthService';
+  __RewireAPI__
+} from '../AuthService';
 
 test('Auth service', (t) => {
   t.test('Login defers to lock', (t) => {

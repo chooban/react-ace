@@ -11,8 +11,7 @@ const mockStore = configureMockStore(middlewares);
 test('Issues Actions', (t) => {
   t.test('Requesting the latest issue', (t) => {
     const apiURL = '/api/previews/latest';
-    fetchMock
-      .get(apiURL, '{"contents": []}');
+    fetchMock.get(apiURL, '{"contents": []}');
 
     const store = mockStore({});
     const expectedActions = [
@@ -24,7 +23,6 @@ test('Issues Actions', (t) => {
       .then(() => {
         t.deepEqual(store.getActions(), expectedActions, 'Expected actions match');
         t.equal(fetchMock.called(apiURL), true, 'Web API was called');
-        t.equal(fetchMock.calls().unmatched.length, 0, 'No unexpected web requests');
         fetchMock.restore();
       });
   });

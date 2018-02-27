@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 
 import PreviewsLink from './PreviewsLink';
 import ToggleOrder from '../containers/ToggleOrderContainer';
-import {
-  matchesSavedSearches
-} from '../utils/CatalogueSearch';
+import { matchesSavedSearches } from '../utils/CatalogueSearch';
 
 const firstLowerCaseLetter = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 const capitalize = (s) => s.toLowerCase().replace(firstLowerCaseLetter, (m) => m.toUpperCase());
@@ -60,7 +58,7 @@ const gridDataToRows = (gridData, savedSearches, showPreview) => (
       <td key="ordertoggle" >
         <ToggleOrder previewsCode={row.previewsCode} ordered={row.ordered} />
       </td>
-      );
+    );
 
     const className = matchesSavedSearches(savedSearches, row) ? 'saved' : '';
 
@@ -82,19 +80,19 @@ const emptyRow = () => (
 );
 
 const PreviewsGrid = ({
-    gridData,
-    hasPrevious,
-    hasNext,
-    previousPage,
-    nextPage,
-    showPreview,
-    savedSearches
+  gridData,
+  hasPrevious,
+  hasNext,
+  previousPage,
+  nextPage,
+  showPreview,
+  savedSearches
 }) => {
   const cols = columns.map((c) => <th key={c.property}>{c.header}</th>);
   cols.push(<th key="cart">&nbsp;</th>);
   const rows = (gridData.length)
-      ? gridDataToRows(gridData, savedSearches, showPreview)
-      : emptyRow();
+    ? gridDataToRows(gridData, savedSearches, showPreview)
+    : emptyRow();
 
   return (
     <div>

@@ -2,9 +2,7 @@
 import fetchMock from 'fetch-mock';
 import test from 'tape';
 
-import {
-  getLatestIssue
-} from '../PreviewsWebApi';
+import { getLatestIssue } from '../PreviewsWebApi';
 
 test('Previews API', (t) => {
   t.test('Get the latest', (t) => {
@@ -21,6 +19,7 @@ test('Previews API', (t) => {
 
     return getLatestIssue().then((d) => {
       t.deepEqual(d, expectedResult);
+      t.equal(fetchMock.done(), true);
       fetchMock.restore();
     });
   });

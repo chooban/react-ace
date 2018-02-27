@@ -57,13 +57,14 @@ const OrderEditor = ({ items, onRemoveItem }) => {
 
     const removeItem = () => onRemoveItem(item.previews);
 
-    cells.push(<td key="remove" className="remove">
-      <ClickableIcon
-        className="remove"
-        iconName="remove_shopping_cart"
-        onClick={removeItem}
-      />
-    </td>
+    cells.push(
+      <td key="remove" className="remove">
+        <ClickableIcon
+          className="remove"
+          iconName="remove_shopping_cart"
+          onClick={removeItem}
+        />
+      </td>
     );
 
     rows.push(<tr key={item.previews}>{ cells }</tr>);
@@ -73,21 +74,25 @@ const OrderEditor = ({ items, onRemoveItem }) => {
 
   const orderTotal = formatAsGBP(total).value;
 
-  rows.push(<tr className="totals" key={'total'}>
-    <td colSpan="2">Total</td>
-    <td colSpan="2">{orderTotal}</td>
-  </tr>);
+  rows.push(
+    <tr className="totals" key="total">
+      <td colSpan="2">Total</td>
+      <td colSpan="2">{orderTotal}</td>
+    </tr>
+  );
 
   const headers = columns.map((c) => <th key={c.property}>{c.header}</th>);
 
-  return (<table className="ordereditor">
-    <thead>
-      <tr>{ headers }</tr>
-    </thead>
-    <tbody>
-      { rows }
-    </tbody>
-  </table>);
+  return (
+    <table className="ordereditor">
+      <thead>
+        <tr>{ headers }</tr>
+      </thead>
+      <tbody>
+        { rows }
+      </tbody>
+    </table>
+  );
 };
 
 OrderEditor.propTypes = {

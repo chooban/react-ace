@@ -6,10 +6,7 @@ import {
   mapDispatchToProps,
   mapStateToProps
 } from '../OrderEditorContainer';
-
-import {
-  removeFromOrder
-} from '../../actions';
+import { removeFromOrder } from '../../actions';
 
 test('Order editor container', (t) => {
   t.test('Provides a callback for removing items', (t) => {

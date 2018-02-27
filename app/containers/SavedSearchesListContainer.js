@@ -7,23 +7,21 @@ import {
   performSavedSearch
 } from '../actions';
 
-import {
-  hitCountForSearch
-} from '../utils/CatalogueSearch';
+import { hitCountForSearch } from '../utils/CatalogueSearch';
 
 const getHitCounts = (searchTerms, catalogue) => (
   searchTerms.map((term) => ({
     searchTerm: term,
     hits: hitCountForSearch(term, catalogue)
-  })
-));
+  }))
+);
 
 export const mapStateToProps = (state) => ({
   savedSearches: (state.user.profile)
     ? getHitCounts(
-        state.user.profile.savedsearches.sort(),
-        state.issues.data
-      )
+      state.user.profile.savedsearches.sort(),
+      state.issues.data
+    )
     : []
 });
 

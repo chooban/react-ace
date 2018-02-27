@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Modal = ({ isOpen, children, height, width }) => {
+const Modal = ({
+  isOpen, children, height, width
+}) => {
   if (!isOpen) {
     return null;
   }

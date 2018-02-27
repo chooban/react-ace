@@ -14,7 +14,7 @@ export class AuthService {
   }
 
   doAuth(authResult) {
-    this.setToken(authResult.idToken);
+    this.setToken(authResult.accessToken);
   }
 
   onAuth(callback) {

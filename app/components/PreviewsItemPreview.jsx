@@ -13,7 +13,6 @@ function checkStatus(resp) {
 }
 
 class PreviewsItemPreview extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {

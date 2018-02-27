@@ -17,8 +17,8 @@ export const mapDispatchToProps = (dispatch) => ({
 });
 
 const ShoppingCartContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ClickableIcon);
 
 export default ShoppingCartContainer;

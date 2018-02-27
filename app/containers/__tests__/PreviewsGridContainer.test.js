@@ -2,10 +2,7 @@
 import test from 'tape';
 import sinon from 'sinon';
 
-import {
-  mapDispatchToProps
-} from '../PreviewsGridContainer';
-
+import { mapDispatchToProps } from '../PreviewsGridContainer';
 import {
   nextPage,
   previousPage,

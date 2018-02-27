@@ -2,13 +2,8 @@
 import test from 'tape';
 import sinon from 'sinon';
 
-import {
-  removeFromOrder
-} from '../../actions';
-
-import {
-  mapDispatchToProps
-} from '../ToggleOrderContainer';
+import { removeFromOrder } from '../../actions';
+import { mapDispatchToProps } from '../ToggleOrderContainer';
 
 const previewsCode = 'ABC/1234';
 

@@ -6,7 +6,7 @@ const triggers = [
 
 export default (store) => (next) => (action) => {
   if (triggers.includes(action.type)) {
-    const file = action.payload.file;
+    const { file } = action.payload;
     const state = store.getState();
 
     if (file !== state.order.issue) {

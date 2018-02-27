@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch) => {
   service.onAuth((auth) => {
     auth.getProfile((err, profile) => {
       if (err) {
-        //eslint-disable-next-line
+        // eslint-disable-next-line
         console.error(err);
         dispatch(logout());
       }

@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   previewsapi:
-    image: chooban/ace-previews-api:dev
+    image: chooban/ace-previews-api:latest
     volumes:
       - './acedata/:/data:ro'
     environment:

@@ -1,9 +1,7 @@
 import { connect } from 'react-redux';
 
 import PreviewsItemViewComponent from '../components/PreviewsItemView';
-import {
-  closePreview
-} from '../actions';
+import { closePreview } from '../actions';
 
 export const mapStateToProps = (state) => ({
   display: state.ui.showItemPreview,

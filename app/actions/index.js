@@ -1,10 +1,6 @@
-import {
-  createAction
-} from 'redux-actions';
+import { createAction } from 'redux-actions';
 
-import {
-    getLatestIssue
-} from '../api/PreviewsWebApi';
+import { getLatestIssue } from '../api/PreviewsWebApi';
 
 const receivedIssue = createAction('RECEIVED_ISSUE_DATA');
 const requestedIssue = createAction('REQUESTED_ISSUE_DATA');
@@ -56,27 +52,27 @@ const addToOrder = (previewsCode) => (
 );
 
 export {
-    addToOrder,
-    removeFromOrder,
-    requestLatestIssue,
-    nextPage,
-    previousPage,
-    updateSearch,
-    requestedIssue,
-    receivedIssue,
-    showOrder,
-    closeOrder,
-    showPreview,
-    closePreview,
-    showHelp,
-    closeHelp,
-    setUserProfile,
-    logout,
-    showSavedSearches,
-    closeSavedSearches,
-    deleteSavedSearch,
-    addSavedSearch,
-    performSavedSearch,
-    exportOrder,
-    clearOrder
+  addToOrder,
+  removeFromOrder,
+  requestLatestIssue,
+  nextPage,
+  previousPage,
+  updateSearch,
+  requestedIssue,
+  receivedIssue,
+  showOrder,
+  closeOrder,
+  showPreview,
+  closePreview,
+  showHelp,
+  closeHelp,
+  setUserProfile,
+  logout,
+  showSavedSearches,
+  closeSavedSearches,
+  deleteSavedSearch,
+  addSavedSearch,
+  performSavedSearch,
+  exportOrder,
+  clearOrder
 };
