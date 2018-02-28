@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.9.1
+    steps:
+      - checkout
+      - restore_cache:
+          key: previews-fe-cache-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: previews-fe-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run: yarn test
