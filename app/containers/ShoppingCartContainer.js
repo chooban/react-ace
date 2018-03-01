@@ -1,14 +1,10 @@
 import { connect } from 'react-redux';
 
-import ClickableIcon from '../components/ClickableIcon';
+import ShoppingCart from '../components/ShoppingCart';
 import { showOrder } from '../actions/';
 
-const determineClassName = (items) => (
-  `ordersummary${items.length > 0 ? ' hasitems' : ''}`
-);
-
 export const mapStateToProps = (state) => ({
-  className: determineClassName(state.order.items),
+  count: state.order.items.length,
   iconName: 'shopping_cart'
 });
 
@@ -19,6 +15,6 @@ export const mapDispatchToProps = (dispatch) => ({
 const ShoppingCartContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ClickableIcon);
+)(ShoppingCart);
 
 export default ShoppingCartContainer;

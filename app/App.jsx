@@ -1,15 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import Reboot from 'material-ui/Reboot';
+import { withStyles } from 'material-ui/styles';
+
+import HeaderBarContainer from './containers/HeaderBarContainer';
 import OrderPopup from './containers/OrderPopupContainer';
 import ItemPreview from './containers/PreviewsItemViewContainer';
 import PreviewsGrid from './containers/PreviewsGridContainer';
-import OrderView from './containers/ShoppingCartContainer';
-import SearchContainer from './containers/SearchContainer';
-import HelpIconContainer from './containers/HelpIcon';
 import HelpPopupContainer from './containers/HelpPopup';
-import AccountIconComponent from './components/AccountIconComponent';
 import SavedSearchesContainer from './containers/SavedSearchesContainer';
 
 import { AuthServiceFactory } from './utils/AuthService';
@@ -18,16 +17,21 @@ import {
   setUserProfile
 } from './actions';
 
+/*
+ *
+            <SearchContainer />
+            <OrderView />
+            <HelpIconContainer />
+            <AccountIconComponent isLoggedIn={loggedIn} />
+ */
 
-const AppComponent = ({ loggedIn }) => (
+const AppComponent = () => (
   <div className="previewsApp">
+    <Reboot />
     <header>
       <nav>
         <div className="nav-wrapper container">
-          <SearchContainer />
-          <OrderView />
-          <HelpIconContainer />
-          <AccountIconComponent isLoggedIn={loggedIn} />
+          <HeaderBarContainer />
         </div>
       </nav>
     </header>
@@ -40,17 +44,6 @@ const AppComponent = ({ loggedIn }) => (
     </main>
   </div>
 );
-
-AppComponent.propTypes = {
-  loggedIn: PropTypes.bool.isRequired
-};
-
-const mapStateToProps = () => {
-  const service = AuthServiceFactory();
-  return {
-    loggedIn: service.loggedIn()
-  };
-};
 
 const mapDispatchToProps = (dispatch) => {
   const service = AuthServiceFactory();
@@ -70,8 +63,8 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const App = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(AppComponent);
 
-export default App;
+export default withStyles({})(App);

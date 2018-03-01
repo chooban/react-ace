@@ -15,6 +15,7 @@ const config = function configFactory(paths) {
       ],
       vendor: [
         'auth0-lock',
+        'material-ui',
         'react',
         'react-dom',
         'react-redux',
