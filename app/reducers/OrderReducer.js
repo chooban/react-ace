@@ -9,15 +9,23 @@ export default function orderReducer(state = initialState.order, action) {
       const nextItems = state.items.slice(0);
       nextItems.push(action.payload);
 
+      const total = nextItems.reduce((acc, cur) => acc + cur.price, 0);
+
       return Object.assign({}, state, {
-        items: nextItems
+        items: nextItems,
+        total
       });
     }
     case 'REMOVE_FROM_ORDER': {
       const idx = state.items.findIndex((d) => d.previews === action.payload);
       if (idx > -1) {
         const items = state.items.slice(0, idx).concat(state.items.slice(idx + 1));
-        return Object.assign({}, state, { items });
+        const total = items.reduce((acc, cur) => acc + cur.price, 0);
+
+        return Object.assign({}, state, {
+          items,
+          total
+        });
       }
       return state;
     }

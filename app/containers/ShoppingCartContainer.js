@@ -5,6 +5,7 @@ import { showOrder } from '../actions/';
 
 export const mapStateToProps = (state) => ({
   count: state.order.items.length,
+  orderTotal: state.order.total,
   iconName: 'shopping_cart'
 });
 

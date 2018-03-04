@@ -11,7 +11,10 @@ function checkStatus(resp) {
 }
 
 export function getLatestIssue() {
-  const parseData = (resp) => JSON.parse(resp);
+  const parseData = (resp) => JSON.parse(
+    resp,
+    (k, v) => (k === 'price' ? parseFloat(v) : v)
+  );
 
   return fetch('/api/previews/latest', acceptJsonHeaders)
     .then(checkStatus)

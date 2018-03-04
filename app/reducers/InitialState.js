@@ -5,7 +5,8 @@ export default {
   },
   order: {
     issue: undefined,
-    items: []
+    items: [],
+    total: 0
   },
   gridConfig: {
     pageSize: 20,

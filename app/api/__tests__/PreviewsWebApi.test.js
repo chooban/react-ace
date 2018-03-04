@@ -6,12 +6,13 @@ import { getLatestIssue } from '../PreviewsWebApi';
 
 test('Previews API', (t) => {
   t.test('Get the latest', (t) => {
-    const returnedData = '{"file":"ecmail337","contents":[{"previewsCode": "337/0001", "title": "Previews Only #339"}]}';
+    const returnedData = '{"file":"ecmail337","contents":[{"previewsCode": "337/0001", "title": "Previews Only #339", "price": "2.50"}]}';
     const expectedResult = {
       file: 'ecmail337',
       contents: [{
         previewsCode: '337/0001',
-        title: 'Previews Only #339'
+        title: 'Previews Only #339',
+        price: 2.5
       }]
     };
 

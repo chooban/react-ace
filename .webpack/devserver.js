@@ -12,17 +12,9 @@ module.exports = function devconfig(paths) {
       host: '0.0.0.0',
       port: 3000,
       proxy: {
-        '/api/previews': {
-          target: 'http://previewsapi:8100',
-          pathRewrite: { '^/api/previews': '/previews' }
-        },
-        '/api/orders': {
-          target: 'http://ordersapi:8101',
-          pathRewrite: { '^/api/orders': '/orders' }
-        },
-        '/api/profiles': {
-          target: 'http://profilesapi:8101',
-          pathRewrite: { '^/api/profiles': '/profiles' }
+        '/api/*': {
+          target: 'http://ace:8100',
+          pathRewrite: { '^\/api': '' }
         }
       }
     },

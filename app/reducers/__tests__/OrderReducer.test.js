@@ -10,7 +10,8 @@ test('Order reducer functions', (t) => {
     quantity: 1,
     title: 'Spider-Man',
     publisher: 'Marvel',
-    comment: ''
+    comment: '',
+    price: 2.5
   };
 
   t.test('adding a unique item to an empty order', (t) => {
@@ -21,9 +22,8 @@ test('Order reducer functions', (t) => {
     });
 
     t.equal(state.order.items.length, 1);
-    t.equal(state.order.items.findIndex(
-      (d) => d.previews === previewsCode
-    ), 0);
+    t.equal(state.order.items.findIndex((d) => d.previews === previewsCode), 0);
+    t.equal(state.order.total, 2.5);
     t.end();
   });
 
@@ -39,9 +39,7 @@ test('Order reducer functions', (t) => {
     });
 
     t.equal(state.order.items.length, 1);
-    t.equal(state.order.items.findIndex(
-      (d) => d.previews === previewsCode
-    ), 0);
+    t.equal(state.order.total, 2.5);
     t.end();
   });
 
@@ -54,6 +52,7 @@ test('Order reducer functions', (t) => {
     t.equal(state.order.items.length, 1);
     state = reducer(state, Actions.removeFromOrder(previewsCode));
     t.equal(state.order.items.length, 0);
+    t.equal(state.order.total, 0);
     t.end();
   });
 
@@ -62,7 +61,7 @@ test('Order reducer functions', (t) => {
       file: 'ecmail332',
       contents: [{
         previewsCode: '332/0026',
-        price: '6.99',
+        price: 6.99,
         publisher: 'DARK HORSE',
         reducedFrom: null,
         title: 'AVATAR LAST AIRBENDER TP 04 SEARCH PART 1'

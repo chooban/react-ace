@@ -22,7 +22,7 @@ test('Shopping Cart container', (t) => {
     t.end();
   });
 
-  t.test('Classname with no order items', (t) => {
+  t.test('Count with no order items', (t) => {
     const state = {
       order: {
         items: []
@@ -31,11 +31,11 @@ test('Shopping Cart container', (t) => {
     const props = mapStateToProps(state);
 
     t.equal(props.iconName, 'shopping_cart');
-    t.equal(props.className, 'ordersummary');
+    t.equal(props.count, 0);
     t.end();
   });
 
-  t.test('Classname with order items', (t) => {
+  t.test('Count with order items', (t) => {
     const state = {
       order: {
         items: ['a']
@@ -44,7 +44,7 @@ test('Shopping Cart container', (t) => {
     const props = mapStateToProps(state);
 
     t.equal(props.iconName, 'shopping_cart');
-    t.equal(props.className, 'ordersummary hasitems');
+    t.equal(props.count, 1);
     t.end();
   });
 });

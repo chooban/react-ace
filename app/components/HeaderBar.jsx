@@ -9,7 +9,7 @@ import OrderView from '../containers/ShoppingCartContainer';
 const HeaderBarComponent = () => (
   <AppBar position="static" color="default">
     <Toolbar>
-      <Typography variant="title" color="inherit">
+      <Typography align="center" variant="title" color="inherit">
         Ace My Order
       </Typography>
       <Search />
