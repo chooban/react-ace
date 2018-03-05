@@ -55,6 +55,7 @@ const ShoppingCartIcon = ({
       <div>
         <Icon
           className={classes.inner}
+          onClick={onClick}
         >
           shopping_basket
         </Icon>
