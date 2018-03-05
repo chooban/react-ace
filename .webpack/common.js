@@ -23,7 +23,7 @@ const config = function configFactory(paths) {
         'redux-actions',
         'redux-logger',
         'redux-thunk',
-        'sprintf'
+        'sprintf-js'
       ]
     },
     resolve: {
