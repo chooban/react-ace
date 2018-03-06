@@ -32,7 +32,8 @@ const config = function configFactory(paths) {
     },
     output: {
       path: paths.build,
-      filename: '[name].js'
+      filename: '[name].js',
+      publicPath: '/'
     },
     module: {
       rules: [
