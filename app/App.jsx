@@ -5,25 +5,13 @@ import Reboot from 'material-ui/Reboot';
 import { withStyles } from 'material-ui/styles';
 
 import HeaderBarContainer from './containers/HeaderBarContainer';
-import OrderPopup from './containers/OrderPopupContainer';
-import ItemPreview from './containers/PreviewsItemViewContainer';
 import PreviewsGrid from './containers/PreviewsGridContainer';
-import HelpPopupContainer from './containers/HelpPopup';
-import SavedSearchesContainer from './containers/SavedSearchesContainer';
 
 import { AuthServiceFactory } from './utils/AuthService';
 import {
   logout,
   setUserProfile
 } from './actions';
-
-/*
- *
-            <SearchContainer />
-            <OrderView />
-            <HelpIconContainer />
-            <AccountIconComponent isLoggedIn={loggedIn} />
- */
 
 const AppComponent = () => (
   <div className="previewsApp">
@@ -37,10 +25,6 @@ const AppComponent = () => (
     </header>
     <main className="content container">
       <PreviewsGrid />
-      <OrderPopup />
-      <ItemPreview />
-      <HelpPopupContainer />
-      <SavedSearchesContainer />
     </main>
   </div>
 );

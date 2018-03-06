@@ -1,14 +1,15 @@
 const webpack = require('webpack');
+const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const UnusedWebpackPlugin = require('unused-webpack-plugin');
 
 const config = function configFactory(paths) {
   return {
     devtool: 'cheap-module-source-map',
     entry: {
       app: [
-        paths.app,
-        'whatwg-fetch'
+        paths.app
       ],
       polyfill: [
         'babel-polyfill'
@@ -85,7 +86,16 @@ const config = function configFactory(paths) {
       }),
       new CopyPlugin([
         { from: 'assets' }
-      ])
+      ]),
+      new UnusedWebpackPlugin({
+        directories: [
+          path.join(__dirname, '../app')
+        ],
+        exclude: [
+          '**/__tests__/*'
+        ],
+        root: path.join(__dirname, '../')
+      })
     ]
   };
 };

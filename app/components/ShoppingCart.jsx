@@ -4,7 +4,6 @@ import { withStyles } from 'material-ui/styles';
 import Icon from 'material-ui/Icon';
 import Badge from 'material-ui/Badge';
 import Typography from 'material-ui/Typography';
-import Hidden from 'material-ui/Hidden';
 
 const styles = (theme) => ({
   root: {
@@ -28,42 +27,22 @@ const ShoppingCartIcon = ({
   onClick
 }) => (
   <div className={classes.root}>
-    <Hidden smUp>
-      <Badge
+    <Badge
+      className={classes.inner}
+      badgeContent={count}
+      color="secondary"
+      onClick={onClick}
+    >
+      <Icon
         className={classes.inner}
-        badgeContent={count}
-        color="secondary"
-        onClick={onClick}
+        component="div"
       >
-        <Icon
-          className={classes.inner}
-          component="div"
-        >
-          shopping_basket
-        </Icon>
-      </Badge>
-    </Hidden>
-    <Hidden xsDown>
-      <div>
-        <Badge
-          className={classes.inner}
-          badgeContent={count}
-          color="secondary"
-          onClick={onClick}
-        />
-      </div>
-      <div>
-        <Icon
-          className={classes.inner}
-          onClick={onClick}
-        >
-          shopping_basket
-        </Icon>
-      </div>
-      <Typography variant="subheading" className={classes.inner}>
-        {formatAsGBP(orderTotal)}
-      </Typography>
-    </Hidden>
+        shopping_basket
+      </Icon>
+    </Badge>
+    <Typography variant="subheading" className={classes.inner}>
+      {formatAsGBP(orderTotal)}
+    </Typography>
   </div>
 );
 

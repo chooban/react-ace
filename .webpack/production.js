@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = function() {
   return {
@@ -10,12 +11,15 @@ module.exports = function() {
         filename: 'index.html',
         template: 'public/index.hbs'
       }),
-      new webpack.optimize.UglifyJsPlugin({
+      new UglifyJsPlugin({
         sourceMap: true,
-        compress: {
-          warnings: false,
-        },
-        comments: false
+        cache: true,
+        uglifyOptions: {
+          compress: {
+            warnings: true
+          },
+          comments: false
+        }
       }),
       new webpack.DefinePlugin({
         'process.env': {
