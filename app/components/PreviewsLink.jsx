@@ -10,7 +10,7 @@ const codeToUrl = (previewsCode) => {
   const issueNumber = +components[0];
   const epoch = new Date(1988, 8, 1);
 
-  epoch.setMonth(epoch.getMonth() + issueNumber);
+  epoch.setMonth(epoch.getMonth() + issueNumber + 1); // Coronavirus means a +1
   const slug = MonthNames[epoch.getMonth()] + (epoch.getFullYear() - 2000) + components[1];
 
   return `http://www.previewsworld.com/Catalog/${slug}`;
