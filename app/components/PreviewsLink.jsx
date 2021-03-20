@@ -13,7 +13,7 @@ const codeToUrl = (previewsCode) => {
   epoch.setMonth(epoch.getMonth() + issueNumber + 1); // Coronavirus means a +1
   const slug = MonthNames[epoch.getMonth()] + (epoch.getFullYear() - 2000) + components[1];
 
-  return `http://www.previewsworld.com/Catalog/${slug}`;
+  return `https://www.previewsworld.com/Catalog/${slug}`;
 };
 
 const PreviewsLink = ({ previewsCode, showPreview }) => (
